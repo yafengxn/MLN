@@ -202,6 +202,26 @@
     [self.innerScrollView mln_setLuaScrollEnable:scrollEnable];
 }
 
+- (void)mil_setFlingSpeed:(CGFloat)speed
+{
+    self.innerScrollView.decelerationRate = speed;
+}
+
+- (CGFloat)mil_flingSpeed
+{
+    return self.innerScrollView.decelerationRate;
+}
+
+- (void)mil_setPagingEnable:(BOOL)pagingEnabled
+{
+    self.innerScrollView.pagingEnabled = pagingEnabled;
+}
+
+- (BOOL)mil_pagingEnabled
+{
+    return self.innerScrollView.pagingEnabled;
+}
+
 #pragma mark - Override
 - (BOOL)lua_layoutEnable
 {
@@ -224,6 +244,8 @@ LUA_EXPORT_VIEW_PROPERTY(showsHorizontalScrollIndicator, "setLua_showsHorizontal
 LUA_EXPORT_VIEW_PROPERTY(showsVerticalScrollIndicator, "setLua_showsVerticalScrollIndicator:", "lua_showsVerticalScrollIndicator", MLNScrollView)
 LUA_EXPORT_VIEW_PROPERTY(i_bounceHorizontal, "setLua_alwaysBounceHorizontal:", "lua_alwaysBounceHorizontal", MLNScrollView)
 LUA_EXPORT_VIEW_PROPERTY(i_bounceVertical, "setLua_alwaysBounceVertical:", "lua_alwaysBounceVertical", MLNScrollView)
+LUA_EXPORT_VIEW_PROPERTY(a_flingSpeed, "mil_setFlingSpeed:", "mil_flingSpeed" , MLNScrollView)
+LUA_EXPORT_VIEW_PROPERTY(i_pagingEnabled, "mil_setPagingEnable:", "mil_pagingEnabled" , MLNScrollView)
 LUA_EXPORT_VIEW_METHOD(setScrollBeginCallback, "setLua_scrollBeginCallback:",MLNScrollView)
 LUA_EXPORT_VIEW_METHOD(setScrollingCallback, "setLua_scrollingCallback:",MLNScrollView)
 LUA_EXPORT_VIEW_METHOD(setEndDraggingCallback, "setLua_endDraggingCallback:",MLNScrollView)
