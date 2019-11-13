@@ -521,7 +521,7 @@ static NSString *fileManagerRootPath = nil;
 {
     if ([self isRelativePath:filePath]) {
         NSString *temp = [filePath stringByReplacingOccurrencesOfString:kRelativeHeader withString:@""];
-        NSString *rootPath =  fileManagerRootPath;
+        NSString *rootPath = fileManagerRootPath;
         NSString *realFileDirPath = [[rootPath stringByAppendingPathComponent:temp] stringByDeletingLastPathComponent];
         if (![self existAtPath:realFileDirPath] && need) {
             [[NSFileManager defaultManager] createDirectoryAtPath:realFileDirPath withIntermediateDirectories:YES attributes:nil error:nil];

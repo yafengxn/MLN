@@ -13,11 +13,10 @@
 #import "MLNGlobalFuncTest.h"
 #import "MLNHotReloadViewController.h"
 #import "MLNOfflineViewController.h"
-#import <MLNDevTool/MLNFPSLabel.h>
 #import <MLNDevTool/MLNLoadTimeStatistics.h>
 #import "MLNGalleryMainViewController.h"
 
-@interface MLNGalleryViewController () <MLNKitInstanceErrorHandlerProtocol, MLNKitInstanceDelegate, MLNKitViewControllerDelegate>
+@interface MLNGalleryViewController () <MLNKitInstanceDelegate, MLNKitViewControllerDelegate>
 
 @property (nonatomic, strong) MLNKitViewController *kcv;
 @property (nonatomic, strong) MLNHotReloadViewController *hotvc;
@@ -28,8 +27,8 @@
 @property (nonatomic, strong) UIButton *showHotReloadButton;
 @property (nonatomic, strong) UIButton *showOfflineButton;
 @property (nonatomic, strong) UIButton *showNativeDemoButton;
+@property (nonatomic, strong) UIButton *closeButton;
 
-@property (nonatomic, strong) MLNFPSLabel *fpsLabel;
 @property (nonatomic, strong) UILabel *loadTimeLabel;
 @property (nonatomic, strong) MLNLoadTimeStatistics *loadTimeStatistics;
 
@@ -143,16 +142,11 @@
     self.showOfflineButton = [self createButtonWithTitle:@"离线加载" action:@selector(showOfflineButton)];
     self.showOfflineButton.frame = CGRectMake(showOfflineButtonX, showOfflineButtonY, buttonW, buttonH);
     [self.view addSubview:self.showOfflineButton];
-    
     CGFloat showNativeDemoButtonX = showDemoButtonX;
     CGFloat showNativeDemoButtonY = showOfflineButtonY + buttonH + space;
     self.showNativeDemoButton = [self createButtonWithTitle:@"NativeDemo展示" action:@selector(showNativeDemo:)];
     self.showNativeDemoButton.frame = CGRectMake(showNativeDemoButtonX, showNativeDemoButtonY, buttonW, buttonH);
     [self.view addSubview:self.showNativeDemoButton];
-    
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    self.fpsLabel = [[MLNFPSLabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.8, 50, 20)];
-    [self.kcv.view addSubview:self.fpsLabel];
 }
 
 - (UIButton *)createButtonWithTitle:(NSString *)title action:(SEL)aSelector
@@ -166,13 +160,7 @@
     return button;
 }
 
-- (MLNLoadTimeStatistics *)loadTimeStatistics
-{
-    if (!_loadTimeStatistics) {
-        _loadTimeStatistics = [[MLNLoadTimeStatistics alloc] init];
-    }
-    return _loadTimeStatistics;
-}
+
 
 
 @end

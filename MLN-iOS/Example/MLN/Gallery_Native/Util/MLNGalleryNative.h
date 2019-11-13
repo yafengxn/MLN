@@ -14,6 +14,9 @@
 #define kNaviBarHeight  64
 #define kTabbBarHeight  49
 
+// 显示fpsLabel
+#define kShowFPSLabel YES
+
 // 禁用图片加载功能
 #define kDisableImageLoad NO
 
@@ -21,7 +24,7 @@
 #define kMemoryTest NO
 
 // 主页面展示：yes:主页面展示lua no:主页面展示native
-#define kLuaPage NO
+#define kLuaPage YES
 
 #endif /* MLNGalleryNative_h */
 

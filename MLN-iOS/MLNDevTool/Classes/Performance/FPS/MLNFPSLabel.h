@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MLNFPSLabel : UILabel
 
+- (instancetype)initWithFrame:(CGRect)frame;
+- (void)startRecordCompletion:(dispatch_block_t)completion;
+- (void)endRecordCompletion:(dispatch_block_t)completion;
+
 @end
 
 NS_ASSUME_NONNULL_END

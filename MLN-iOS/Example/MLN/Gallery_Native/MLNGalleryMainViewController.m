@@ -16,12 +16,10 @@
 #import "UIImage+MLNResize.h"
 #import <UIView+Toast.h>
 #import "MLNLoadTimeStatistics.h"
-#import <MLNDevTool/MLNFPSLabel.h>
 #import "MLNGalleryNative.h"
 
 @interface MLNGalleryMainViewController ()<UITabBarControllerDelegate>
 @property (nonatomic, strong) UIButton *backButton;
-@property (nonatomic, strong) MLNFPSLabel *fpsLabel;
 @end
 
 @implementation MLNGalleryMainViewController
@@ -39,10 +37,6 @@
 {
     if (!kMemoryTest) {
         [self backButton];
-        
-        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-        self.fpsLabel = [[MLNFPSLabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.8, 50, 20)];
-        [self.view addSubview:self.fpsLabel];
     }
 }
 

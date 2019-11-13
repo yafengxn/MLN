@@ -15,6 +15,7 @@ function _class:new()
     setmetatable(o, { __index = self })
     self.dataList = Array()
     self.requestPageIndex = 1
+    self.autoScrollTool = AutoScrollTool()
     return o
 end
 
@@ -71,7 +72,7 @@ end
 ---创建collectionView
 ---@private
 function _class:setupCollectionView()
-    self.headerViewHeight = 420
+    self.headerViewHeight = 400
 
     self.collectionView = WaterfallView(true, true):width(MeasurementType.MATCH_PARENT):height(MeasurementType.MATCH_PARENT)
     self.collectionView:useAllSpanForLoading(true)
@@ -87,6 +88,10 @@ function _class:setupCollectionView()
     self.collectionView:layout(self.layout)
 
     self:setupCollectionViewAdapter()
+
+    System:setTimeOut(function()
+        self.autoScrollTool:autoScrollWithView(self.collectionView, 'file://gallery/json/musicRank.json')
+    end, 2.0)
 end
 
 --- @private
@@ -105,7 +110,6 @@ function _class:setupCollectionViewAdapter()
     end)
 
     adapter:initHeader(function(header)
-        --header.contentView:removeAllSubviews()
         header.contentView:addView(self:headerView())
     end)
 
@@ -149,17 +153,16 @@ function _class:setupCollectionViewAdapter()
     end)
 
     adapter:heightForCell(function(_, row)
+--[[
         local item = self.dataList:get(row)
         local rank = item:get("rank") or 0
         if rank and tonumber(rank) < 2 then
             return cellWidth + 75
         end
+--]]
         return cellWidth + 90
-
     end)
     adapter:selectedRowByReuseId(cellReuseId, function(cell, _, row)
-        --Toast(self.dataList:get(row):get("title"), 1)
-        --self:gotoDetailView()
         if System:Android() then
             Navigator:gotoPage("file://android_asset/MMLuaKitGallery/IdeaMassView.lua", nil, 0)
         else
@@ -379,8 +382,5 @@ function _class:updateCategoryButtonUI(button)
           :bgColor(Color(253, 74, 63))--ok
     self.preCategButton = button
 end
-function _class:gotoDetailView()
-    require("lua_pods.LuaPageManager.LuaPageManager")
-    LuaPageManager:gotoPage("ideaMassEntryFile", Map(), AnimType.BottomToTop, 1)
-end
+
 return _class
