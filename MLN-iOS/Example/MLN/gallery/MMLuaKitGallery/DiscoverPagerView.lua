@@ -15,7 +15,6 @@ function _class:new()
     setmetatable(o, { __index = self })
     self.dataList = Array()
     self.requestPageIndex = 1
-    self.autoScrollTool = AutoScrollTool()
     return o
 end
 
@@ -88,10 +87,6 @@ function _class:setupCollectionView()
     self.collectionView:layout(self.layout)
 
     self:setupCollectionViewAdapter()
-
-    System:setTimeOut(function()
-        self.autoScrollTool:autoScrollWithView(self.collectionView, 'file://gallery/json/musicRank.json')
-    end, 2.0)
 end
 
 --- @private
@@ -110,6 +105,7 @@ function _class:setupCollectionViewAdapter()
     end)
 
     adapter:initHeader(function(header)
+        --header.contentView:removeAllSubviews()
         header.contentView:addView(self:headerView())
     end)
 
@@ -153,14 +149,13 @@ function _class:setupCollectionViewAdapter()
     end)
 
     adapter:heightForCell(function(_, row)
---[[
         local item = self.dataList:get(row)
         local rank = item:get("rank") or 0
         if rank and tonumber(rank) < 2 then
             return cellWidth + 75
         end
---]]
         return cellWidth + 90
+
     end)
     adapter:selectedRowByReuseId(cellReuseId, function(cell, _, row)
         if System:Android() then

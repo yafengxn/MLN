@@ -43,12 +43,14 @@ static NSString *kMLNNativeWaterfallViewCellID = @"kMLNNativeWaterfallViewCellID
     [self.navigationBar setTitle:@"发现"];
     [self requestDiscoverData:YES];
     [self waterfallView];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        _autoScrollTool = [[MLNAutoScrollTool alloc] init];
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"gallery/json/autoScorllPoints" ofType:@"json"];
-        [_autoScrollTool autoScrollWithView:self.waterfallView filePath:filePath];
-    });
+
+    if (kAutoTestFps) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            _autoScrollTool = [[MLNAutoScrollTool alloc] init];
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"gallery/json/autoScrollPoints" ofType:@"json"];
+            [_autoScrollTool autoScrollWithView:self.waterfallView filePath:filePath];
+        });
+    }
 }
 
 #pragma mark - Actions
@@ -76,7 +78,7 @@ static NSString *kMLNNativeWaterfallViewCellID = @"kMLNNativeWaterfallViewCellID
     NSLog(@"<<<<<<<<<<<<<<<<<<原生创建Controller");
     [[MLNLoadTimeStatistics sharedInstance] recordStartTime];
     MLNDiscoverAlbumDetailViewController *detailViewController = [[MLNDiscoverAlbumDetailViewController alloc] init];
-    [self.navigationController pushViewController:detailViewController animated:YES];
+    [self.navigationController pushViewController:detailViewController animated:NO];
 }
 
 

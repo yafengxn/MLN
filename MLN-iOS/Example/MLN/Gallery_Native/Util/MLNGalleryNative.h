@@ -14,6 +14,9 @@
 #define kNaviBarHeight  64
 #define kTabbBarHeight  49
 
+// Fps自动测试开关
+#define kAutoTestFps NO
+
 // 显示fpsLabel
 #define kShowFPSLabel YES
 

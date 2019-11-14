@@ -10,6 +10,8 @@
 #import "MLNWeakTarget.h"
 #import <MLNEntityExportProtocol.h>
 
+#define kDefaultFpsFilePath [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"/MLua/fps.txt"]
+
 @interface MLNFPSLabel()
 @property (nonatomic, strong) CADisplayLink *link;
 @property (nonatomic, assign) NSUInteger count;
@@ -55,6 +57,8 @@
     _endRecordBlock = completion;
 }
 
+
+
 - (void)startRecord
 {
     _recordFps = YES;
@@ -84,6 +88,26 @@
         }
     }
     [self.fpsArray writeToFile:filePath atomically:YES];
+}
+
+- (NSString *)readFPSRecord
+{
+    NSString *filePath = self.fpsFilePath ?: kDefaultFpsFilePath;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        NSLog(@"文件不存在");
+        return nil;
+    }
+    NSArray *fpsArray = [NSArray arrayWithContentsOfFile:filePath];
+    __block NSString *fpsText = [NSString string];
+    [fpsArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        fpsText = [fpsText stringByAppendingString:[NSString stringWithFormat:@",%@", obj]];
+    }];
+    return fpsText;
+}
+
+- (NSString *)fpsFilePath
+{
+    return _fpsFilePath ?: kDefaultFpsFilePath;
 }
 
 - (void)tick:(CADisplayLink *)link

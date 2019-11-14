@@ -30,6 +30,7 @@
 #import "MLNMyErrorHandler.h"
 #import "MLNAutoScrollTool.h"
 #import <UIView+Toast.h>
+#import "MLNAppDelegate.h"
 
 @interface MLNViewController () <MLNViewControllerProtocol, MLNKitInstanceDelegate>
 
@@ -42,7 +43,6 @@
 
 @property (nonatomic, strong) UIViewController *contentViewController;
 @property (nonatomic, strong) UIButton *galleryButton;
-@property (nonatomic, strong) MLNFPSLabel *fpsLabel;
 @property (nonatomic, strong) UILabel *loadTimeLabel;
 @property (nonatomic, strong) MLNLoadTimeStatistics *loadTimeStatistics;
 @end
@@ -116,18 +116,8 @@
 
 - (void)galleryButtonClicked:(id)sender
 {
-//    MLNGalleryViewController *galleryVc = [[MLNGalleryViewController alloc] init];
-//    [self presentViewController:galleryVc animated:YES completion:nil];
-    NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"/MLua/fps.txt"];
-    if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        NSLog(@"文件不存在");
-    }
-    NSArray *fpsArray = [NSArray arrayWithContentsOfFile:filePath];
-    __block NSString *fpsText = [NSString string];
-    [fpsArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        fpsText = [fpsText stringByAppendingString:[NSString stringWithFormat:@",%@", obj]];
-    }];
-    [self.view makeToast:fpsText duration:10 position:CSToastPositionCenter];
+    MLNGalleryViewController *galleryVc = [[MLNGalleryViewController alloc] init];
+    [self presentViewController:galleryVc animated:YES completion:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated

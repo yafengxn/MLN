@@ -2,14 +2,14 @@
 //  MLNAutoScrollTool.m
 //  MLN_Example
 //
-//  Created by Feng on 2019/11/13.
-//  Copyright © 2019 liu.xu_1586. All rights reserved.
+//  Created by MoMo on 2019/11/13.
+//  Copyright © 2019 MOMO. All rights reserved.
 //
 
 #import "MLNAutoScrollTool.h"
 #import <MLNKit.h>
 
-#define kDefautlInterval 0.5
+#define kDefautlInterval 0.1
 
 @implementation MLNAutoScrollTool
 {
@@ -48,11 +48,15 @@
 #pragma mark - Public method
 - (void)autoScrollWithView:(UIScrollView *)scrollView filePath:(NSString *)filePath
 {
+    UIScrollView *realScrollView = scrollView;
+    if ([scrollView conformsToProtocol:@protocol(MLNPaddingContainerViewProtocol)] && scrollView.lua_contentView) {
+        realScrollView = (UIScrollView *)scrollView.lua_contentView;
+    }
     
-    MLNLuaAssert(self.mln_luaCore, scrollView && [scrollView isKindOfClass:[UIScrollView class]], @"The first parameter must could scroll!");
+    MLNLuaAssert(self.mln_luaCore, scrollView && [realScrollView isKindOfClass:[UIScrollView class]], @"The first parameter must could scroll!");
     MLNLuaAssert(self.mln_luaCore, [filePath isKindOfClass:[NSString class]] && filePath.length > 0, @"The first parameter must could scroll!");
     
-    _targetScrollView = scrollView;
+    _targetScrollView = realScrollView;
     _targetPointArray = [self targetScrollPointInFile:filePath];
     
     _timer = [NSTimer timerWithTimeInterval:self.interval target:self selector:@selector(tickTok:) userInfo:nil repeats:YES];

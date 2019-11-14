@@ -98,6 +98,11 @@
     }
 }
 
+- (void)didReceiveMemoryWarning
+{
+    NSLog(@">>>>>>>> MLNLuaPageViewController 内存不够用了");
+}
+
 #pragma mark - MLNKitInstanceDelegate
 - (void)instance:(MLNKitInstance *)instance didFinishRun:(NSString *)entryFileName
 {

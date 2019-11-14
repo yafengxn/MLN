@@ -3,7 +3,7 @@
 //  MLN_Example
 //
 //  Created by MoMo on 2019/11/13.
-//  Copyright © 2019 liu.xu_1586. All rights reserved.
+//  Copyright © 2019 MOMO. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
