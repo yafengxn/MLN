@@ -14,6 +14,12 @@
 #define kNaviBarHeight  64
 #define kTabbBarHeight  49
 
+// Fps自动测试开关
+#define kAutoTestFps NO
+
+// 显示fpsLabel
+#define kShowFPSLabel YES
+
 // 禁用图片加载功能
 #define kDisableImageLoad NO
 

@@ -24,12 +24,6 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-}
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    
     self.navigationBar.frame = CGRectMake(0, 0, kScreenWidth, kNaviBarHeight);
     
     CGFloat contentLabelW = 100;
@@ -41,7 +35,6 @@
     [[MLNLoadTimeStatistics sharedInstance] recordEndTime];
     NSLog(@"<<<<<<<<<<<<<<<<<<原生消息二级页面私信布局完成：%@", @([[MLNLoadTimeStatistics sharedInstance]allLoadTime] * 1000));
 }
-
 
 - (MLNGalleryNavigationBar *)navigationBar
 {

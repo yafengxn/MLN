@@ -14,6 +14,8 @@
 #import "MLNViewController.h"
 #import "MLNGalleryMainViewController.h"
 #import <MLNFile.h>
+#import <MLNFPSLabel.h>
+#import <UIView+Toast.h>
 
 @implementation MLNAppDelegate
 
@@ -35,8 +37,27 @@
     [navigationController.navigationBar setHidden:YES];
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
+    
+    if (kShowFPSLabel) {
+        [self setupFpsLabel];
+    }
 
     return YES;
+}
+
+- (void)setupFpsLabel
+{
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    self.fpsLabel = [[MLNFPSLabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.8, 50, 20)];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.fpsLabel];
+    
+    [self.fpsLabel startRecordCompletion:^{
+        [self.window makeToast:@"开始记录fps" duration:2.0 position:CSToastPositionCenter];
+    }];
+    
+    [self.fpsLabel endRecordCompletion:^{
+        [self.window makeToast:@"结束记录fps" duration:2.0 position:CSToastPositionCenter];
+    }];
 }
 
 - (void)copyJsonFilesToSandbox
@@ -50,8 +71,9 @@
     if (!exist) {
         [[NSFileManager defaultManager] createDirectoryAtPath:destFileDirectory withIntermediateDirectories:YES attributes:nil error:nil];
     } else {
-        for (NSString *filePath in jsonFilePaths) {
-            NSString *oldFilePath = [jsonDirectoryPath stringByAppendingPathComponent:filePath];
+        NSArray *oldJsonFilePaths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:destFileDirectory error:&error];
+        for (NSString *filePath in oldJsonFilePaths) {
+            NSString *oldFilePath = [destFileDirectory stringByAppendingPathComponent:filePath];
             NSError *error = nil;
             BOOL success = [[NSFileManager defaultManager] removeItemAtPath:oldFilePath error:&error];
             if (!success) {
@@ -63,8 +85,8 @@
         NSString *srcFilePath = [jsonDirectoryPath stringByAppendingPathComponent:filePath];
         NSString *dstFilePath = [destFileDirectory stringByAppendingPathComponent:filePath];
         BOOL success = [[NSFileManager defaultManager] copyItemAtPath:srcFilePath toPath:dstFilePath error:NULL];
-        if (success) {
-            NSLog(@"------> %@", dstFilePath);
+        if (!success) {
+            NSLog(@"------> copy 失败：%@", dstFilePath);
         }
     }
 }

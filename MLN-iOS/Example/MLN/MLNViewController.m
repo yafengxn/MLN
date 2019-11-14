@@ -27,6 +27,10 @@
 #import "MLNGalleryNative.h"
 #import "MLNLuaPageViewController.h"
 #import "MLNGalleryMainViewController.h"
+#import "MLNMyErrorHandler.h"
+#import "MLNAutoScrollTool.h"
+#import <UIView+Toast.h>
+#import "MLNAppDelegate.h"
 
 @interface MLNViewController () <MLNViewControllerProtocol, MLNKitInstanceDelegate>
 
@@ -35,10 +39,10 @@
 @property (nonatomic, strong) id<MLNRefreshDelegate> refreshHandler;
 @property (nonatomic, strong) id<MLNImageLoaderProtocol> imgLoader;
 @property (nonatomic, strong) id<MLNNavigatorHandlerProtocol> navHandler;
+@property (nonatomic, strong) id<MLNKitInstanceErrorHandlerProtocol> errorHandler;
 
 @property (nonatomic, strong) UIViewController *contentViewController;
 @property (nonatomic, strong) UIButton *galleryButton;
-@property (nonatomic, strong) MLNFPSLabel *fpsLabel;
 @property (nonatomic, strong) UILabel *loadTimeLabel;
 @property (nonatomic, strong) MLNLoadTimeStatistics *loadTimeStatistics;
 @end
@@ -53,12 +57,14 @@
     self.refreshHandler = [[MLNMyRefreshHandler alloc] init];
     self.imgLoader = [[MLNMyImageHandler alloc] init];
     self.navHandler = [[MLNNavigatorHandler alloc] init];
+    self.errorHandler = [[MLNMyErrorHandler alloc] init];
 
     MLNKitInstanceHandlersManager *handlersManager = [MLNKitInstanceHandlersManager defaultManager];
     handlersManager.httpHandler = self.httpHandler;
     handlersManager.scrollRefreshHandler = self.refreshHandler;
     handlersManager.imageLoader = self.imgLoader;
     handlersManager.navigatorHandler = self.navHandler;
+    handlersManager.errorHandler = self.errorHandler;
 
     [self setupSubController];
     
@@ -79,7 +85,8 @@
         [kcv regClasses:@[[MLNTestMe class],
                           [MLNStaticTest class],
                           [MLNGlobalVarTest class],
-                          [MLNGlobalFuncTest class]]];
+                          [MLNGlobalFuncTest class],
+                          [MLNAutoScrollTool class]]];
         [kcv changeCurrentBundlePath:bundle.bundlePath];
         [self addChildViewController:kcv];
         [self.view addSubview:kcv.view];
@@ -105,11 +112,6 @@
     [self.galleryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.galleryButton addTarget:self action:@selector(galleryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.galleryButton];
-    
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    self.fpsLabel = [[MLNFPSLabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.8, 50, 20)];
-    self.fpsLabel.hidden = YES;
-    [self.contentViewController.view addSubview:self.fpsLabel];
 }
 
 - (void)galleryButtonClicked:(id)sender
@@ -131,7 +133,7 @@
 
 - (void)showLuaScriptLoadTime
 {
-//    [self.contentViewController.view addSubview:self.loadTimeLabel];
+    [self.contentViewController.view addSubview:self.loadTimeLabel];
     self.loadTimeLabel.text = [NSString stringWithFormat:@"%.0f ms", [self.loadTimeStatistics luaCoreCreateTime] * 1000];
     CGSize loadTimeLabelSize = [self.loadTimeLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}];
     CGFloat loadTimeLabelY = [UIScreen mainScreen].bounds.size.height * 0.75;

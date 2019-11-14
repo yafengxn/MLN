@@ -7,11 +7,11 @@
 //
 
 @import UIKit;
-
+@class MLNFPSLabel;
 @interface MLNAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (nonatomic, assign) BOOL disableImage;
+@property (nonatomic, strong) MLNFPSLabel *fpsLabel;
 
 @end

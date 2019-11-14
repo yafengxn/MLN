@@ -157,8 +157,6 @@ function _class:setupCollectionViewAdapter()
 
     end)
     adapter:selectedRowByReuseId(cellReuseId, function(cell, _, row)
-        --Toast(self.dataList:get(row):get("title"), 1)
-        --self:gotoDetailView()
         if System:Android() then
             Navigator:gotoPage("file://android_asset/MMLuaKitGallery/IdeaMassView.lua", nil, 0)
         else

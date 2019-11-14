@@ -40,11 +40,6 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
     [self requestInspirData:YES];
     [self headerView];
     [self waterfallView];
-}
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
     
     [[MLNLoadTimeStatistics sharedInstance] recordEndTime];
     NSLog(@"<<<<<<<<<<<<<<<<<<原生二级页面布局完成:%@", @([[MLNLoadTimeStatistics sharedInstance] allLoadTime] * 1000));
@@ -66,6 +61,7 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
 {
     MLNDiscoverAlbumDetailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMLNDiscoverDetailCellID forIndexPath:indexPath];
     [cell reloadWithData:self.dataList[indexPath.row]];
+    
     return cell;
 }
 

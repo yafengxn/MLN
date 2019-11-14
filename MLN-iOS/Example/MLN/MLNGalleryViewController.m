@@ -13,7 +13,6 @@
 #import "MLNGlobalFuncTest.h"
 #import "MLNHotReloadViewController.h"
 #import "MLNOfflineViewController.h"
-#import <MLNDevTool/MLNFPSLabel.h>
 #import <MLNDevTool/MLNLoadTimeStatistics.h>
 #import "MLNGalleryMainViewController.h"
 
@@ -29,8 +28,8 @@
 @property (nonatomic, strong) UIButton *showHotReloadButton;
 @property (nonatomic, strong) UIButton *showOfflineButton;
 @property (nonatomic, strong) UIButton *showNativeDemoButton;
+@property (nonatomic, strong) UIButton *closeButton;
 
-@property (nonatomic, strong) MLNFPSLabel *fpsLabel;
 @property (nonatomic, strong) UILabel *loadTimeLabel;
 @property (nonatomic, strong) MLNLoadTimeStatistics *loadTimeStatistics;
 
@@ -143,7 +142,7 @@
     self.showHotReloadButton = [self createButtonWithTitle:@"热重载" action:@selector(showHotReload:)];
     self.showHotReloadButton.frame = CGRectMake(showHotReloadButtonX, showHotReloadButtonY, buttonW, buttonH);
     [self.view addSubview:self.showHotReloadButton];
-    
+
     CGFloat showNativeDemoButtonX = showDemoButtonX;
     CGFloat showNativeDemoButtonY = (screenH - buttonH) / 2.0 + space + buttonH;
     self.showNativeDemoButton = [self createButtonWithTitle:@"NativeDemo展示" action:@selector(showNativeDemo:)];
@@ -156,10 +155,6 @@
     self.showOfflineButton.frame = CGRectMake(showOfflineButtonX, showOfflineButtonY, buttonW, buttonH);
     self.showOfflineButton.hidden = YES;
     [self.view addSubview:self.showOfflineButton];
-    
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    self.fpsLabel = [[MLNFPSLabel alloc] initWithFrame:CGRectMake(10, screenHeight * 0.8, 50, 20)];
-    [self.kcv.view addSubview:self.fpsLabel];
 }
 
 - (UIButton *)createButtonWithTitle:(NSString *)title action:(SEL)aSelector
@@ -190,15 +185,6 @@
     }
     return _backButton;
 }
-
-- (MLNLoadTimeStatistics *)loadTimeStatistics
-{
-    if (!_loadTimeStatistics) {
-        _loadTimeStatistics = [[MLNLoadTimeStatistics alloc] init];
-    }
-    return _loadTimeStatistics;
-}
-
 
 @end
 
