@@ -14,8 +14,12 @@
 #define kNaviBarHeight  64
 #define kTabbBarHeight  49
 
+
+// BinaryLuaCode
+#define kTestWithBinaryLuaCode NO
+
 // Fps自动测试开关
-#define kAutoTestFps NO
+#define kAutoTestFps YES
 
 // 显示fpsLabel
 #define kShowFPSLabel YES
@@ -27,7 +31,7 @@
 #define kMemoryTest NO
 
 // 主页面展示：yes:主页面展示lua no:主页面展示native
-#define kLuaPage YES
+#define kLuaPage NO
 
 #endif /* MLNGalleryNative_h */
 

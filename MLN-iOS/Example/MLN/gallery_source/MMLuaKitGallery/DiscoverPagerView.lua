@@ -105,6 +105,7 @@ function _class:setupCollectionViewAdapter()
     end)
 
     adapter:initHeader(function(header)
+        --header.contentView:removeAllSubviews()
         header.contentView:addView(self:headerView())
     end)
 
@@ -212,9 +213,30 @@ function _class:requestNetwork(first, complete)
         self.requestPageIndex = self.requestPageIndex + 1
     end
 
-    File:asyncReadFile('file://gallery/json/musicRank.json', function(codeNumber, response)
-        map = StringUtil:jsonToMap(response)
-        if codeNumber == 0 then
+    if System:Android() then
+
+        File:asyncReadMapFile('file://android_asset/MMLuaKitGallery/discoverry.json', function(codeNumber, response)
+
+            print("codeNumber: " .. tostring(codeNumber))
+
+            if codeNumber == 0 then
+                local data = response:get("result")
+                if first then
+                    self.dataList = data
+                elseif data then
+                    self.dataList:addAll(data)
+                end
+                complete(true, self.dataList)
+            else
+                --error(err:get("errmsg"))
+                complete(false, nil)
+            end
+        end)
+
+    else
+        File:asyncReadFile('file://gallery/json/musicRank.json', function(codeNumber, response)
+            map = StringUtil:jsonToMap(response)
+            if codeNumber == 0 then
             local data = map:get("result")
             if first then
                 self.dataList = data
@@ -226,7 +248,8 @@ function _class:requestNetwork(first, complete)
                 --error(err:get("errmsg"))
                 complete(false, nil)
             end
-    end)
+        end)
+    end
 end
 
 ---创建搜索框

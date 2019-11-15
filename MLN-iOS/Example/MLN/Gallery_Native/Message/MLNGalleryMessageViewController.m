@@ -99,7 +99,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"<<<<<<<<<<<<<<<<<<原生消息二级页面私信创建Controller");
-    [[MLNLoadTimeStatistics sharedInstance] recordStartTime];
+    [[MLNLoadTimeStatistics sharedInstance] recordLoadStartTime];
     MLNGalleryMessageDetailViewController *messageDetailController = [[MLNGalleryMessageDetailViewController alloc] init];
     if (indexPath.row == 0) {
         messageDetailController.titleString = @"私信";

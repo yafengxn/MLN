@@ -31,6 +31,21 @@
  */
 - (void)didSetupLuaCore:(MLNKitInstance *)instance;
 
+
+/**
+ 即将注册Kit bridge
+ 
+ @param instance 承载Lua引擎的实例
+ */
+- (void)willRegisterKitClasses:(MLNKitInstance *)instance;
+
+/**
+ 完成注册Kit bridge
+ 
+ @param instance 承载Lua引擎的实例
+ */
+- (void)didRegisterKitClasses:(MLNKitInstance *)instance;
+
 /**
  即将加载文件
 
@@ -58,6 +73,34 @@
  @param error 错误信息
  */
 - (void)instance:(MLNKitInstance *)instance didFailLoad:(NSData *)data fileName:(NSString *)fileName error:(NSError *)error;
+
+/**
+ 即将执行文件
+ 
+ @param instance 承载Lua引擎的实例
+ */
+- (void)willRunFile:(MLNKitInstance *)instance fileName:(NSString *)fileName;
+
+/**
+ 完成执行文件
+ 
+ @param instance 承载Lua引擎的实例
+ */
+- (void)didRunFile:(MLNKitInstance *)instance fileName:(NSString *)fileName;
+
+/**
+ 即将开始首次强制布局
+ 
+ @param instance 承载Lua引擎的实例
+ */
+- (void)willForceLayoutWindow:(MLNKitInstance *)instance;
+
+/**
+ 完成首次强制布局
+ 
+ @param instance 承载Lua引擎的实例
+ */
+- (void)didForceLayoutWindow:(MLNKitInstance *)instance;
 
 /**
  模块执行完成

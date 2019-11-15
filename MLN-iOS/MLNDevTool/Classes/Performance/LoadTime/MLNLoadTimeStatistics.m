@@ -2,26 +2,32 @@
 //  MLNLoadTimeStatistics.m
 //  MLN
 //
-//  Created by MoMo on 2019/11/4.
+//  setupd by MoMo on 2019/11/4.
 //
 
 #import "MLNLoadTimeStatistics.h"
+#import <objc/runtime.h>
+#import <MLNKit.h>
+#import <MLNKitBridgesManager.h>
 
 @interface MLNLoadTimeStatistics()
-@property (nonatomic, strong) NSMutableDictionary *loadScriptTimeDict;
+@property (nonatomic, assign, readwrite) CFAbsoluteTime startTime;
+@property (nonatomic, assign, readwrite) CFAbsoluteTime endTime;
+@property (nonatomic, assign, readwrite) CFAbsoluteTime setupCoreStartTime;
+@property (nonatomic, assign, readwrite) CFAbsoluteTime setupCoreEndTime;
+@property (nonatomic, assign, readwrite) CFAbsoluteTime registerKitStartTime;
+@property (nonatomic, assign, readwrite) CFAbsoluteTime registerKitEndTime;
+@property (nonatomic, assign, readwrite) CFAbsoluteTime runFileStartTime;
+@property (nonatomic, assign, readwrite) CFAbsoluteTime runFileEndTime;
+@property (nonatomic, assign, readwrite) CFAbsoluteTime forceLayoutWindowStartTime;
+@property (nonatomic, assign, readwrite) CFAbsoluteTime forceLayoutWindowEndTime;
+@property (nonatomic, strong) NSMutableDictionary *loadTimeDict;
 @end
 
-@implementation MLNLoadTimeStatistics
-{
-    CFTimeInterval _startTime;
-    CFTimeInterval _endTime;
-    CFTimeInterval _luaCoreCreateStartTime;
-    CFTimeInterval _luaCoreCreateEndTime;
-    CFTimeInterval _loadScriptStartTime;
-    CFTimeInterval _loadScriptEndTime;
-}
 
 static MLNLoadTimeStatistics *_instance = nil;
+
+@implementation MLNLoadTimeStatistics
 
 + (instancetype)sharedInstance
 {
@@ -34,121 +40,151 @@ static MLNLoadTimeStatistics *_instance = nil;
 
 - (NSString *)description
 {
-    NSString *descriptMessage = [NSString stringWithFormat:@"/********** MLN LoadTime Statistics ******/\n%@\n%@\n%@\n", \
-                                 [NSString stringWithFormat:@"LuaCoreCreateTime:%.0f", [self luaCoreCreateTime] * 1000], \
-                                 [NSString stringWithFormat:@"LuaScriptLoadTime:%.5f", [self loadScriptTime] * 1000], \
-                                 [NSString stringWithFormat:@"RegisterThirdBridgeTime:%.0f", [self luaCoreCreateTime] * 1000]];
+//    NSString *descriptMessage = [NSString stringWithFormat:@"\n/********** MLN LoadTime Statistics ******/\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@", \
+//                                 [NSString stringWithFormat:@"setupLuaCoreTime:          %.2f ms", [self setupCoreStartTime] - [self startTime]], \
+//                                 [NSString stringWithFormat:@"registerKitStartTime:      %.2f ms", [self registerKitStartTime] - [self startTime]], \
+//                                 [NSString stringWithFormat:@"registerKitEndTime:        %.2f ms", [self registerKitEndTime] - [self startTime]], \
+//                                 [NSString stringWithFormat:@"registerKitTime:           %.2f ms", [self registerKitEndTime] - [self registerKitStartTime]], \
+//                                 [NSString stringWithFormat:@"runFileStartTime:          %.2f ms", [self runFileStartTime] - [self startTime]], \
+//                                 [NSString stringWithFormat:@"runFileEndTime:            %.2f ms", [self runFileEndTime] - [self startTime]], \
+//                                 [NSString stringWithFormat:@"runFileTime:               %.2f ms", [self runFileEndTime] - [self runFileStartTime]], \
+//                                 [NSString stringWithFormat:@"forceLayoutWindowStartTime:%.2f ms", [self forceLayoutWindowStartTime] - [self startTime]], \
+//                                 [NSString stringWithFormat:@"forceLayoutWindowEndTime:  %.2f ms", [self forceLayoutWindowEndTime] - [self startTime]], \
+//                                 [NSString stringWithFormat:@"forceLayoutWindowTime:     %.2f ms", [self forceLayoutWindowEndTime] - [self forceLayoutWindowStartTime]], \
+//                                 [NSString stringWithFormat:@"endTime:                   %.2f ms", [self endTime] - [self startTime]]];
+    
+    NSString *descriptMessage = [NSString stringWithFormat:@"\n/********** MLN LoadTime Statistics ******/\n%@ %@ %@ %@ %@ %@ %@ %@ %@ %@ %@", \
+                                 [NSString stringWithFormat:@"%.2f", [self setupCoreStartTime] - [self startTime]], \
+                                 [NSString stringWithFormat:@"%.2f", [self registerKitStartTime] - [self startTime]], \
+                                 [NSString stringWithFormat:@"%.2f", [self registerKitEndTime] - [self startTime]], \
+                                 [NSString stringWithFormat:@"%.2f", [self registerKitEndTime] - [self registerKitStartTime]], \
+                                 [NSString stringWithFormat:@"%.2f", [self runFileStartTime] - [self startTime]], \
+                                 [NSString stringWithFormat:@"%.2f", [self runFileEndTime] - [self startTime]], \
+                                 [NSString stringWithFormat:@"%.2f", [self runFileEndTime] - [self runFileStartTime]], \
+                                 [NSString stringWithFormat:@"%.2f", [self forceLayoutWindowStartTime] - [self startTime]], \
+                                 [NSString stringWithFormat:@"%.2f", [self forceLayoutWindowEndTime] - [self startTime]], \
+                                 [NSString stringWithFormat:@"%.2f", [self forceLayoutWindowEndTime] - [self forceLayoutWindowStartTime]], \
+                                 [NSString stringWithFormat:@"%.2f", [self endTime] - [self startTime]]];
+    
     return descriptMessage;
 }
 
-- (void)resetAllTimeRecord
+- (void)resetLoadTimeRecord
 {
     _startTime = 0.0;
     _endTime = 0.0;
-    [self resetLuaCoreCreateTime];
-    [self resetLuaScriptLoadTime];
 }
 
-- (void)recordStartTime
+- (void)recordLoadStartTime
 {
-    [self resetAllTimeRecord];
-    
-    _startTime = CACurrentMediaTime();
+    [self resetLoadTimeRecord];
+    _startTime = [self currentTime];
 }
 
-- (void)recordEndTime
+- (void)recordLoadEndTime
 {
-    _endTime = CACurrentMediaTime();
+    _endTime = [self currentTime];
 }
 
-- (NSTimeInterval)allLoadTime
+- (NSTimeInterval)loadTime
 {
     return _endTime - _startTime;
 }
 
-- (void)resetLuaCoreCreateTime
+- (void)resetSetupCoreTimeRecord
 {
-    _luaCoreCreateStartTime = 0.0;
-    _luaCoreCreateEndTime = 0.0;
+    _setupCoreStartTime = 0.0;
+    _setupCoreEndTime = 0.0;
 }
 
-- (void)recordLuaCoreCreateStartTime
+- (void)recordSetupCoreStartTime
 {
-    [self resetLuaCoreCreateTime];
-    _luaCoreCreateStartTime = CACurrentMediaTime();
+    [self resetSetupCoreTimeRecord];
+    _setupCoreStartTime = [self currentTime];
 }
 
-- (void)recordLuaCoreCreateEndTime
+- (void)recordSetupCoreEndTime
 {
-    _luaCoreCreateEndTime = CACurrentMediaTime();
+    _setupCoreEndTime = [self currentTime];
 }
 
-- (NSTimeInterval)luaCoreCreateTime
+- (CFAbsoluteTime)setupCoreTime
 {
-    return _luaCoreCreateEndTime - _luaCoreCreateStartTime;
+    return _setupCoreEndTime  - _setupCoreStartTime;
 }
 
-- (void)resetLuaScriptLoadTime
+- (void)resetRegisterKitTimeRecord
 {
-    if (self.loadScriptTimeDict.allKeys.count > 0) {
-        [self.loadScriptTimeDict removeAllObjects];
-    }
-    self.loadScriptTimeDict = nil;
+    _registerKitStartTime = 0.0;
+    _registerKitEndTime = 0.0;
 }
 
-- (void)recordLoadScriptStartTimeWithFileName:(NSString *)fileName
+- (void)recordRegisterKitStartTime
 {
-    [self resetLuaScriptLoadTime];
-    _loadScriptStartTime = CACurrentMediaTime();
-    NSMutableDictionary *timeDict = [self scriptLoadTimeDictForFileName:fileName];
-    [timeDict setObject:@(_loadScriptStartTime) forKey:@"startTime"];
+    [self resetRegisterKitTimeRecord];
+    _registerKitStartTime = [self currentTime];
 }
 
-- (void)recordLoadScriptEndTimeWithFileName:(NSString *)fileName
+- (void)recordRegisterKitEndTime
 {
-    _loadScriptEndTime = CACurrentMediaTime();
-    NSMutableDictionary *timeDict = [self scriptLoadTimeDictForFileName:fileName];
-    [timeDict setObject:@(_loadScriptEndTime) forKey:@"endTime"];
-    [timeDict setObject:@(_loadScriptEndTime - _loadScriptStartTime) forKey:@"loadTime"];
+    _registerKitEndTime = [self currentTime];
 }
 
-- (NSTimeInterval)loadScriptTime
+- (CFAbsoluteTime)registerKitTime
 {
-    NSTimeInterval totalLoadScriptTime = 0.0f;
-    for (NSString *fileKey in self.loadScriptTimeDict.allKeys) {
-        totalLoadScriptTime += [[[self.loadScriptTimeDict valueForKey:fileKey] valueForKey:@"loadTime"] doubleValue];
-    }
-    return totalLoadScriptTime;
+    return _registerKitEndTime - _registerKitEndTime;
+}
+
+- (void)resetRunFileTimeRecord
+{
+    _runFileStartTime = 0.0;
+    _runFileEndTime = 0.0;
+}
+
+- (void)recordRunFileStartTime
+{
+    [self resetRunFileTimeRecord];
+    _runFileStartTime = [self currentTime];
+}
+
+- (void)recordRunFileEndTime
+{
+    _runFileEndTime = [self currentTime];
+}
+
+- (CFAbsoluteTime)recordRunFileTime
+{
+    return _runFileEndTime - _runFileStartTime;
 }
 
 
-- (NSTimeInterval)registerThirdBridgeTime
+- (void)resetForceLayoutWindowTime
 {
-    return 0.0f;
+    _forceLayoutWindowStartTime = 0.0;
+    _forceLayoutWindowEndTime = 0.0;
+}
+
+- (void)recordForceLayoutWindowStartTime
+{
+    [self resetForceLayoutWindowTime];
+    _forceLayoutWindowStartTime = [self currentTime];
+}
+
+- (void)recordForceLayoutWindowEndTime
+{
+    _forceLayoutWindowEndTime = [self currentTime];
+}
+
+- (CFAbsoluteTime)forceLayoutWindowTime
+{
+    return _forceLayoutWindowEndTime - _forceLayoutWindowStartTime;
 }
 
 
 #pragma mark - Private method
-
-- (NSMutableDictionary *)scriptLoadTimeDictForFileName:(NSString *)fileName
+- (CFAbsoluteTime)currentTime
 {
-    NSMutableDictionary *dict = [self.loadScriptTimeDict valueForKey:fileName];
-    if (!dict) {
-        dict = [NSMutableDictionary new];
-        [self.loadScriptTimeDict setObject:dict forKey:fileName];
-    }
-    return dict;
+    return CFAbsoluteTimeGetCurrent() * 1000;
 }
-
-- (NSMutableDictionary *)loadScriptTimeDict
-{
-    if (!_loadScriptTimeDict) {
-        _loadScriptTimeDict = [NSMutableDictionary new];
-    }
-    return _loadScriptTimeDict;
-}
-
-
-
 
 @end

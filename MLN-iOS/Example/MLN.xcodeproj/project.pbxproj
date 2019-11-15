@@ -71,7 +71,10 @@
 		B29500F72372D5B400F48F09 /* MLNSimpleViewPagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B29500F62372D5B400F48F09 /* MLNSimpleViewPagerCell.m */; };
 		B29F4282237BF77100130F07 /* MLNMyErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B29F4281237BF77100130F07 /* MLNMyErrorHandler.m */; };
 		B29F4285237C0BED00130F07 /* MLNAutoScrollTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B29F4284237C0BED00130F07 /* MLNAutoScrollTool.m */; };
-		B2D0AB85236C1F0A00B1D349 /* gallery in Resources */ = {isa = PBXBuildFile; fileRef = B2D0AB84236C1F0A00B1D349 /* gallery */; };
+		B29F429A237E5AB000130F07 /* MLNLuaCodeLoadHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B29F4299237E5AB000130F07 /* MLNLuaCodeLoadHandler.m */; };
+		B29F42A0237E5C4F00130F07 /* gallery_source in Resources */ = {isa = PBXBuildFile; fileRef = B29F429F237E5C4F00130F07 /* gallery_source */; };
+		B29F42A4237E5E9900130F07 /* config_data in Resources */ = {isa = PBXBuildFile; fileRef = B29F42A3237E5E9900130F07 /* config_data */; };
+		B2D0AB85236C1F0A00B1D349 /* gallery_binary in Resources */ = {isa = PBXBuildFile; fileRef = B2D0AB84236C1F0A00B1D349 /* gallery_binary */; };
 		B2D0ABB52370136000B1D349 /* MLNGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D0ABB42370136000B1D349 /* MLNGalleryViewController.m */; };
 		B2DD3E5D237990E9002AB6AD /* MLNLuaPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DD3E4E237990E8002AB6AD /* MLNLuaPageViewController.m */; };
 		B2DD3E5E237990E9002AB6AD /* MLNPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DD3E51237990E9002AB6AD /* MLNPackage.m */; };
@@ -223,7 +226,11 @@
 		B29F4281237BF77100130F07 /* MLNMyErrorHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNMyErrorHandler.m; sourceTree = "<group>"; };
 		B29F4283237C0BED00130F07 /* MLNAutoScrollTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNAutoScrollTool.h; sourceTree = "<group>"; };
 		B29F4284237C0BED00130F07 /* MLNAutoScrollTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNAutoScrollTool.m; sourceTree = "<group>"; };
-		B2D0AB84236C1F0A00B1D349 /* gallery */ = {isa = PBXFileReference; lastKnownFileType = folder; path = gallery; sourceTree = "<group>"; };
+		B29F4298237E5AB000130F07 /* MLNLuaCodeLoadHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNLuaCodeLoadHandler.h; sourceTree = "<group>"; };
+		B29F4299237E5AB000130F07 /* MLNLuaCodeLoadHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNLuaCodeLoadHandler.m; sourceTree = "<group>"; };
+		B29F429F237E5C4F00130F07 /* gallery_source */ = {isa = PBXFileReference; lastKnownFileType = folder; path = gallery_source; sourceTree = "<group>"; };
+		B29F42A3237E5E9900130F07 /* config_data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = config_data; sourceTree = "<group>"; };
+		B2D0AB84236C1F0A00B1D349 /* gallery_binary */ = {isa = PBXFileReference; lastKnownFileType = folder; path = gallery_binary; sourceTree = "<group>"; };
 		B2D0ABB32370136000B1D349 /* MLNGalleryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNGalleryViewController.h; sourceTree = "<group>"; };
 		B2D0ABB42370136000B1D349 /* MLNGalleryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryViewController.m; sourceTree = "<group>"; };
 		B2DD3E4D237990E8002AB6AD /* MLNLuaPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNLuaPageViewController.h; sourceTree = "<group>"; };
@@ -342,7 +349,9 @@
 				B2DD3E54237990E9002AB6AD /* MLNActionManager */,
 				B2DD3E4F237990E9002AB6AD /* MLNPackageManager */,
 				B29500B42371855900F48F09 /* Gallery_Native */,
-				B2D0AB84236C1F0A00B1D349 /* gallery */,
+				B2D0AB84236C1F0A00B1D349 /* gallery_binary */,
+				B29F429F237E5C4F00130F07 /* gallery_source */,
+				B29F42A3237E5E9900130F07 /* config_data */,
 				6003F59C195388D20070C39A /* MLNAppDelegate.h */,
 				6003F59D195388D20070C39A /* MLNAppDelegate.m */,
 				6003F5A5195388D20070C39A /* MLNViewController.h */,
@@ -374,6 +383,8 @@
 				B2D0ABB42370136000B1D349 /* MLNGalleryViewController.m */,
 				B29F4283237C0BED00130F07 /* MLNAutoScrollTool.h */,
 				B29F4284237C0BED00130F07 /* MLNAutoScrollTool.m */,
+				B29F4298237E5AB000130F07 /* MLNLuaCodeLoadHandler.h */,
+				B29F4299237E5AB000130F07 /* MLNLuaCodeLoadHandler.m */,
 			);
 			name = "Example for MLN";
 			path = MLN;
@@ -797,12 +808,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B29F42A0237E5C4F00130F07 /* gallery_source in Resources */,
 				30CB3BFB23684CD400AB90C6 /* MLN.podspec in Resources */,
+				B29F42A4237E5E9900130F07 /* config_data in Resources */,
 				30CB3BF923684B7F00AB90C6 /* MLNDevTool.podspec in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
-				B2D0AB85236C1F0A00B1D349 /* gallery in Resources */,
+				B2D0AB85236C1F0A00B1D349 /* gallery_binary in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -958,6 +971,7 @@
 				B27F65CA2377AAAE00F2D341 /* MLNGalleryMessageBaseCell.m in Sources */,
 				B2DD3E5F237990E9002AB6AD /* MLNPackageManager.m in Sources */,
 				B27F65E12377AB1600F2D341 /* MLNGalleryPlusViewController.m in Sources */,
+				B29F429A237E5AB000130F07 /* MLNLuaCodeLoadHandler.m in Sources */,
 				B27F65A82377AA9700F2D341 /* MLNGalleryDiscoverViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1126,7 +1140,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 36WT396TPZ;
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MLN/MLN-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1148,7 +1162,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.MMILua-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Xcode iOS Wildcard";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;
 			};

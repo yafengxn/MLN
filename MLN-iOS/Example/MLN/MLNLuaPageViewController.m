@@ -51,13 +51,13 @@
         }
     }
     NSLog(@">>>>>>>>>>>>>创建Lua页面");
-    [[MLNLoadTimeStatistics sharedInstance] recordStartTime];
+    [[MLNLoadTimeStatistics sharedInstance] recordLoadStartTime];
     UIViewController *topViewController = [MLNControlContext mln_topViewController];
     MLNLuaPageViewController *controller = [[MLNLuaPageViewController alloc] initWithActionItem:actionItem];
     controller.kitInstance.delegate = controller;
     switch (gotoValue) {
         case 0: {
-            [topViewController.navigationController pushViewController:controller animated:animated];
+            [topViewController.navigationController pushViewController:controller animated:NO];
         }
             break;
         case 1: {
@@ -104,10 +104,51 @@
 }
 
 #pragma mark - MLNKitInstanceDelegate
+
+- (void)willSetupLuaCore:(MLNKitInstance *)instance;
+{
+    [[MLNLoadTimeStatistics sharedInstance] recordSetupCoreStartTime];
+}
+
+- (void)didSetupLuaCore:(MLNKitInstance *)instance
+{
+    [[MLNLoadTimeStatistics sharedInstance] recordSetupCoreEndTime];
+}
+
+- (void)willRegisterKitClasses:(MLNKitInstance *)instance
+{
+    [[MLNLoadTimeStatistics sharedInstance] recordRegisterKitStartTime];
+}
+
+- (void)didRegisterKitClasses:(MLNKitInstance *)instance
+{
+    [[MLNLoadTimeStatistics sharedInstance] recordRegisterKitEndTime];
+}
+
+- (void)willRunFile:(MLNKitInstance *)instance fileName:(NSString *)fileName
+{
+    [[MLNLoadTimeStatistics sharedInstance] recordRunFileStartTime];
+}
+
+- (void)didRunFile:(MLNKitInstance *)instance fileName:(NSString *)fileName
+{
+    [[MLNLoadTimeStatistics sharedInstance] recordRunFileEndTime];
+}
+
+- (void)willForceLayoutWindow:(MLNKitInstance *)instance
+{
+    [[MLNLoadTimeStatistics sharedInstance] recordForceLayoutWindowStartTime];
+}
+
+- (void)didForceLayoutWindow:(MLNKitInstance *)instance
+{
+    [[MLNLoadTimeStatistics sharedInstance] recordForceLayoutWindowEndTime];
+}
+
 - (void)instance:(MLNKitInstance *)instance didFinishRun:(NSString *)entryFileName
 {
-    [[MLNLoadTimeStatistics sharedInstance] recordEndTime];
-    NSLog(@">>>>>>>>>>>>>Lua页面布局完成：%@", @([[MLNLoadTimeStatistics sharedInstance] allLoadTime] * 1000));
+    [[MLNLoadTimeStatistics sharedInstance] recordLoadEndTime];
+    NSLog(@"=========> load Time: %@", [[MLNLoadTimeStatistics sharedInstance] description]);
 }
 
 - (void)checkPackage

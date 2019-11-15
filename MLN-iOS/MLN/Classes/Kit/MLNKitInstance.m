@@ -212,9 +212,23 @@
     }
     // 执行
     NSError *err = nil;
+    if ([self.delegate respondsToSelector:@selector(willRunFile:fileName:)]) {
+        [self.delegate willRunFile:self fileName:entryFilePath];
+    }
     if ([self.luaCore runFile:entryFilePath error:&err]) {
+        if ([self.delegate respondsToSelector:@selector(didRunFile:fileName:)]) {
+            [self.delegate didRunFile:self fileName:entryFilePath];
+        }
+        
+        if ([self.delegate respondsToSelector:@selector(willForceLayoutWindow:)]) {
+            [self.delegate willForceLayoutWindow:self];
+        }
         // 请求布局
         [self forceLayoutLuaWindow];
+        if ([self.delegate respondsToSelector:@selector(didForceLayoutWindow:)]) {
+            [self.delegate didForceLayoutWindow:self];
+        }
+        
         // 回调代理
         if ([self.delegate respondsToSelector:@selector(instance:didFinishRun:)]) {
             [self.delegate instance:self didFinishRun:entryFilePath];
@@ -376,8 +390,14 @@
     }
     // 创建新的LuaCore
     [self luaCore];
+    if ([self.delegate respondsToSelector:@selector(willRegisterKitClasses:)]) {
+        [self.delegate willRegisterKitClasses:self];
+    }
     // 注册Kit所有Bridge
     [self registerKitClasses];
+    if ([self.delegate respondsToSelector:@selector(didRegisterKitClasses:)]) {
+        [self.delegate didRegisterKitClasses:self];
+    }
     // 开启所有处理引擎
     [self startAllEngines];
     // 创建LuaWindow

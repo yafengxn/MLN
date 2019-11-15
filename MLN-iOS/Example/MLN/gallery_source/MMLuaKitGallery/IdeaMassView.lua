@@ -247,10 +247,29 @@ function _class:requestNetwork(first, complete)
         end
     end
 
-    File:asyncReadFile('file://gallery/json/musicRank.json', function(codeNumber, response)
-        print("codeNumber: " .. tostring(codeNumber))
-        map = StringUtil:jsonToMap(response)
-        if codeNumber == 0 then
+    if System:Android() then
+        File:asyncReadMapFile('file://android_asset/MMLuaKitGallery/discoverry_detail.json', function(codeNumber, response)
+
+            print("codeNumber: " .. tostring(codeNumber))
+            if codeNumber == 0 then
+                local data = response:get("result")
+                if first then
+                    self.dataList = data
+                elseif data then
+                    self.dataList:addAll(data)
+                end
+
+                complete(true, data)
+            else
+                --error(err:get("errmsg"))
+                complete(false, nil)
+            end
+        end)
+    else
+        File:asyncReadFile('file://gallery/json/musicRank.json', function(codeNumber, response)
+            print("codeNumber: " .. tostring(codeNumber))
+            map = StringUtil:jsonToMap(response)
+            if codeNumber == 0 then
             local data = map:get("result")
             if first then
                 self.dataList = data
@@ -261,8 +280,9 @@ function _class:requestNetwork(first, complete)
         else
             --error(err:get("errmsg"))
             complete(false, nil)
-        end
-    end)
+            end
+        end)
+    end
 end
 
 function _class:setupDataSource()

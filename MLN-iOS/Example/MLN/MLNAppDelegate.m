@@ -16,6 +16,7 @@
 #import <MLNFile.h>
 #import <MLNFPSLabel.h>
 #import <UIView+Toast.h>
+#import "MLNLuaCodeLoadHandler.h"
 
 @implementation MLNAppDelegate
 
@@ -62,31 +63,40 @@
 
 - (void)copyJsonFilesToSandbox
 {
-    NSString *jsonDirectoryPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"/gallery/json"];
-    NSError *error = nil;
-    NSArray *jsonFilePaths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:jsonDirectoryPath error:&error];
+    NSString *jsonDirectoryPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"config_data"];
     NSString *destFileDirectory = [[MLNFile fileManagerRootPath] stringByAppendingPathComponent:@"gallery/json"];
-    BOOL isDir = NO;
-    BOOL exist = [[NSFileManager defaultManager] fileExistsAtPath:destFileDirectory isDirectory:&isDir];
+    [self copyFilesFromDirectory:jsonDirectoryPath toDirectory:destFileDirectory];
+}
+
+- (void)copyFilesFromDirectory:(NSString *)sourceDirectory toDirectory:(NSString *)destDirectory
+{
+    NSAssert(sourceDirectory && sourceDirectory.length > 0, @"source Directory must not be nil or a blank string");
+    NSAssert(destDirectory && destDirectory.length > 0, @"source Directory must not be nil or a blank string");
+    
+    BOOL isDirectory = NO;
+    BOOL exist = [[NSFileManager defaultManager] fileExistsAtPath:destDirectory isDirectory:&isDirectory];
     if (!exist) {
-        [[NSFileManager defaultManager] createDirectoryAtPath:destFileDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+        [[NSFileManager defaultManager] createDirectoryAtPath:destDirectory withIntermediateDirectories:YES attributes:nil error:nil];
     } else {
-        NSArray *oldJsonFilePaths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:destFileDirectory error:&error];
-        for (NSString *filePath in oldJsonFilePaths) {
-            NSString *oldFilePath = [destFileDirectory stringByAppendingPathComponent:filePath];
+        NSError *error = nil;
+        NSArray *oldFilePaths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:destDirectory error:&error];
+        for (NSString *filePath in oldFilePaths) {
+            NSString *oldFilePath = [destDirectory stringByAppendingPathComponent:filePath];
             NSError *error = nil;
             BOOL success = [[NSFileManager defaultManager] removeItemAtPath:oldFilePath error:&error];
             if (!success) {
-                NSLog(@"-----> error:%@", error);
+                NSLog(@"-----> remove file %@ error:%@", oldFilePath, error);
             }
         }
     }
-    for (NSString *filePath in jsonFilePaths) {
-        NSString *srcFilePath = [jsonDirectoryPath stringByAppendingPathComponent:filePath];
-        NSString *dstFilePath = [destFileDirectory stringByAppendingPathComponent:filePath];
-        BOOL success = [[NSFileManager defaultManager] copyItemAtPath:srcFilePath toPath:dstFilePath error:NULL];
+    NSArray *oldFilePaths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:sourceDirectory error:nil];
+    for (NSString *filePath in oldFilePaths) {
+        NSString *srcFilePath = [sourceDirectory stringByAppendingPathComponent:filePath];
+        NSString *dstFilePath = [destDirectory stringByAppendingPathComponent:filePath];
+        NSError *error = nil;
+        BOOL success = [[NSFileManager defaultManager] copyItemAtPath:srcFilePath toPath:dstFilePath error:&error];
         if (!success) {
-            NSLog(@"------> copy 失败：%@", dstFilePath);
+            NSLog(@"------> copy file %@ 失败, error:%@", dstFilePath, error);
         }
     }
 }

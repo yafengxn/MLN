@@ -75,11 +75,16 @@
 
 - (void)setupSubController
 {
-    [[MLNLoadTimeStatistics sharedInstance] recordStartTime];
+    [[MLNLoadTimeStatistics sharedInstance] recordLoadStartTime];
     
     if (kLuaPage) {
         NSString *entryFile = @"Main.lua";
-        MLNLuaBundle *bundle = [MLNLuaBundle mainBundleWithPath:@"gallery"];
+        MLNLuaBundle *bundle = nil;
+        if (kTestWithBinaryLuaCode) {
+            bundle = [MLNLuaBundle mainBundleWithPath:@"gallery_binary"];
+        } else {
+            bundle = [MLNLuaBundle mainBundleWithPath:@"gallery_source"];
+        }
         MLNLuaPageViewController *kcv = [[MLNLuaPageViewController alloc] initWithEntryFilePath:entryFile];
         kcv.kitInstance.delegate = self;
         [kcv regClasses:@[[MLNTestMe class],
@@ -119,45 +124,5 @@
     MLNGalleryViewController *galleryVc = [[MLNGalleryViewController alloc] init];
     [self.navigationController pushViewController:galleryVc animated:YES];
 }
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    if (!kMemoryTest) {
-        [self showLuaScriptLoadTime];
-    }
-}
-
-#pragma mark - Private method
-
-- (void)showLuaScriptLoadTime
-{
-    [self.contentViewController.view addSubview:self.loadTimeLabel];
-    self.loadTimeLabel.text = [NSString stringWithFormat:@"%.0f ms", [self.loadTimeStatistics luaCoreCreateTime] * 1000];
-    CGSize loadTimeLabelSize = [self.loadTimeLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}];
-    CGFloat loadTimeLabelY = [UIScreen mainScreen].bounds.size.height * 0.75;
-    self.loadTimeLabel.frame = CGRectMake(10, loadTimeLabelY, loadTimeLabelSize.width + 10, loadTimeLabelSize.height + 10);
-}
-
-- (void)hideLuaScriptLoadTime
-{
-    self.loadTimeLabel.hidden = YES;
-}
-
-- (UILabel *)loadTimeLabel
-{
-    if (!_loadTimeLabel) {
-        _loadTimeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _loadTimeLabel.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
-        _loadTimeLabel.textColor = [UIColor whiteColor];
-        _loadTimeLabel.font = [UIFont systemFontOfSize:12];
-        _loadTimeLabel.textAlignment = NSTextAlignmentCenter;
-        _loadTimeLabel.adjustsFontSizeToFitWidth = YES;
-        _loadTimeLabel.numberOfLines = 0;
-    }
-    return _loadTimeLabel;
-}
-
 
 @end

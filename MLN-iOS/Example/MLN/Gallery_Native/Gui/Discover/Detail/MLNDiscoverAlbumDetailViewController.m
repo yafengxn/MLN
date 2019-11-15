@@ -41,8 +41,8 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
     [self headerView];
     [self waterfallView];
     
-    [[MLNLoadTimeStatistics sharedInstance] recordEndTime];
-    NSLog(@"<<<<<<<<<<<<<<<<<<原生二级页面布局完成:%@", @([[MLNLoadTimeStatistics sharedInstance] allLoadTime] * 1000));
+    [[MLNLoadTimeStatistics sharedInstance] recordLoadEndTime];
+    NSLog(@"<<<<<<<<<<<<<<<<<<原生二级页面布局完成:%@", @([[MLNLoadTimeStatistics sharedInstance] loadTime] * 1000));
 }
 
 #pragma mark - Actions

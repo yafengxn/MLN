@@ -47,7 +47,7 @@ static NSString *kMLNNativeWaterfallViewCellID = @"kMLNNativeWaterfallViewCellID
     if (kAutoTestFps) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             _autoScrollTool = [[MLNAutoScrollTool alloc] init];
-            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"gallery/json/autoScrollPoints" ofType:@"json"];
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"config_data/autoScrollPoints" ofType:@"json"];
             [_autoScrollTool autoScrollWithView:self.waterfallView filePath:filePath];
         });
     }
@@ -76,9 +76,9 @@ static NSString *kMLNNativeWaterfallViewCellID = @"kMLNNativeWaterfallViewCellID
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"<<<<<<<<<<<<<<<<<<原生创建Controller");
-    [[MLNLoadTimeStatistics sharedInstance] recordStartTime];
+    [[MLNLoadTimeStatistics sharedInstance] recordLoadStartTime];
     MLNDiscoverAlbumDetailViewController *detailViewController = [[MLNDiscoverAlbumDetailViewController alloc] init];
-    [self.navigationController pushViewController:detailViewController animated:NO];
+    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 

@@ -86,7 +86,7 @@
         return NO;
     }
     
-    [[MLNLoadTimeStatistics sharedInstance] recordStartTime];
+    [[MLNLoadTimeStatistics sharedInstance] recordLoadStartTime];
     return YES;
 }
 

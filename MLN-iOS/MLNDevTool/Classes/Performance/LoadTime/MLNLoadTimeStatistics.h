@@ -11,22 +11,43 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MLNLoadTimeStatistics : NSObject
 
+@property (nonatomic, assign, readonly) CFAbsoluteTime startTime;
+@property (nonatomic, assign, readonly) CFAbsoluteTime endTime;
+@property (nonatomic, assign, readonly) CFAbsoluteTime setupCoreStartTime;
+@property (nonatomic, assign, readonly) CFAbsoluteTime setupCoreEndTime;
+@property (nonatomic, assign, readonly) CFAbsoluteTime registerKitStartTime;
+@property (nonatomic, assign, readonly) CFAbsoluteTime registerKitEndTime;
+@property (nonatomic, assign, readonly) CFAbsoluteTime runFileStartTime;
+@property (nonatomic, assign, readonly) CFAbsoluteTime runFileEndTime;
+@property (nonatomic, assign, readonly) CFAbsoluteTime forceLayoutWindowStartTime;
+@property (nonatomic, assign, readonly) CFAbsoluteTime forceLayoutWindowEndTime;
+
 + (instancetype)sharedInstance;
 
-- (void)resetAllTimeRecord;
-- (void)recordStartTime;
-- (void)recordEndTime;
-- (NSTimeInterval)allLoadTime;
+- (void)resetLoadTimeRecord;
+- (void)recordLoadStartTime;
+- (void)recordLoadEndTime;
+- (CFAbsoluteTime)loadTime;
 
-- (void)resetLuaCoreCreateTime;
-- (void)recordLuaCoreCreateStartTime;
-- (void)recordLuaCoreCreateEndTime;
-- (NSTimeInterval)luaCoreCreateTime;
+- (void)resetRegisterKitTimeRecord;
+- (void)recordRegisterKitStartTime;
+- (void)recordRegisterKitEndTime;
+- (CFAbsoluteTime)registerKitTime;
 
-- (void)resetLuaScriptLoadTime;
-- (void)recordLoadScriptStartTimeWithFileName:(NSString *)fileName;
-- (void)recordLoadScriptEndTimeWithFileName:(NSString *)fileName;
-- (NSTimeInterval)loadScriptTime;
+- (void)resetSetupCoreTimeRecord;
+- (void)recordSetupCoreStartTime;
+- (void)recordSetupCoreEndTime;
+- (CFAbsoluteTime)setupCoreTime;
+
+- (void)resetRunFileTimeRecord;
+- (void)recordRunFileStartTime;
+- (void)recordRunFileEndTime;
+- (CFAbsoluteTime)recordRunFileTime;
+
+- (void)resetForceLayoutWindowTime;
+- (void)recordForceLayoutWindowStartTime;
+- (void)recordForceLayoutWindowEndTime;
+- (CFAbsoluteTime)forceLayoutWindowTime;
 
 @end
 

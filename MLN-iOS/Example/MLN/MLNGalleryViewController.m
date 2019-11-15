@@ -49,13 +49,6 @@
     [self.view addGestureRecognizer:swipeGesture];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [self showLuaScriptLoadTime];
-}
-
 - (void)swipe:(UIGestureRecognizer *)gesture
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -88,37 +81,13 @@
 
 - (void)showNativeDemo:(id)sender
 {
-    [[MLNLoadTimeStatistics sharedInstance] recordStartTime];
+    [[MLNLoadTimeStatistics sharedInstance] recordLoadStartTime];
     self.galleryMainVc = [[MLNGalleryMainViewController alloc] init];
     [self.navigationController pushViewController:self.galleryMainVc animated:YES];
 }
 
 
 #pragma mark - Private method
-
-- (void)showLuaScriptLoadTime
-{
-    if (!_loadTimeLabel) {
-        CGFloat loadTimeLabelY = [UIScreen mainScreen].bounds.size.height * 0.7;
-        _loadTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, loadTimeLabelY, 50, 50)];
-        _loadTimeLabel.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
-        _loadTimeLabel.textColor = [UIColor whiteColor];
-        _loadTimeLabel.font = [UIFont systemFontOfSize:12];
-        _loadTimeLabel.textAlignment = NSTextAlignmentCenter;
-        _loadTimeLabel.adjustsFontSizeToFitWidth = YES;
-        _loadTimeLabel.numberOfLines = 0;
-        [self.kcv.view addSubview:_loadTimeLabel];
-    }
-
-    [self.kcv.view bringSubviewToFront:_loadTimeLabel];
-    self->_loadTimeLabel.hidden = NO;
-    self->_loadTimeLabel.text = [NSString stringWithFormat:@"%.0f ms\n%.0f ms\n%.0f ms\n", [self.loadTimeStatistics luaCoreCreateTime] * 1000, [self.loadTimeStatistics loadScriptTime] * 1000, [self.loadTimeStatistics allLoadTime] * 1000];
-}
-
-- (void)hideLuaScriptLoadTime
-{
-    self->_loadTimeLabel.hidden = YES;
-}
 
 - (void)setupSubviews
 {
