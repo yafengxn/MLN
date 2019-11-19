@@ -17,10 +17,6 @@
 #import <MLNLoadTimeStatistics.h>
 #import <MLNKitInstance.h>
 
-@interface MLNLuaPageViewController ()<MLNKitInstanceDelegate>
-
-@end
-
 @implementation MLNLuaPageViewController
 
 #pragma mark - MLNActionProtocol

@@ -15,10 +15,11 @@
 #import "MLNOfflineViewController.h"
 #import <MLNDevTool/MLNLoadTimeStatistics.h>
 #import "MLNGalleryMainViewController.h"
+#import "MLNLuaPageViewController.h"
 
 @interface MLNGalleryViewController () <MLNKitInstanceDelegate, MLNKitViewControllerDelegate>
 
-@property (nonatomic, strong) MLNKitViewController *kcv;
+@property (nonatomic, strong) MLNLuaPageViewController *kcv;
 @property (nonatomic, strong) MLNHotReloadViewController *hotvc;
 @property (nonatomic, strong) MLNOfflineViewController *ovc;
 @property (nonatomic, strong) MLNGalleryMainViewController *galleryMainVc;
@@ -56,8 +57,11 @@
 
 - (void)showDemoClick:(id)sender {
     NSString *entryFile = @"Main.lua";
-    MLNLuaBundle *bundle = [MLNLuaBundle mainBundleWithPath:@"gallery"];
-    MLNKitViewController *kcv = [[MLNKitViewController alloc] initWithEntryFilePath:entryFile];
+    MLNLuaBundle *bundle = [MLNLuaBundle mainBundleWithPath:@"gallery_source"];
+    NSLog(@">>>>>>>>>>>>>创建Lua页面");
+    [[MLNLoadTimeStatistics sharedInstance] recordLoadStartTime];
+    MLNLuaPageViewController *kcv = [[MLNLuaPageViewController alloc] initWithEntryFilePath:entryFile];
+    kcv.kitInstance.delegate = kcv;
     kcv.delegate = self;
     [kcv regClasses:@[[MLNTestMe class],
                       [MLNStaticTest class],
@@ -103,7 +107,7 @@
     CGFloat showDemoButtonY = (screenH - buttonH) / 2.0 - space - buttonH;
     self.showDemoButton = [self createButtonWithTitle:@"Demo 展示" action:@selector(showDemoClick:)];
     self.showDemoButton.frame = CGRectMake(showDemoButtonX, showDemoButtonY, buttonW, buttonH);
-    self.showDemoButton.hidden = YES;
+//    self.showDemoButton.hidden = YES;
     [self.view addSubview:self.showDemoButton];
     
     CGFloat showHotReloadButtonX = showDemoButtonX;

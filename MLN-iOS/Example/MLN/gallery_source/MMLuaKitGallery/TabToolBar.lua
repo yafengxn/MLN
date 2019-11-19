@@ -6,7 +6,8 @@
 
 local _class = {
     _name = 'TabToolBar',
-    _version = '1.0'
+    _version = '1.0',
+    _barItems = {}
 }
 
 ---@public
@@ -17,9 +18,28 @@ function _class:new()
 end
 
 ---@public
-function _class:setupItems(normalImages, selectImages, callback)
-    self.clickCallback = callback
+function _class:setupItems(normalImages, selectImages)
     self:createBarButtonItems(normalImages, selectImages)
+end
+
+
+---@public
+function _class:setClickCallback(callback)
+    self.clickCallback = callback
+    self:setBarItemClickAction()
+end
+
+
+---@private
+function _class:setBarItemClickAction()
+    local itemCount = self.normalImages:size()
+    for i = 1, itemCount do
+        local barItem = self._barItems[i]
+        barItem:onClick(function()
+            self:updateBarItemImages(barItem, i)
+            self.clickCallback(i)
+        end)
+    end
 end
 
 ---@private
@@ -50,10 +70,8 @@ function _class:createBarButtonItems(normalImages, selectImages)
     for i = 1, itemCount do
         local itemView = View():width(barItemWidth):height(MeasurementType.MATCH_PARENT):priority(1)
         local barItem = ImageView():width(barItemWidth):height(barItemHeight):setGravity(Gravity.CENTER)
-        barItem:onClick(function()
-            self:updateBarItemImages(barItem, i)
-            self.clickCallback(i)
-        end)
+
+        self._barItems[i] = barItem
         if i == 1 then
             self.preBarItem = barItem
             self.preIndex = 1

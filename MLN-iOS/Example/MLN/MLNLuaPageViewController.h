@@ -8,12 +8,12 @@
 
 #import <MLNKitViewController.h>
 #import "MLNActionProtocol.h"
+#import <MLNKitInstanceDelegate.h>
 
 @class MLNPackage;
-
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MLNLuaPageViewController : MLNKitViewController<MLNActionProtocol>
+@interface MLNLuaPageViewController : MLNKitViewController<MLNKitInstanceDelegate, MLNActionProtocol>
 
 //根据该package进行包内容检查加载
 @property (nonatomic, strong) MLNPackage *package;

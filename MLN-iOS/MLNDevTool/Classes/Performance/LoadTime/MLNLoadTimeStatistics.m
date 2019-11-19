@@ -40,31 +40,31 @@ static MLNLoadTimeStatistics *_instance = nil;
 
 - (NSString *)description
 {
-//    NSString *descriptMessage = [NSString stringWithFormat:@"\n/********** MLN LoadTime Statistics ******/\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@", \
-//                                 [NSString stringWithFormat:@"setupLuaCoreTime:          %.2f ms", [self setupCoreStartTime] - [self startTime]], \
-//                                 [NSString stringWithFormat:@"registerKitStartTime:      %.2f ms", [self registerKitStartTime] - [self startTime]], \
-//                                 [NSString stringWithFormat:@"registerKitEndTime:        %.2f ms", [self registerKitEndTime] - [self startTime]], \
-//                                 [NSString stringWithFormat:@"registerKitTime:           %.2f ms", [self registerKitEndTime] - [self registerKitStartTime]], \
-//                                 [NSString stringWithFormat:@"runFileStartTime:          %.2f ms", [self runFileStartTime] - [self startTime]], \
-//                                 [NSString stringWithFormat:@"runFileEndTime:            %.2f ms", [self runFileEndTime] - [self startTime]], \
-//                                 [NSString stringWithFormat:@"runFileTime:               %.2f ms", [self runFileEndTime] - [self runFileStartTime]], \
-//                                 [NSString stringWithFormat:@"forceLayoutWindowStartTime:%.2f ms", [self forceLayoutWindowStartTime] - [self startTime]], \
-//                                 [NSString stringWithFormat:@"forceLayoutWindowEndTime:  %.2f ms", [self forceLayoutWindowEndTime] - [self startTime]], \
-//                                 [NSString stringWithFormat:@"forceLayoutWindowTime:     %.2f ms", [self forceLayoutWindowEndTime] - [self forceLayoutWindowStartTime]], \
-//                                 [NSString stringWithFormat:@"endTime:                   %.2f ms", [self endTime] - [self startTime]]];
+    NSString *descriptMessage = [NSString stringWithFormat:@"\n/********** MLN LoadTime Statistics ******/\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@", \
+                                 [NSString stringWithFormat:@"setupLuaCoreTime:          %.2f ms", [self setupCoreStartTime] - [self startTime]], \
+                                 [NSString stringWithFormat:@"registerKitStartTime:      %.2f ms", [self registerKitStartTime] - [self startTime]], \
+                                 [NSString stringWithFormat:@"registerKitEndTime:        %.2f ms", [self registerKitEndTime] - [self startTime]], \
+                                 [NSString stringWithFormat:@"registerKitTime:           %.2f ms", [self registerKitEndTime] - [self registerKitStartTime]], \
+                                 [NSString stringWithFormat:@"runFileStartTime:          %.2f ms", [self runFileStartTime] - [self startTime]], \
+                                 [NSString stringWithFormat:@"runFileEndTime:            %.2f ms", [self runFileEndTime] - [self startTime]], \
+                                 [NSString stringWithFormat:@"runFileTime:               %.2f ms", [self runFileEndTime] - [self runFileStartTime]], \
+                                 [NSString stringWithFormat:@"forceLayoutWindowStartTime:%.2f ms", [self forceLayoutWindowStartTime] - [self startTime]], \
+                                 [NSString stringWithFormat:@"forceLayoutWindowEndTime:  %.2f ms", [self forceLayoutWindowEndTime] - [self startTime]], \
+                                 [NSString stringWithFormat:@"forceLayoutWindowTime:     %.2f ms", [self forceLayoutWindowEndTime] - [self forceLayoutWindowStartTime]], \
+                                 [NSString stringWithFormat:@"endTime:                   %.2f ms", [self endTime] - [self startTime]]];
     
-    NSString *descriptMessage = [NSString stringWithFormat:@"\n/********** MLN LoadTime Statistics ******/\n%@ %@ %@ %@ %@ %@ %@ %@ %@ %@ %@", \
-                                 [NSString stringWithFormat:@"%.2f", [self setupCoreStartTime] - [self startTime]], \
-                                 [NSString stringWithFormat:@"%.2f", [self registerKitStartTime] - [self startTime]], \
-                                 [NSString stringWithFormat:@"%.2f", [self registerKitEndTime] - [self startTime]], \
-                                 [NSString stringWithFormat:@"%.2f", [self registerKitEndTime] - [self registerKitStartTime]], \
-                                 [NSString stringWithFormat:@"%.2f", [self runFileStartTime] - [self startTime]], \
-                                 [NSString stringWithFormat:@"%.2f", [self runFileEndTime] - [self startTime]], \
-                                 [NSString stringWithFormat:@"%.2f", [self runFileEndTime] - [self runFileStartTime]], \
-                                 [NSString stringWithFormat:@"%.2f", [self forceLayoutWindowStartTime] - [self startTime]], \
-                                 [NSString stringWithFormat:@"%.2f", [self forceLayoutWindowEndTime] - [self startTime]], \
-                                 [NSString stringWithFormat:@"%.2f", [self forceLayoutWindowEndTime] - [self forceLayoutWindowStartTime]], \
-                                 [NSString stringWithFormat:@"%.2f", [self endTime] - [self startTime]]];
+//    NSString *descriptMessage = [NSString stringWithFormat:@"\n/********** MLN LoadTime Statistics ******/\n%@ %@ %@ %@ %@ %@ %@ %@ %@ %@ %@", \
+//                                 [NSString stringWithFormat:@"%.2f", [self setupCoreStartTime] - [self startTime]], \
+//                                 [NSString stringWithFormat:@"%.2f", [self registerKitStartTime] - [self startTime]], \
+//                                 [NSString stringWithFormat:@"%.2f", [self registerKitEndTime] - [self startTime]], \
+//                                 [NSString stringWithFormat:@"%.2f", [self registerKitEndTime] - [self registerKitStartTime]], \
+//                                 [NSString stringWithFormat:@"%.2f", [self runFileStartTime] - [self startTime]], \
+//                                 [NSString stringWithFormat:@"%.2f", [self runFileEndTime] - [self startTime]], \
+//                                 [NSString stringWithFormat:@"%.2f", [self runFileEndTime] - [self runFileStartTime]], \
+//                                 [NSString stringWithFormat:@"%.2f", [self forceLayoutWindowStartTime] - [self startTime]], \
+//                                 [NSString stringWithFormat:@"%.2f", [self forceLayoutWindowEndTime] - [self startTime]], \
+//                                 [NSString stringWithFormat:@"%.2f", [self forceLayoutWindowEndTime] - [self forceLayoutWindowStartTime]], \
+//                                 [NSString stringWithFormat:@"%.2f", [self endTime] - [self startTime]]];
     
     return descriptMessage;
 }

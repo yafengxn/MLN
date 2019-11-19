@@ -194,8 +194,15 @@
     _entryFilePath = entryFilePath;
     // 准备环境
     [self setup];
+    // 执行布局文件
+    [self runLayoutFileWithEntryFilePath:entryFilePath error:error];
     // 执行
-    return [self runWithEntryFile:entryFilePath error:error];
+    __block BOOL success = NO;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        success = [self runWithEntryFile:entryFilePath error:error];
+    });
+    
+    return success;
 }
 
 - (BOOL)runWithEntryFile:(NSString *)entryFilePath error:(NSError * _Nullable __autoreleasing * _Nullable)error
@@ -210,6 +217,7 @@
         }
         return NO;
     }
+    
     // 执行
     NSError *err = nil;
     if ([self.delegate respondsToSelector:@selector(willRunFile:fileName:)]) {
@@ -245,6 +253,61 @@
     return NO;
 }
 
+- (BOOL)runLayoutFileWithEntryFilePath:(NSString *)entryFilePath error:(NSError * _Nullable __autoreleasing * _Nullable)error
+{
+    if (!stringNotEmpty(entryFilePath)) {
+        if (error) {
+            *error = [NSError mln_errorCall:@"entryFile is nil!"];
+        }
+        MLNError(self.luaCore, @"entry file is nil!");
+    }
+    NSString *entryLayoutFile = [self entryLayoutFileWithEntryFile:entryFilePath];
+    NSString *realEntryLayoutFilePath = [self.currentBundle filePathWithName:entryLayoutFile];
+    if (!realEntryLayoutFilePath) {
+        return NO;
+    }
+    NSError *err = nil;
+    if ([self.delegate respondsToSelector:@selector(willRunFile:fileName:)]) {
+        [self.delegate willRunFile:self fileName:entryFilePath];
+    }
+    if ([self.luaCore runFile:entryLayoutFile error:&err]) {
+        if ([self.delegate respondsToSelector:@selector(didRunFile:fileName:)]) {
+            [self.delegate didRunFile:self fileName:entryFilePath];
+        }
+        
+        if ([self.delegate respondsToSelector:@selector(willForceLayoutWindow:)]) {
+            [self.delegate willForceLayoutWindow:self];
+        }
+        [self forceLayoutLuaWindow];
+        // 请求布局
+        [self forceLayoutLuaWindow];
+        if ([self.delegate respondsToSelector:@selector(didForceLayoutWindow:)]) {
+            [self.delegate didForceLayoutWindow:self];
+        }
+        
+        // 回调代理
+        if ([self.delegate respondsToSelector:@selector(instance:didFinishRun:)]) {
+            [self.delegate instance:self didFinishRun:entryFilePath];
+        }
+        return YES;
+    }
+    // 回调代理
+    if ([self.delegate respondsToSelector:@selector(instance:didFailRun:error:)]) {
+        [self.delegate instance:self didFailRun:entryFilePath error:err];
+    }
+    
+    if (error) {
+        *error = err;
+    }
+    return NO;
+}
+
+- (NSString *)entryLayoutFileWithEntryFile:(NSString *)entryFile
+{
+    NSString *fileName = [[entryFile lastPathComponent] stringByDeletingPathExtension];
+    return [NSString stringWithFormat:@"%@Layout.lua", fileName];
+}
+
 - (BOOL)reload:(NSError * _Nullable __autoreleasing *)error
 {
     return [self reloadWithEntryFile:_entryFilePath windowExtra:_windowExtra error:error];
@@ -265,6 +328,8 @@
     if (![self.luaCore registerClasses:_classes error:error]) {
         return NO;
     }
+    // 加载布局文件
+    [self runLayoutFileWithEntryFilePath:entryFilePath error:error];
     // 执行
     if ([self runWithEntryFile:entryFilePath error:error]) {
         [self redoLuaViewDidAppearIfNeed];
