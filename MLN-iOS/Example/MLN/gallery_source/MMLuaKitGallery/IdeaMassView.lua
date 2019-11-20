@@ -3,6 +3,8 @@ local _class = {
     _version = '1.0'
 }
 
+require('IdeaMassMainViewLayout')
+
 ---@public
 function _class:new()
     local o = {}
@@ -12,169 +14,39 @@ function _class:new()
     self.type = 1
     return o
 end
----优先加载其他辅助文件
----@private
-function _class:loadExtensions()
-    require("MMLuaKitGallery.Constant")
-end
 
 ---@public
 function _class:rootView()
     if self.containerView then
         return self.containerView
     end
-    self:loadExtensions()
-    self:createSubviews()
+    self:setupTapTableView()
+    self:setupWaterfallView()
     self:setupDataSource()
     return self.containerView
 end
 
----@private
-function _class:createSubviews()
-    self:setupContainerView()
-    self:setupTitleView()
-    self:setupHeaderView()
-    --waterfallview
-    self.waterfall = self:setupWaterfallView()
-    self.containerView:addView(self.waterfall)
-end
----容器视图
----@public
-function _class:setupContainerView()
-    self.containerView = LinearLayout(LinearType.VERTICAL)
-    self.containerView:width(MeasurementType.MATCH_PARENT):height(MeasurementType.MATCH_PARENT):bgColor(_Color.White)
 
-    if System:iOS() then
-        self.containerView:marginTop(window:statusBarHeight())
-    end
-end
+function _class:setupTapTableView()
+    local tapTableViewAdapter = CollectionViewAutoFitAdapter()
 
----导航栏视图
----@public
-function _class:setupTitleView()
-    --导航栏
-    self.navigation = require("MMLuaKitGallery.NavigationBar"):new()
-    self.navibar = self.navigation:bar("灵感集", nil)
-    self.containerView:addView(self.navibar)
-
-    --返回
-    self.backBtn = ImageView():width(22):height(22):marginLeft(20):setGravity(MBit:bor(Gravity.LEFT, Gravity.CENTER_VERTICAL))
-    self.backBtn:image("icon_back")
-    self.navibar:addView(self.backBtn)
-    self.backBtn:onClick(function()
-        Navigator:closeSelf(AnimType.Default)
-    end)
-
-    --分享
-    self.shareBtn = ImageView():width(22):height(22):marginRight(20):setGravity(MBit:bor(Gravity.RIGHT, Gravity.CENTER_VERTICAL))
-    self.shareBtn:image("1567316383469-minshare")
-    self.navibar:addView(self.shareBtn)
-
-end
----header设置
-function _class:setupHeaderView()
-    self:setupTopView()
-    self.containerView:addView(self.HeaderView)
-end
----header视图
-function _class:setupTopView()
-    self.HeaderView = LinearLayout(LinearType.VERTICAL):width(MeasurementType.MATCH_PARENT):height(231):bgColor(_Color.Gray)
-
-    self.topView = View():width(MeasurementType.MATCH_PARENT):height(MeasurementType.WRAP_CONTENT):padding(20, 10, 10, 10)
-    self.HeaderView:addView(self.topView)
-
-    self.iv = ImageView():width(100):height(100):cornerRadius(6)
-    self.topView:addView(self.iv)
-
-    self.attention = Label():text("+ 关注"):textColor(_Color.White):fontSize(12):borderWidth(1):borderColor(_Color.White):padding(6, 12, 6, 12):cornerRadius(2):setGravity(Gravity.RIGHT)
-    self.topView:addView(self.attention)
-
-    self.title = Label():marginLeft(120):text("一周穿搭不重样"):textColor(_Color.White):fontSize(16):setTextFontStyle(FontStyle.BOLD)
-    self.topView:addView(self.title)
-
-    --篇数 浏览量
-    self.countLinear = LinearLayout(LinearType.HORIZONTAL):marginLeft(120):marginTop(28)
-    self.topView:addView(self.countLinear)
-
-    self.pageLogo = ImageView():width(15):height(15):cornerRadius(6):image("https://s.momocdn.com/w/u/others/2019/10/18/1571393657050-mls_star.png")
-    self.countLinear:addView(self.pageLogo)
-    self.pageCount = Label():text("200篇"):textColor(_Color.White):fontSize(12):marginLeft(3)
-    self.countLinear:addView(self.pageCount)
-
-    self.scanLogo = ImageView():width(15):height(15):marginLeft(8):image("https://s.momocdn.com/w/u/others/2019/10/18/1571393656549-mls_scan.png")
-    self.countLinear:addView(self.scanLogo)
-    self.scanCount = Label():text("6790"):textColor(_Color.White):fontSize(12):marginLeft(3)
-    self.countLinear:addView(self.scanCount)
-
-    --话题创建者
-    self.autoLinear = LinearLayout(LinearType.HORIZONTAL):marginLeft(120):setGravity(Gravity.BOTTOM):marginBottom(5)
-    self.topView:addView(self.autoLinear)
-    self.authorHeader = ImageView():width(25):height(25):image("https://s.momocdn.com/w/u/others/2019/10/18/1571393657050-mls_header.png")
-    self.autoLinear:addView(self.authorHeader)
-    self.authorName = Label():text("小美酱Pick榜 创建"):textColor(_Color.White):fontSize(12):setGravity(Gravity.CENTER_VERTICAL):marginLeft(5)
-    self.autoLinear:addView(self.authorName)
-
-    --相关灵感集栏
-    self.aboutLinear = LinearLayout(LinearType.HORIZONTAL):width(MeasurementType.MATCH_PARENT):height(50):padding(10, 10, 10, 10)
-    self.HeaderView:addView(self.aboutLinear)
-    self.about = Label():text("相关灵感集："):textColor(_Color.White):fontSize(12):setGravity(Gravity.CENTER_VERTICAL)
-    self.aboutLinear:addView(self.about)
-    --标签列表视图
-    self:setupTapListView():setGravity(Gravity.CENTER_VERTICAL)
-    self.aboutLinear:addView(self:setupTapListView())
-    self.bottomView = LinearLayout(LinearType.VERTICAL):width(MeasurementType.MATCH_PARENT):height(MeasurementType.MATCH_PARENT)
-    self.bottomView:bgColor(_Color.White):setCornerRadiusWithDirection(10, MBit:bor(RectCorner.TOP_LEFT, RectCorner.TOP_RIGHT))
-    self.HeaderView:addView(self.bottomView)
-    --tabSegment
-    self.tabSegment = self:setupTabSegment()
-    --line
-    self.line = View():width(MeasurementType.MATCH_PARENT):height(1):bgColor(_Color.LightGray)
-    self.bottomView:addView(self.line)
-end
----灵感集标签列表
-function _class:setupTapListView()
-    self.tapTableView = CollectionView(false, false):width(MeasurementType.MATCH_PARENT):height(MeasurementType.WRAP_CONTENT):scrollDirection(ScrollDirection.HORIZONTAL)
-    self.tapLayout = CollectionViewGridLayoutFix():itemSpacing(10):spanCount(1)
-
-    self.tapAdapter = CollectionViewAutoFitAdapter()
-
-    self.tapAdapter:initCell(function(cell)
+    tapTableViewAdapter:initCell(function(cell)
         cell.tapLabel = Label():text(""):textColor(_Color.White):fontSize(12):padding(6, 15, 6, 15):bgColor(Color(70, 70, 70, 0.5)):cornerRadius(40)
         cell.contentView:addView(cell.tapLabel)
     end)
-    self.tapAdapter:fillCellData(function(cell, _, row)
+
+    tapTableViewAdapter:fillCellData(function(cell, _, row)
         local item = self.dataList:get(row)
         cell.tapLabel:text(item:get("author"))
     end)
-    self.tapAdapter:rowCount(function()
+
+    tapTableViewAdapter:rowCount(function()
         return self.dataList:size()
     end)
-    self.tapTableView:layout(self.tapLayout)
-    self.tapTableView:adapter(self.tapAdapter)
-    return self.tapTableView
+
+    IdeaMassMainViewLayout._headerView.tapTableView:adapter(tapTableViewAdapter)
 end
 
-function _class:setupTabSegment()
-    titles = Array():add("热门"):add("最新")
-    self.tabSegment = TabSegmentView(Rect(0, 400, window:width(), 50), titles, _Color.Black)
-    self.tabSegment:normalFontSize(14):tintColor(_Color.Gray):selectedColor(_Color.DeepGray):setAlignment(TabSegmentAlignment.LEFT):selectScale(1)
-    self.tabSegment:setItemTabClickListener(function(index)
-        if self.type ~= index then
-            self.waterfall:resetLoading()
-            self.dataList:removeAll()
-            self.type = index
-            self:requestNetwork(true, function(success, _)
-                if success then
-                    if self.dataList:size() > 0 then
-                        self.waterfall:reloadData()
-                    end
-                end
-            end)
-        end
-    end)
-    self.bottomView:addView(self.tabSegment)
-    return self.tabSegment
-end
 
 function _class:setupWaterfallView()
     self.waterfall = WaterfallView(false, true):width(MeasurementType.MATCH_PARENT):height(MeasurementType.MATCH_PARENT)
@@ -217,6 +89,7 @@ function _class:setupWaterfallView()
     end)
     self.waterfall:layout(self.waterfallLayout)
     self.waterfall:adapter(self.waterfallAdapter)
+
     self.waterfall:setLoadingCallback(function()
         self:requestNetwork(false, function(success, data)
             if success then
@@ -226,6 +99,8 @@ function _class:setupWaterfallView()
             end
         end)
     end)
+    IdeaMassMainViewLayout._containerView:addView(self.waterfall)
+    IdeaMassMainViewLayout._waterfallView = self.waterfall
     return self.waterfall
 end
 ---请求接口
@@ -290,9 +165,9 @@ function _class:setupDataSource()
     self:requestNetwork(true, function(success, _)
         if success then
             if self.dataList:size() > 0 then
-                self.iv:image(self.dataList:get(1):get("pic_radio"))
-                self.tapTableView:reloadData()
-                self.waterfall:reloadData()
+                IdeaMassMainViewLayout._headerView.iv:image(self.dataList:get(1):get("pic_radio"))
+                IdeaMassMainViewLayout._headerView.tapTableView:reloadData()
+                IdeaMassMainViewLayout._waterfallView:reloadData()
             end
         end
     end)

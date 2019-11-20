@@ -69,7 +69,6 @@ function setupHomePagerView()
     local placeHolderView = View():bgColor(Color(255, 255, 255, 0.0)):width(window:width()):height(0.5)
     MainLayout._homePagerContainerView:addView(placeHolderView)
 
-
     local titles = Array()
     titles:add("关注")
     titles:add("推荐")
