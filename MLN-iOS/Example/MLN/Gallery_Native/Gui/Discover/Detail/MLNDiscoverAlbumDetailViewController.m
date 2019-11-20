@@ -42,7 +42,7 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
     [self waterfallView];
     
     [[MLNLoadTimeStatistics sharedInstance] recordLoadEndTime];
-    NSLog(@"<<<<<<<<<<<<<<<<<<原生二级页面布局完成:%@", @([[MLNLoadTimeStatistics sharedInstance] loadTime] * 1000));
+    NSLog(@"<<<<<<<<<<<<<<<<<<原生二级页面布局完成:%@", @([[MLNLoadTimeStatistics sharedInstance] loadTime]));
 }
 
 #pragma mark - Actions

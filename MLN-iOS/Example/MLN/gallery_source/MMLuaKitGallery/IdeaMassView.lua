@@ -3,8 +3,6 @@ local _class = {
     _version = '1.0'
 }
 
-require('IdeaMassMainViewLayout')
-
 ---@public
 function _class:new()
     local o = {}
@@ -21,6 +19,7 @@ function _class:rootView()
         return self.containerView
     end
     self:setupTapTableView()
+    self:setupTabSegementAction()
     self:setupWaterfallView()
     self:setupDataSource()
     return self.containerView
@@ -45,6 +44,24 @@ function _class:setupTapTableView()
     end)
 
     IdeaMassMainViewLayout._headerView.tapTableView:adapter(tapTableViewAdapter)
+end
+
+
+function _class:setupTabSegementAction()
+    IdeaMassMainViewLayout._headerView.tabSegment:setItemTabClickListener(function(index)
+        if self.type ~= index then
+            self.waterfall:resetLoading()
+            self.dataList:removeAll()
+            self.type = index
+            self:requestNetwork(true, function(success, _)
+                if success then
+                    if self.dataList:size() > 0 then
+                        self.waterfall:reloadData()
+                    end
+                end
+            end)
+        end
+    end)
 end
 
 

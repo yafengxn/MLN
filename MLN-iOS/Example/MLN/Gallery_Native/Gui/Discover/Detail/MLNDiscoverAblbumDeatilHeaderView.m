@@ -32,6 +32,14 @@
 
 @implementation MLNDiscoverAblbumDeatilHeaderView
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame]) {
+        [self setupViews];
+    }
+    return self;
+}
+
 - (void)reloadWithData:(NSArray *)dataList
 {
     if (dataList.count <= 0) {
@@ -55,10 +63,8 @@
 }
 
 
-- (void)layoutSubviews
+- (void)setupViews
 {
-    [super layoutSubviews];
-    
     self.backgroundColor = [UIColor colorWithRed:140/255.0 green:140/255.0 blue:140/255.0 alpha:1.0];
     
     CGFloat margin = 10;

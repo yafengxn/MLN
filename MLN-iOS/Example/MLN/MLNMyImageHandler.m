@@ -16,10 +16,6 @@
 
 - (void)imageView:(UIImageView<MLNEntityExportProtocol> *)imageView setImageWithPath:(NSString *)path
 {
-    if (kDisableImageLoad)  {
-        return;
-    }
-    
     if ([self isHttpURL:path]) {
         NSURL *imgURL = [NSURL URLWithString:path];
         [imageView sd_setImageWithURL:imgURL];

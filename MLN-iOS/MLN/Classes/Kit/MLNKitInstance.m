@@ -195,10 +195,17 @@
     // 准备环境
     [self setup];
     // 执行布局文件
+    CFAbsoluteTime runFileStart = CFAbsoluteTimeGetCurrent();
     [self runLayoutFileWithEntryFilePath:entryFilePath error:error];
+    CFAbsoluteTime runFileEnd = CFAbsoluteTimeGetCurrent();
+    NSLog(@"runfile =======> %f", (runFileEnd - runFileStart) * 1000);
+
+    CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
     // 执行
     __block BOOL success = NO;
     dispatch_async(dispatch_get_main_queue(), ^{
+        CFAbsoluteTime end = CFAbsoluteTimeGetCurrent();
+        NSLog(@"=========> 异步runLoop %f", (end - start) * 1000);
         success = [self runWithEntryFile:entryFilePath error:error];
     });
     
@@ -278,7 +285,6 @@
         if ([self.delegate respondsToSelector:@selector(willForceLayoutWindow:)]) {
             [self.delegate willForceLayoutWindow:self];
         }
-        [self forceLayoutLuaWindow];
         // 请求布局
         [self forceLayoutLuaWindow];
         if ([self.delegate respondsToSelector:@selector(didForceLayoutWindow:)]) {

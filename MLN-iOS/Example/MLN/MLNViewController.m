@@ -86,7 +86,7 @@
             bundle = [MLNLuaBundle mainBundleWithPath:@"gallery_source"];
         }
         MLNLuaPageViewController *kcv = [[MLNLuaPageViewController alloc] initWithEntryFilePath:entryFile];
-        kcv.kitInstance.delegate = self;
+        kcv.kitInstance.delegate = kcv;
         [kcv regClasses:@[[MLNTestMe class],
                           [MLNStaticTest class],
                           [MLNGlobalVarTest class],

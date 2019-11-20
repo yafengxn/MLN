@@ -16,7 +16,6 @@ end
 function _class:setupSubviews()
     self:setupTopView()
     self:setupTapListView()
-    self:setupTabSegment()
 end
 
 ---header视图
@@ -63,8 +62,9 @@ function _class:setupTopView()
     self.about = Label():text("相关灵感集："):textColor(_Color.White):fontSize(12):setGravity(Gravity.CENTER_VERTICAL)
     self.aboutLinear:addView(self.about)
     --标签列表视图
-    self:setupTapListView():setGravity(Gravity.CENTER_VERTICAL)
-    self.aboutLinear:addView(self:setupTapListView())
+    self.tapTableView = self:setupTapListView()
+    self.tapTableView:setGravity(Gravity.CENTER_VERTICAL)
+    self.aboutLinear:addView(self.tapTableView)
     self.bottomView = LinearLayout(LinearType.VERTICAL):width(MeasurementType.MATCH_PARENT):height(MeasurementType.MATCH_PARENT)
     self.bottomView:bgColor(_Color.White):setCornerRadiusWithDirection(10, MBit:bor(RectCorner.TOP_LEFT, RectCorner.TOP_RIGHT))
     self.HeaderView:addView(self.bottomView)
@@ -76,6 +76,10 @@ function _class:setupTopView()
 end
 ---灵感集标签列表
 function _class:setupTapListView()
+    if self.tapTableView then
+        return self.tapTableView
+    end
+
     self.tapTableView = CollectionView(false, false):width(MeasurementType.MATCH_PARENT):height(MeasurementType.WRAP_CONTENT):scrollDirection(ScrollDirection.HORIZONTAL)
     self.tapLayout = CollectionViewGridLayoutFix():itemSpacing(10):spanCount(1)
     self.tapTableView:layout(self.tapLayout)
@@ -85,26 +89,10 @@ end
 
 function _class:setupTabSegment()
     titles = Array():add("热门"):add("最新")
-    self.tabSegment = TabSegmentView(Rect(0, 400, window:width(), 50), titles, _Color.Black)
-    self.tabSegment:normalFontSize(14):tintColor(_Color.Gray):selectedColor(_Color.DeepGray):setAlignment(TabSegmentAlignment.LEFT):selectScale(1)
-    self.tabSegment:setItemTabClickListener(function(index)
-    --[[
-        if self.type ~= index then
-            self.waterfall:resetLoading()
-            self.dataList:removeAll()
-            self.type = index
-            self:requestNetwork(true, function(success, _)
-                if success then
-                    if self.dataList:size() > 0 then
-                        self.waterfall:reloadData()
-                    end
-                end
-            end)
-        end
-    --]]
-    end)
-    self.bottomView:addView(self.tabSegment)
-    return self.tabSegment
+    local tabSegment = TabSegmentView(Rect(0, 400, window:width(), 50), titles, _Color.Black)
+    --self.tabSegment:normalFontSize(14):tintColor(_Color.Gray):selectedColor(_Color.DeepGray):setAlignment(TabSegmentAlignment.LEFT):selectScale(1)
+    self.bottomView:addView(tabSegment)
+    return tabSegment
 end
 
 
