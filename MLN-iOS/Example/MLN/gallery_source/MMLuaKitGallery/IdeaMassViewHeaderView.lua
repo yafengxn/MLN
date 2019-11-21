@@ -15,7 +15,6 @@ end
 ---@private
 function _class:setupSubviews()
     self:setupTopView()
-    self:setupTapListView()
 end
 
 ---header视图
@@ -82,7 +81,9 @@ function _class:setupTapListView()
 
     self.tapTableView = CollectionView(false, false):width(MeasurementType.MATCH_PARENT):height(MeasurementType.WRAP_CONTENT):scrollDirection(ScrollDirection.HORIZONTAL)
     self.tapLayout = CollectionViewGridLayoutFix():itemSpacing(10):spanCount(1)
+    self.adapter = CollectionViewAutoFitAdapter()
     self.tapTableView:layout(self.tapLayout)
+    self.tapTableView:adapter(self.adapter)
     return self.tapTableView
 end
 

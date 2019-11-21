@@ -22,12 +22,11 @@ function _class:rootView()
     self:setupTabSegementAction()
     self:setupWaterfallView()
     self:setupDataSource()
-    return self.containerView
 end
 
 
 function _class:setupTapTableView()
-    local tapTableViewAdapter = CollectionViewAutoFitAdapter()
+    local tapTableViewAdapter = IdeaMassMainViewLayout._headerView.adapter
 
     tapTableViewAdapter:initCell(function(cell)
         cell.tapLabel = Label():text(""):textColor(_Color.White):fontSize(12):padding(6, 15, 6, 15):bgColor(Color(70, 70, 70, 0.5)):cornerRadius(40)
@@ -42,8 +41,6 @@ function _class:setupTapTableView()
     tapTableViewAdapter:rowCount(function()
         return self.dataList:size()
     end)
-
-    IdeaMassMainViewLayout._headerView.tapTableView:adapter(tapTableViewAdapter)
 end
 
 
@@ -69,6 +66,9 @@ function _class:setupWaterfallView()
     self.waterfall = WaterfallView(false, true):width(MeasurementType.MATCH_PARENT):height(MeasurementType.MATCH_PARENT)
     self.waterfallLayout = WaterfallLayoutFix():itemSpacing(12):lineSpacing(18):spanCount(2):layoutInset(10, 0, 0, 0)
     self.waterfallAdapter = WaterfallAdapter()
+    self.waterfall:layout(self.waterfallLayout)
+    self.waterfall:adapter(self.waterfallAdapter)
+
     self.waterfallAdapter:initCell(function(cell)
         local REQCELL = require("MMLuaKitGallery.IdeaWaterfallCell"):new()
         REQCELL:cellView()
@@ -104,8 +104,6 @@ function _class:setupWaterfallView()
             return 250
         end
     end)
-    self.waterfall:layout(self.waterfallLayout)
-    self.waterfall:adapter(self.waterfallAdapter)
 
     self.waterfall:setLoadingCallback(function()
         self:requestNetwork(false, function(success, data)

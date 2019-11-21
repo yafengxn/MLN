@@ -33,7 +33,7 @@
     self.contentLabel.frame = CGRectMake(contentLabelX, contentLabelY, contentLabelW, contentLabelH);
     
     [[MLNLoadTimeStatistics sharedInstance] recordLoadEndTime];
-    NSLog(@"<<<<<<<<<<<<<<<<<<原生消息二级页面私信布局完成：%@", @([[MLNLoadTimeStatistics sharedInstance] loadTime] * 1000));
+    NSLog(@"<<<<<<<<<<<<<<<<<<原生消息二级页面私信布局完成：%@", @([[MLNLoadTimeStatistics sharedInstance] loadTime]));
 }
 
 - (MLNGalleryNavigationBar *)navigationBar

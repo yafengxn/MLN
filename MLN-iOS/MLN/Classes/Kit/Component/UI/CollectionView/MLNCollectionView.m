@@ -47,6 +47,7 @@
             if (sself.innerCollectionView.dataSource != sself.adapter) {
                 sself.innerCollectionView.dataSource = sself.adapter;
             }
+            [sself.innerCollectionView reloadData];
             [sself mln_handleCollectionViewStatus];
         }];
     }

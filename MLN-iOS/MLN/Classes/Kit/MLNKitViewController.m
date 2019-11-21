@@ -148,6 +148,11 @@
     [self.kitInstance doLuaWindowDidDisappear];
 }
 
+- (void)releaseKitInstance
+{
+    _luaInstance = nil;
+}
+
 - (MLNKitInstance *)kitInstance
 {
     if (!_luaInstance) {

@@ -17,6 +17,7 @@
 #import "MLNKitBridgesManager.h"
 #import "MLNWindow.h"
 #import "MLNKitInstanceConsts.h"
+#import "MLNLuaCorePool.h"
 
 #define kMLNRunLoopBeforeWaitingLazyTaskOrder   1
 #define kMLNRunLoopBeforeWaitingRenderOrder     2
@@ -111,6 +112,11 @@
 
 @implementation MLNKitInstance
 
++ (void)initializeLuaCorePool
+{
+    [MLNLuaCorePool initializeLuaCorePool];
+}
+
 #pragma mark - MLNErrorHandlerProtocol
 - (BOOL)canHandleAssert:(MLNLuaCore *)luaCore
 {
@@ -150,22 +156,22 @@
 }
 
 #pragma mark - Public For LuaCore
-- (instancetype)initWithLuaBundlePath:(NSString *)luaBundlePath viewController:(nonnull UIViewController<MLNViewControllerProtocol> *)viewController
+- (instancetype)initWithLuaBundlePath:(NSString *)luaBundlePath viewController:( UIViewController<MLNViewControllerProtocol> * __nullable)viewController
 {
     return [self initWithLuaBundle:[MLNLuaBundle bundleCachesWithPath:luaBundlePath] viewController:viewController];
 }
 
-- (instancetype)initWithLuaBundle:(MLNLuaBundle *)bundle viewController:(nonnull UIViewController<MLNViewControllerProtocol> *)viewController
+- (instancetype)initWithLuaBundle:(MLNLuaBundle *)bundle viewController:( UIViewController<MLNViewControllerProtocol> * __nullable)viewController
 {
     return [self initWithLuaBundle:bundle convertor:nil exporter:nil rootView:viewController.view viewController:viewController];
 }
 
-- (instancetype)initWithLuaBundle:(MLNLuaBundle *)bundle rootView:(UIView * _Nullable)rootView viewController:(nonnull UIViewController<MLNViewControllerProtocol> *)viewController
+- (instancetype)initWithLuaBundle:(MLNLuaBundle *)bundle rootView:(UIView * _Nullable)rootView viewController:( UIViewController<MLNViewControllerProtocol> * __nullable)viewController
 {
     return [self initWithLuaBundle:bundle convertor:nil exporter:nil rootView:rootView viewController:viewController];
 }
 
-- (instancetype)initWithLuaBundle:(MLNLuaBundle *__nullable)luaBundle convertor:(Class<MLNConvertorProtocol> __nullable)convertorClass exporter:(Class<MLNExporterProtocol> __nullable)exporterClass rootView:(UIView *)rootView viewController:(UIViewController<MLNViewControllerProtocol> *)viewController
+- (instancetype)initWithLuaBundle:(MLNLuaBundle *__nullable)luaBundle convertor:(Class<MLNConvertorProtocol> __nullable)convertorClass exporter:(Class<MLNExporterProtocol> __nullable)exporterClass rootView:(UIView *)rootView viewController:(UIViewController<MLNViewControllerProtocol> * __nullable)viewController
 {
     if (self = [super init]) {
         _currentBundle = luaBundle;
@@ -194,18 +200,11 @@
     _entryFilePath = entryFilePath;
     // 准备环境
     [self setup];
-    // 执行布局文件
-    CFAbsoluteTime runFileStart = CFAbsoluteTimeGetCurrent();
+    // 运行主页面布局文件
     [self runLayoutFileWithEntryFilePath:entryFilePath error:error];
-    CFAbsoluteTime runFileEnd = CFAbsoluteTimeGetCurrent();
-    NSLog(@"runfile =======> %f", (runFileEnd - runFileStart) * 1000);
-
-    CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
     // 执行
     __block BOOL success = NO;
     dispatch_async(dispatch_get_main_queue(), ^{
-        CFAbsoluteTime end = CFAbsoluteTimeGetCurrent();
-        NSLog(@"=========> 异步runLoop %f", (end - start) * 1000);
         success = [self runWithEntryFile:entryFilePath error:error];
     });
     
@@ -268,11 +267,14 @@
         }
         MLNError(self.luaCore, @"entry file is nil!");
     }
+    CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
     NSString *entryLayoutFile = [self entryLayoutFileWithEntryFile:entryFilePath];
     NSString *realEntryLayoutFilePath = [self.currentBundle filePathWithName:entryLayoutFile];
     if (!realEntryLayoutFilePath) {
         return NO;
     }
+    CFAbsoluteTime end = CFAbsoluteTimeGetCurrent();
+    NSLog(@"========> |getfile| %f", (end - start) * 1000);
     NSError *err = nil;
     if ([self.delegate respondsToSelector:@selector(willRunFile:fileName:)]) {
         [self.delegate willRunFile:self fileName:entryFilePath];
@@ -461,14 +463,6 @@
     }
     // 创建新的LuaCore
     [self luaCore];
-    if ([self.delegate respondsToSelector:@selector(willRegisterKitClasses:)]) {
-        [self.delegate willRegisterKitClasses:self];
-    }
-    // 注册Kit所有Bridge
-    [self registerKitClasses];
-    if ([self.delegate respondsToSelector:@selector(didRegisterKitClasses:)]) {
-        [self.delegate didRegisterKitClasses:self];
-    }
     // 开启所有处理引擎
     [self startAllEngines];
     // 创建LuaWindow
@@ -483,7 +477,7 @@
 
 - (void)createLuaCore
 {
-    _luaCore = [[MLNLuaCore alloc] initWithLuaBundle:_currentBundle convertor:_convertorClass exporter:_exporterClass];
+    _luaCore = [MLNLuaCorePool acuqireALuaCore];
     _luaCore.weakAssociatedObject = self;
     _luaCore.errorHandler = self;
     _luaCore.delegate = self;

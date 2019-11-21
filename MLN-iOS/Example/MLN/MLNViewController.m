@@ -52,6 +52,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [MLNKitInstance initializeLuaCorePool];
+    
     // 初始化handlers
     self.httpHandler = [[MLNMyHttpHandler alloc] init];
     self.refreshHandler = [[MLNMyRefreshHandler alloc] init];

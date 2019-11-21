@@ -98,7 +98,7 @@ Lua中的根视图。
  @param viewController LuaWindow所在的视图控制器，并使用viewController.view作为承载LuaWindow的根视图
  @return LuaInstance实例
  */
-- (instancetype)initWithLuaBundlePath:(NSString *__nullable)luaBundlePath viewController:(UIViewController<MLNViewControllerProtocol> *)viewController;
+- (instancetype)initWithLuaBundlePath:(NSString *__nullable)luaBundlePath viewController:(UIViewController<MLNViewControllerProtocol> * __nullable)viewController;
 
 /**
  初始化方法
@@ -107,7 +107,7 @@ Lua中的根视图。
  @param viewController LuaWindow所在的视图控制器，并使用viewController.view作为承载LuaWindow的根视图
  @return Lua Core 实例
  */
-- (instancetype)initWithLuaBundle:(MLNLuaBundle *__nullable)luaBundle viewController:(UIViewController<MLNViewControllerProtocol> *)viewController;
+- (instancetype)initWithLuaBundle:(MLNLuaBundle *__nullable)luaBundle viewController:(UIViewController<MLNViewControllerProtocol> * __nullable)viewController;
 
 /**
  初始化方法
@@ -125,7 +125,7 @@ Lua中的根视图。
  @param viewController LuaWindow所在的视图控制器，并使用viewController.view作为承载LuaWindow的根视图
  @return Lua Core 实例
  */
-- (instancetype)initWithLuaBundle:(MLNLuaBundle *__nullable)luaBundle rootView:(UIView * __nullable)rootView viewController:(UIViewController<MLNViewControllerProtocol> *)viewController;
+- (instancetype)initWithLuaBundle:(MLNLuaBundle *__nullable)luaBundle rootView:(UIView * __nullable)rootView viewController:(UIViewController<MLNViewControllerProtocol> * __nullable)viewController;
 
 /**
  默认的初始化方法
@@ -138,10 +138,15 @@ Lua中的根视图。
  @param viewController LuaWindowd所在的视图控制器
  @return LuaInstance实例
  */
-- (instancetype)initWithLuaBundle:(MLNLuaBundle *__nullable)luaBundle convertor:(Class<MLNConvertorProtocol> __nullable)convertorClass exporter:(Class<MLNExporterProtocol> __nullable)exporterClass rootView:(UIView * __nullable)rootView viewController:(UIViewController<MLNViewControllerProtocol> *)viewController NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithLuaBundle:(MLNLuaBundle *__nullable)luaBundle convertor:(Class<MLNConvertorProtocol> __nullable)convertorClass exporter:(Class<MLNExporterProtocol> __nullable)exporterClass rootView:(UIView * __nullable)rootView viewController:(UIViewController<MLNViewControllerProtocol> * __nullable)viewController NS_DESIGNATED_INITIALIZER;
 
 + (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE; 
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ 初始化LuaCore池
+ */
++ (void)initializeLuaCorePool;
 
 /**
  加载并执行数据

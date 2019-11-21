@@ -111,16 +111,6 @@
     [[MLNLoadTimeStatistics sharedInstance] recordSetupCoreEndTime];
 }
 
-- (void)willRegisterKitClasses:(MLNKitInstance *)instance
-{
-    [[MLNLoadTimeStatistics sharedInstance] recordRegisterKitStartTime];
-}
-
-- (void)didRegisterKitClasses:(MLNKitInstance *)instance
-{
-    [[MLNLoadTimeStatistics sharedInstance] recordRegisterKitEndTime];
-}
-
 - (void)willRunFile:(MLNKitInstance *)instance fileName:(NSString *)fileName
 {
     [[MLNLoadTimeStatistics sharedInstance] recordRunFileStartTime];

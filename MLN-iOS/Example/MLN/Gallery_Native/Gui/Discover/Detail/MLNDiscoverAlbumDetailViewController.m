@@ -37,12 +37,17 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationBar setTitle:@"灵感集"];
-    [self requestInspirData:YES];
     [self headerView];
     [self waterfallView];
     
     [[MLNLoadTimeStatistics sharedInstance] recordLoadEndTime];
     NSLog(@"<<<<<<<<<<<<<<<<<<原生二级页面布局完成:%@", @([[MLNLoadTimeStatistics sharedInstance] loadTime]));
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self requestInspirData:YES];
 }
 
 #pragma mark - Actions

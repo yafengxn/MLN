@@ -10,7 +10,8 @@ IdeaMassMainViewLayout = {
     _titleLabel = nil,
     _backBtn = nil,
     _shareBtn = nil,
-    _headerView = nil
+    _headerView = nil,
+    _waterfallView = nil
 }
 
 ---@public
