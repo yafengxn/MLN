@@ -16,6 +16,7 @@
 #import <NSString+MLNKit.h>
 #import <MLNLoadTimeStatistics.h>
 #import <MLNKitInstance.h>
+#import "MLNYYLabel.h"
 
 @implementation MLNLuaPageViewController
 
@@ -51,6 +52,7 @@
     UIViewController *topViewController = [MLNControlContext mln_topViewController];
     MLNLuaPageViewController *controller = [[MLNLuaPageViewController alloc] initWithActionItem:actionItem];
     controller.kitInstance.delegate = controller;
+    [controller regClasses:@[[MLNYYLabel class]]];
     switch (gotoValue) {
         case 0: {
             [topViewController.navigationController pushViewController:controller animated:NO];

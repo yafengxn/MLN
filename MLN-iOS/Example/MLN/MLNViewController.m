@@ -31,6 +31,7 @@
 #import "MLNAutoScrollTool.h"
 #import <UIView+Toast.h>
 #import "MLNAppDelegate.h"
+#import "MLNYYLabel.h"
 
 @interface MLNViewController () <MLNViewControllerProtocol, MLNKitInstanceDelegate>
 
@@ -94,7 +95,8 @@
                           [MLNStaticTest class],
                           [MLNGlobalVarTest class],
                           [MLNGlobalFuncTest class],
-                          [MLNAutoScrollTool class]]];
+                          [MLNAutoScrollTool class],
+                          [MLNYYLabel class]]];
         [kcv changeCurrentBundlePath:bundle.bundlePath];
         [self addChildViewController:kcv];
         [self.view addSubview:kcv.view];
@@ -124,8 +126,23 @@
 
 - (void)galleryButtonClicked:(id)sender
 {
-    MLNGalleryViewController *galleryVc = [[MLNGalleryViewController alloc] init];
-    [self.navigationController pushViewController:galleryVc animated:YES];
+    if (kPrintFpsUseClickMeDebugButton) {
+        // 读取fps结果
+        NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"/MLua/fps.txt"];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+            NSLog(@"文件不存在");
+        }
+        NSArray *fpsArray = [NSArray arrayWithContentsOfFile:filePath];
+        __block NSString *fpsText = [NSString string];
+        [fpsArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            fpsText = [fpsText stringByAppendingString:[NSString stringWithFormat:@",%@", obj]];
+        }];
+        [self.view makeToast:fpsText duration:10 position:CSToastPositionCenter];
+        NSLog(@"fps: %@", fpsText);
+    } else {
+        MLNGalleryViewController *galleryVc = [[MLNGalleryViewController alloc] init];
+        [self.navigationController pushViewController:galleryVc animated:YES];
+    }
 }
 
 @end

@@ -25,6 +25,10 @@ function _class:rootView()
     end
     self:createSubviews()
     self:setupDataSource()
+    self.autoScrollTool = AutoScrollTool()
+    --System:setTimeOut(function()
+    --    self.autoScrollTool:autoScrollWithView(self.collectionView, 'file://gallery/json/autoScrollPoints.json')
+    --end, 2.0)
     return self.containerView
 end
 

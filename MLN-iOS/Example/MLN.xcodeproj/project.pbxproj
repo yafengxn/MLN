@@ -74,6 +74,7 @@
 		B29F429A237E5AB000130F07 /* MLNLuaCodeLoadHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B29F4299237E5AB000130F07 /* MLNLuaCodeLoadHandler.m */; };
 		B29F42A0237E5C4F00130F07 /* gallery_source in Resources */ = {isa = PBXBuildFile; fileRef = B29F429F237E5C4F00130F07 /* gallery_source */; };
 		B29F42A4237E5E9900130F07 /* config_data in Resources */ = {isa = PBXBuildFile; fileRef = B29F42A3237E5E9900130F07 /* config_data */; };
+		B29F431023878ACA00130F07 /* MLNYYLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B29F430F23878ACA00130F07 /* MLNYYLabel.m */; };
 		B2D0AB85236C1F0A00B1D349 /* gallery_binary in Resources */ = {isa = PBXBuildFile; fileRef = B2D0AB84236C1F0A00B1D349 /* gallery_binary */; };
 		B2D0ABB52370136000B1D349 /* MLNGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D0ABB42370136000B1D349 /* MLNGalleryViewController.m */; };
 		B2DD3E5D237990E9002AB6AD /* MLNLuaPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DD3E4E237990E8002AB6AD /* MLNLuaPageViewController.m */; };
@@ -230,6 +231,8 @@
 		B29F4299237E5AB000130F07 /* MLNLuaCodeLoadHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNLuaCodeLoadHandler.m; sourceTree = "<group>"; };
 		B29F429F237E5C4F00130F07 /* gallery_source */ = {isa = PBXFileReference; lastKnownFileType = folder; path = gallery_source; sourceTree = "<group>"; };
 		B29F42A3237E5E9900130F07 /* config_data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = config_data; sourceTree = "<group>"; };
+		B29F430E23878ACA00130F07 /* MLNYYLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNYYLabel.h; sourceTree = "<group>"; };
+		B29F430F23878ACA00130F07 /* MLNYYLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNYYLabel.m; sourceTree = "<group>"; };
 		B2D0AB84236C1F0A00B1D349 /* gallery_binary */ = {isa = PBXFileReference; lastKnownFileType = folder; path = gallery_binary; sourceTree = "<group>"; };
 		B2D0ABB32370136000B1D349 /* MLNGalleryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNGalleryViewController.h; sourceTree = "<group>"; };
 		B2D0ABB42370136000B1D349 /* MLNGalleryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryViewController.m; sourceTree = "<group>"; };
@@ -385,6 +388,8 @@
 				B29F4284237C0BED00130F07 /* MLNAutoScrollTool.m */,
 				B29F4298237E5AB000130F07 /* MLNLuaCodeLoadHandler.h */,
 				B29F4299237E5AB000130F07 /* MLNLuaCodeLoadHandler.m */,
+				B29F430E23878ACA00130F07 /* MLNYYLabel.h */,
+				B29F430F23878ACA00130F07 /* MLNYYLabel.m */,
 			);
 			name = "Example for MLN";
 			path = MLN;
@@ -908,6 +913,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B27F65D92377AAC400F2D341 /* MLNHomeTableViewCell.m in Sources */,
+				B29F431023878ACA00130F07 /* MLNYYLabel.m in Sources */,
 				B27F65B12377AA9700F2D341 /* MLNDiscoverTagView.m in Sources */,
 				30A4EB5A231CC5CD00995416 /* MLNMyHttpHandler.m in Sources */,
 				B27F65C72377AAAE00F2D341 /* MLNGalleryMessageDescCellModel.m in Sources */,

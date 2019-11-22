@@ -9,7 +9,7 @@
 #import "MLNAutoScrollTool.h"
 #import <MLNKit.h>
 
-#define kDefautlInterval 0.1
+#define kDefautlInterval 0.5
 
 @implementation MLNAutoScrollTool
 {

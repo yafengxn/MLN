@@ -24,7 +24,6 @@ function _class:rootView()
     self:setupDataSource()
 end
 
-
 function _class:setupTapTableView()
     local tapTableViewAdapter = IdeaMassMainViewLayout._headerView.adapter
 
@@ -40,6 +39,10 @@ function _class:setupTapTableView()
 
     tapTableViewAdapter:rowCount(function()
         return self.dataList:size()
+    end)
+
+    tapTableViewAdapter:sizeForCell(function(section, row)
+        return Size(70, 30)
     end)
 end
 
