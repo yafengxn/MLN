@@ -24,7 +24,7 @@
 #define kAutoTestFps NO
 
 // 显示fpsLabel
-#define kShowFPSLabel YES
+#define kShowFPSLabel NO
 
 // 禁用图片加载功能
 #define kDisableImageLoad NO

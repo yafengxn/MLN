@@ -25,7 +25,7 @@
 @property (nonatomic, strong) MLNMyHttpHandler *myHttpHandler;
 @property (nonatomic, assign) NSInteger requestPageIndex;
 @property (nonatomic, strong) NSMutableArray *dataList;
-@property (nonatomic, strong) MLNDiscoverAblbumDeatilHeaderView *headerView;
+@property (nonatomic, weak) IBOutlet MLNDiscoverAblbumDeatilHeaderView *headerView;
 @end
 
 static NSString *kMLNDiscoverDetailHeaderID = @"kMLNDiscoverDetailHeaderID";
@@ -34,13 +34,9 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
 @implementation MLNDiscoverAlbumDetailViewController
 
 - (void)viewDidLoad {
-    NSLog(@"<<<<<<<<<<<<<<<<<<原生创建Controller");
-    [[MLNLoadTimeStatistics sharedInstance] recordLoadStartTime];
-    
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationBar setTitle:@"灵感集"];
-    [self headerView];
     [self waterfallView];
     
     [[MLNLoadTimeStatistics sharedInstance] recordLoadEndTime];
@@ -51,6 +47,13 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
 {
     [super viewWillAppear:animated];
     [self requestInspirData:YES];
+    self.tabBarController.tabBar.hidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 #pragma mark - Actions
@@ -85,27 +88,16 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
     return CGSizeMake(kScreenWidth, 0);
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-{
-    MLNDiscoverAblbumDeatilHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kMLNDiscoverDetailHeaderID forIndexPath:indexPath];
-    [headerView reloadWithData:self.dataList];
-    __weak typeof(self) weakSelf = self;
-    headerView.selectBlock = ^{
-        [weakSelf requestInspirData:YES];
-    };
-    return headerView;
-}
-
 #pragma mark - Private method
 
-- (MLNDiscoverAblbumDeatilHeaderView *)headerView
-{
-    if (!_headerView) {
-        _headerView = [[MLNDiscoverAblbumDeatilHeaderView alloc] initWithFrame:CGRectMake(0, kNaviBarHeight, kScreenWidth, 200)];
-        [self.view addSubview:_headerView];
-    }
-    return _headerView;
-}
+//- (MLNDiscoverAblbumDeatilHeaderView *)headerView
+//{
+//    if (!_headerView) {
+//        _headerView = [[MLNDiscoverAblbumDeatilHeaderView alloc] initWithFrame:CGRectMake(0, kNaviBarHeight, kScreenWidth, 200)];
+//        [self.view addSubview:_headerView];
+//    }
+//    return _headerView;
+//}
 
 - (MLNNativeWaterfallView *)waterfallView
 {
@@ -115,12 +107,11 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
         layout.itemSpacing = 10;
         layout.lineSpacing = 10;
         layout.delegate = self;
-        _waterfallView = [[MLNNativeWaterfallView alloc] initWithFrame:CGRectMake(0, kNaviBarHeight + 220, kScreenWidth, kScreenHeight - kNaviBarHeight - 200 - kTabbBarHeight) collectionViewLayout:layout];
+        _waterfallView = [[MLNNativeWaterfallView alloc] initWithFrame:CGRectMake(0, kNaviBarHeight + 220, kScreenWidth, kScreenHeight - kNaviBarHeight - 220) collectionViewLayout:layout];
         _waterfallView.backgroundColor = [UIColor whiteColor];
         _waterfallView.dataSource = self;
         _waterfallView.delegate = self;
         [_waterfallView registerClass:[MLNDiscoverAlbumDetailCell class] forCellWithReuseIdentifier:kMLNDiscoverDetailCellID];
-        [_waterfallView registerClass:[MLNDiscoverAblbumDeatilHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kMLNDiscoverDetailHeaderID];
         _waterfallView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
         [self.view addSubview:_waterfallView];
     }

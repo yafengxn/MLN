@@ -15,7 +15,7 @@
 #define kSelectedTextColor [UIColor whiteColor]
 
 @interface MLNDiscoverTagView()
-
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSMutableArray *tagButtons;
 @property (nonatomic, strong) NSArray *dataList;
 @property (nonatomic, assign) NSInteger selectedIndex;
@@ -29,22 +29,21 @@
     _dataList = dataList;
     
     [self reCreateCategoryButtons];
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
+    
+    self.scrollView.frame = self.bounds;
     
     CGFloat startX = 0;
     for (NSInteger i = 0; i < self.tagButtons.count; i++) {
         UIButton *button = self.tagButtons[i];
-        CGFloat buttonW = [button.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}].width + 10;
+        CGFloat buttonW = [button.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}].width + 15;
         CGFloat buttonH = 20;
         CGFloat buttonX = startX;
         CGFloat buttonY = (self.bounds.size.height - buttonH)/2.0;
         button.frame = CGRectMake(buttonX, buttonY, buttonW, buttonH);
         startX = startX + buttonW + 10;
     }
+    
+    self.scrollView.contentSize = CGSizeMake(startX, self.bounds.size.height);
 }
 
 - (void)reCreateCategoryButtons
@@ -55,7 +54,7 @@
     for (NSInteger i = 0; i < self.dataList.count; i++) {
         UIButton *button = [self createButtonWithTitle:self.dataList[i]];
         [button setTitle:self.dataList[i] forState:UIControlStateNormal];
-        [self addSubview:button];
+        [self.scrollView addSubview:button];
         [self.tagButtons addObject:button];
     }
     
@@ -110,5 +109,14 @@
     return _tagButtons;
 }
 
+- (UIScrollView *)scrollView
+{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] init];
+        _scrollView.showsHorizontalScrollIndicator = NO;
+        [self addSubview:_scrollView];
+    }
+    return _scrollView;
+}
 
 @end

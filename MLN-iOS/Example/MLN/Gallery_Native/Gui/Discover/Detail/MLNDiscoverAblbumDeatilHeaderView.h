@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MLNDiscoverAblbumDeatilHeaderView : UICollectionReusableView
+@interface MLNDiscoverAblbumDeatilHeaderView : UIView
 
 @property (nonatomic, copy) dispatch_block_t selectBlock;
 

@@ -14,31 +14,45 @@
 
 @interface MLNDiscoverAblbumDeatilHeaderView()
 
-@property (nonatomic, strong) UIImageView *albumImageView;
-@property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UIButton *followButton;
-@property (nonatomic, strong) UIImageView *collectImageView;
-@property (nonatomic, strong) UILabel *collectCountLabel;
-@property (nonatomic, strong) UIImageView *lookImageView;
-@property (nonatomic, strong) UILabel *lookCountLabel;
-@property (nonatomic, strong) UIImageView *avatarImageView;
-@property (nonatomic, strong) UILabel *nameLabel;
-@property (nonatomic, strong) UILabel *recommendLabel;
-@property (nonatomic, strong) MLNDiscoverTagView *tagView;
+@property (nonatomic, weak) IBOutlet UIImageView *albumImageView;
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UIButton *followButton;
+@property (nonatomic, weak) IBOutlet UIImageView *collectImageView;
+@property (nonatomic, weak) IBOutlet UILabel *collectCountLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *lookImageView;
+@property (nonatomic, weak) IBOutlet UILabel *lookCountLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *avatarImageView;
+@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *recommendLabel;
+@property (nonatomic, weak) IBOutlet MLNDiscoverTagView *tagView;
 @property (nonatomic, strong) MLNNativeTabSegmentView *tabSegementView;
-@property (nonatomic, strong) UIView *seperatorView;
+@property (nonatomic, strong)  UIView *seperatorView;
+
+//@property (nonatomic, strong) UIImageView *albumImageView;
+//@property (nonatomic, strong) UILabel *titleLabel;
+//@property (nonatomic, strong) UIButton *followButton;
+//@property (nonatomic, strong) UIImageView *collectImageView;
+//@property (nonatomic, strong) UILabel *collectCountLabel;
+//@property (nonatomic, strong) UIImageView *lookImageView;
+//@property (nonatomic, strong) UILabel *lookCountLabel;
+//@property (nonatomic, strong) UIImageView *avatarImageView;
+//@property (nonatomic, strong) UILabel *nameLabel;
+//@property (nonatomic, strong) UILabel *recommendLabel;
+//@property (nonatomic, strong) MLNDiscoverTagView *tagView;
+//@property (nonatomic, strong) MLNNativeTabSegmentView *tabSegementView;
+//@property (nonatomic, strong) UIView *seperatorView;
 
 @end
 
 @implementation MLNDiscoverAblbumDeatilHeaderView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    if (self = [super initWithFrame:frame]) {
-        [self setupViews];
-    }
-    return self;
-}
+//- (instancetype)initWithFrame:(CGRect)frame
+//{
+//    if (self = [super initWithFrame:frame]) {
+//        [self setupViews];
+//    }
+//    return self;
+//}
 
 - (void)reloadWithData:(NSArray *)dataList
 {
@@ -47,10 +61,22 @@
     }
     NSString *albumImageString = [dataList[1] valueForKey:@"pic_radio"];
     [self.albumImageView sd_setImageWithURL:[NSURL URLWithString:albumImageString]];
+    self.albumImageView.layer.cornerRadius = 6;
+    self.albumImageView.layer.masksToBounds = YES;
+    
+    [self.followButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.followButton.layer.cornerRadius = 3;
+    self.followButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.followButton.layer.borderWidth = 0.5;
+    
+    [self.collectImageView sd_setImageWithURL:[NSURL URLWithString:@"https://s.momocdn.com/w/u/others/2019/10/18/1571393657050-mls_star.png"]];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:@"https://s.momocdn.com/w/u/others/2019/10/18/1571393657050-mls_header.png"]];
+    [self.lookImageView sd_setImageWithURL:[NSURL URLWithString:@"https://s.momocdn.com/w/u/others/2019/10/18/1571393656549-mls_scan.png"]];
+    
     NSMutableArray *authorArray = [NSMutableArray array];
     NSInteger itemCount = dataList.count;
     for (NSInteger i = 0; i < itemCount; i++) {
-        if (i >= 3) {
+        if (i >= 5) {
             break;
         }
         NSDictionary *dict = dataList[i];
@@ -59,7 +85,14 @@
             [authorArray addObject:authorString];
         }
     }
+    self.tagView.normalBackgroundColor = [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0];
+    self.tagView.normalTextColor = [UIColor whiteColor];
     [self.tagView reloadWithDataList:authorArray];
+    
+    self.tabSegementView.frame = CGRectMake(0, 170, kScreenWidth, 50);
+    [self setCornerRadius:10 toView:self.tabSegementView];
+
+    self.seperatorView.frame = CGRectMake(0, 219, kScreenWidth, 0.5);
 }
 
 
@@ -135,6 +168,7 @@
 
 
 #pragma mark - Private method
+/*
 - (UIImageView *)albumImageView
 {
     if (!_albumImageView) {
@@ -261,6 +295,7 @@
     }
     return _tagView;
 }
+*/
 
 - (MLNNativeTabSegmentView *)tabSegementView
 {
@@ -286,7 +321,6 @@
     }
     return _seperatorView;
 }
-
 
 #pragma mark - Util
 

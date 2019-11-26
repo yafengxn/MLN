@@ -132,6 +132,11 @@ const CGFloat kMLNTabSegmentViewLabelOffsetWeight = 10.0f;
     return self;
 }
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+}
+
 - (void)refreshSegmentTitles:(NSArray<NSString*> *)segmentTitles {
     self.toIndex = -1;
     [self removeAnimation];
