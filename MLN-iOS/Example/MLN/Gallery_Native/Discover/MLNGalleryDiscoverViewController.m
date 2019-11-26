@@ -75,16 +75,8 @@ static NSString *kMLNNativeWaterfallViewCellID = @"kMLNNativeWaterfallViewCellID
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"<<<<<<<<<<<<<<<<<<原生创建Controller");
-    [[MLNLoadTimeStatistics sharedInstance] recordLoadStartTime];
-    CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
-    UIStoryboard *albumDetailStoryBoard = [UIStoryboard storyboardWithName:@"InspirDetail" bundle:[NSBundle mainBundle]];
-    MLNDiscoverAlbumDetailViewController *detailViewController = [albumDetailStoryBoard instantiateViewControllerWithIdentifier:@"DiscoverAlbumDetail"];
-    CFAbsoluteTime end = CFAbsoluteTimeGetCurrent();
-    NSLog(@"========> storybaord加载：%f", (end - start) * 1000);
+    MLNDiscoverAlbumDetailViewController *detailViewController = [[MLNDiscoverAlbumDetailViewController alloc] init];
     [self.navigationController pushViewController:detailViewController animated:NO];
-//    MLNDiscoverAlbumDetailViewController *detailViewController = [[MLNDiscoverAlbumDetailViewController alloc] init];
-//    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 
