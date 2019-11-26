@@ -16,7 +16,6 @@
 #import "MLNKitInstanceHandlersManager.h"
 #import "MLNWindow.h"
 #import "MLNKitInstanceConsts.h"
-#import "MLNLuaCorePool.h"
 
 #define kMLNRunLoopBeforeWaitingLazyTaskOrder   1
 #define kMLNRunLoopBeforeWaitingRenderOrder     2
@@ -107,11 +106,6 @@
 @end
 
 @implementation MLNKitInstance
-
-+ (void)initializeLuaCorePool
-{
-    [MLNLuaCorePool initializeLuaCorePool];
-}
 
 #pragma mark - MLNErrorHandlerProtocol
 - (BOOL)canHandleAssert:(MLNLuaCore *)luaCore
@@ -258,14 +252,11 @@
         }
         MLNError(self.luaCore, @"entry file is nil!");
     }
-    CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
     NSString *entryLayoutFile = [self entryLayoutFileWithEntryFile:entryFilePath];
     NSString *realEntryLayoutFilePath = [self.currentBundle filePathWithName:entryLayoutFile];
     if (!realEntryLayoutFilePath) {
         return NO;
     }
-    CFAbsoluteTime end = CFAbsoluteTimeGetCurrent();
-    NSLog(@"========> |getfile| %f", (end - start) * 1000);
     NSError *err = nil;
     if ([self.delegate respondsToSelector:@selector(willRunFile:fileName:)]) {
         [self.delegate willRunFile:self fileName:entryFilePath];

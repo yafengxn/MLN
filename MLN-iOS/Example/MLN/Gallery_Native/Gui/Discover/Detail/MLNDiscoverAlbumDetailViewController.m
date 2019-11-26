@@ -34,6 +34,9 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
 @implementation MLNDiscoverAlbumDetailViewController
 
 - (void)viewDidLoad {
+    NSLog(@"<<<<<<<<<<<<<<<<<<原生创建Controller");
+    [[MLNLoadTimeStatistics sharedInstance] recordLoadStartTime];
+    
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationBar setTitle:@"灵感集"];

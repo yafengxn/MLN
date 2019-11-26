@@ -11,7 +11,7 @@
 #import <MLNKitBridgesManager.h>
 
 // 打印详细加载时间
-#define kPrintDetailLoadTimeStatistics YES
+#define kPrintDetailLoadTimeStatistics NO
 
 @interface MLNLoadTimeStatistics()
 @property (nonatomic, assign, readwrite) CFAbsoluteTime startTime;

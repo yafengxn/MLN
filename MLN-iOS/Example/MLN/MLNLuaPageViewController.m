@@ -47,8 +47,6 @@
             }
         }
     }
-    NSLog(@">>>>>>>>>>>>>创建Lua页面");
-    [[MLNLoadTimeStatistics sharedInstance] recordLoadStartTime];
     UIViewController *topViewController = [MLNControlContext mln_topViewController];
     MLNLuaPageViewController *controller = [[MLNLuaPageViewController alloc] initWithActionItem:actionItem];
     controller.kitInstance.delegate = controller;
@@ -89,6 +87,9 @@
 }
 
 - (void)viewDidLoad {
+    NSLog(@">>>>>>>>>>>>>加载Lua页面");
+    [[MLNLoadTimeStatistics sharedInstance] recordLoadStartTime];
+    
     [super viewDidLoad];
     
     if (_package.needReload || _package.needDownload) {

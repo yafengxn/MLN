@@ -15,13 +15,13 @@
 #define kTabbBarHeight  49
 
 // BinaryLuaCode
-#define kTestWithBinaryLuaCode NO
+#define kTestWithBinaryLuaCode YES
 
 // 使用点我调试按钮打印FPS
 #define kPrintFpsUseClickMeDebugButton NO
 
 // Fps自动测试开关
-#define kAutoTestFps YES
+#define kAutoTestFps NO
 
 // 显示fpsLabel
 #define kShowFPSLabel YES

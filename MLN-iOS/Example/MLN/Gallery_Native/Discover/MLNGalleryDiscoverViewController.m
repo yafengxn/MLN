@@ -75,10 +75,8 @@ static NSString *kMLNNativeWaterfallViewCellID = @"kMLNNativeWaterfallViewCellID
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"<<<<<<<<<<<<<<<<<<原生创建Controller");
-    [[MLNLoadTimeStatistics sharedInstance] recordLoadStartTime];
     MLNDiscoverAlbumDetailViewController *detailViewController = [[MLNDiscoverAlbumDetailViewController alloc] init];
-    [self.navigationController pushViewController:detailViewController animated:YES];
+    [self.navigationController pushViewController:detailViewController animated:NO];
 }
 
 

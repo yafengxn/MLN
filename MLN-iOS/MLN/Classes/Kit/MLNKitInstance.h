@@ -136,11 +136,6 @@ Lua中的根视图。
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
- 初始化LuaCore池
- */
-+ (void)initializeLuaCorePool;
-
-/**
  加载并执行数据
 
  @param entryFilePath 当前执行模块的入口文件
