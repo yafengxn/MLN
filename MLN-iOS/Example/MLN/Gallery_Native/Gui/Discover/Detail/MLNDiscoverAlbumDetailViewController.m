@@ -25,7 +25,8 @@
 @property (nonatomic, strong) MLNMyHttpHandler *myHttpHandler;
 @property (nonatomic, assign) NSInteger requestPageIndex;
 @property (nonatomic, strong) NSMutableArray *dataList;
-@property (nonatomic, weak) IBOutlet MLNDiscoverAblbumDeatilHeaderView *headerView;
+@property (nonatomic, strong) MLNDiscoverAblbumDeatilHeaderView *headerView;
+
 @end
 
 static NSString *kMLNDiscoverDetailHeaderID = @"kMLNDiscoverDetailHeaderID";
@@ -34,9 +35,15 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
 @implementation MLNDiscoverAlbumDetailViewController
 
 - (void)viewDidLoad {
+    NSLog(@"<<<<<<<<<<<<<<<<<<原生创建Controller");
+    [[MLNLoadTimeStatistics sharedInstance] recordLoadStartTime];
+    
     [super viewDidLoad];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationBar setTitle:@"灵感集"];
+    
+    [self setupHeaderView];
     [self waterfallView];
     
     [[MLNLoadTimeStatistics sharedInstance] recordLoadEndTime];
@@ -80,7 +87,7 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
 #pragma mark - MLNNativeWaterfallLayoutDelegate
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout heightForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 300;
+    return 265;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
@@ -90,14 +97,12 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
 
 #pragma mark - Private method
 
-//- (MLNDiscoverAblbumDeatilHeaderView *)headerView
-//{
-//    if (!_headerView) {
-//        _headerView = [[MLNDiscoverAblbumDeatilHeaderView alloc] initWithFrame:CGRectMake(0, kNaviBarHeight, kScreenWidth, 200)];
-//        [self.view addSubview:_headerView];
-//    }
-//    return _headerView;
-//}
+- (void)setupHeaderView
+{
+    self.headerView = [[[NSBundle mainBundle] loadNibNamed:@"MLNDiscoverAblbumDeatilHeaderView" owner:self options:nil] firstObject];
+    [self.view addSubview:self.headerView];
+    self.headerView.frame = CGRectMake(0, 64, kScreenWidth, 220);
+}
 
 - (MLNNativeWaterfallView *)waterfallView
 {
@@ -111,7 +116,9 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
         _waterfallView.backgroundColor = [UIColor whiteColor];
         _waterfallView.dataSource = self;
         _waterfallView.delegate = self;
-        [_waterfallView registerClass:[MLNDiscoverAlbumDetailCell class] forCellWithReuseIdentifier:kMLNDiscoverDetailCellID];
+        
+        UINib *discoverDetailNib = [UINib nibWithNibName:@"MLNDiscoverAlbumDetailCell" bundle:[NSBundle mainBundle]];
+        [_waterfallView registerNib:discoverDetailNib forCellWithReuseIdentifier:kMLNDiscoverDetailCellID];
         _waterfallView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
         [self.view addSubview:_waterfallView];
     }

@@ -75,7 +75,9 @@
 		B29F42A0237E5C4F00130F07 /* gallery_source in Resources */ = {isa = PBXBuildFile; fileRef = B29F429F237E5C4F00130F07 /* gallery_source */; };
 		B29F42A4237E5E9900130F07 /* config_data in Resources */ = {isa = PBXBuildFile; fileRef = B29F42A3237E5E9900130F07 /* config_data */; };
 		B29F431023878ACA00130F07 /* MLNYYLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B29F430F23878ACA00130F07 /* MLNYYLabel.m */; };
-		B29F431F238CDFB800130F07 /* InspirDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29F431E238CDFB800130F07 /* InspirDetail.storyboard */; };
+		B29F433F238D605900130F07 /* MLNDiscoverAblbumDeatilHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29F433E238D605900130F07 /* MLNDiscoverAblbumDeatilHeaderView.xib */; };
+		B29F4353238E6D8A00130F07 /* MLNDiscoverAlbumDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29F4352238E6D8A00130F07 /* MLNDiscoverAlbumDetailCell.xib */; };
+		B29F435A238E841D00130F07 /* MLNDiscoverTagViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B29F4358238E841D00130F07 /* MLNDiscoverTagViewCell.m */; };
 		B2D0AB85236C1F0A00B1D349 /* gallery_binary in Resources */ = {isa = PBXBuildFile; fileRef = B2D0AB84236C1F0A00B1D349 /* gallery_binary */; };
 		B2D0ABB52370136000B1D349 /* MLNGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D0ABB42370136000B1D349 /* MLNGalleryViewController.m */; };
 		B2DD3E5D237990E9002AB6AD /* MLNLuaPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DD3E4E237990E8002AB6AD /* MLNLuaPageViewController.m */; };
@@ -234,7 +236,10 @@
 		B29F42A3237E5E9900130F07 /* config_data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = config_data; sourceTree = "<group>"; };
 		B29F430E23878ACA00130F07 /* MLNYYLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNYYLabel.h; sourceTree = "<group>"; };
 		B29F430F23878ACA00130F07 /* MLNYYLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNYYLabel.m; sourceTree = "<group>"; };
-		B29F431E238CDFB800130F07 /* InspirDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = InspirDetail.storyboard; sourceTree = "<group>"; };
+		B29F433E238D605900130F07 /* MLNDiscoverAblbumDeatilHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MLNDiscoverAblbumDeatilHeaderView.xib; sourceTree = "<group>"; };
+		B29F4352238E6D8A00130F07 /* MLNDiscoverAlbumDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MLNDiscoverAlbumDetailCell.xib; sourceTree = "<group>"; };
+		B29F4357238E841D00130F07 /* MLNDiscoverTagViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNDiscoverTagViewCell.h; sourceTree = "<group>"; };
+		B29F4358238E841D00130F07 /* MLNDiscoverTagViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNDiscoverTagViewCell.m; sourceTree = "<group>"; };
 		B2D0AB84236C1F0A00B1D349 /* gallery_binary */ = {isa = PBXFileReference; lastKnownFileType = folder; path = gallery_binary; sourceTree = "<group>"; };
 		B2D0ABB32370136000B1D349 /* MLNGalleryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNGalleryViewController.h; sourceTree = "<group>"; };
 		B2D0ABB42370136000B1D349 /* MLNGalleryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryViewController.m; sourceTree = "<group>"; };
@@ -381,7 +386,6 @@
 				B29F4281237BF77100130F07 /* MLNMyErrorHandler.m */,
 				30A4EB6B231F4FD400995416 /* MLNTestMe+Test.h */,
 				30A4EB6C231F4FD400995416 /* MLNTestMe+Test.m */,
-				B29F431E238CDFB800130F07 /* InspirDetail.storyboard */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -547,6 +551,8 @@
 				B27F65A32377AA9600F2D341 /* MLNDiscoverAblbumDeatilHeaderView.m */,
 				B27F65A52377AA9600F2D341 /* MLNDiscoverAlbumDetailCell.h */,
 				B27F659A2377AA9500F2D341 /* MLNDiscoverAlbumDetailCell.m */,
+				B29F4352238E6D8A00130F07 /* MLNDiscoverAlbumDetailCell.xib */,
+				B29F433E238D605900130F07 /* MLNDiscoverAblbumDeatilHeaderView.xib */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -556,6 +562,8 @@
 			children = (
 				B27F65942377AA9500F2D341 /* MLNDiscoverTagView.h */,
 				B27F65A62377AA9600F2D341 /* MLNDiscoverTagView.m */,
+				B29F4357238E841D00130F07 /* MLNDiscoverTagViewCell.h */,
+				B29F4358238E841D00130F07 /* MLNDiscoverTagViewCell.m */,
 			);
 			path = TagView;
 			sourceTree = "<group>";
@@ -817,11 +825,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B29F42A0237E5C4F00130F07 /* gallery_source in Resources */,
-				B29F431F238CDFB800130F07 /* InspirDetail.storyboard in Resources */,
+				B29F433F238D605900130F07 /* MLNDiscoverAblbumDeatilHeaderView.xib in Resources */,
 				30CB3BFB23684CD400AB90C6 /* MLN.podspec in Resources */,
 				B29F42A4237E5E9900130F07 /* config_data in Resources */,
 				30CB3BF923684B7F00AB90C6 /* MLNDevTool.podspec in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
+				B29F4353238E6D8A00130F07 /* MLNDiscoverAlbumDetailCell.xib in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				B2D0AB85236C1F0A00B1D349 /* gallery_binary in Resources */,
@@ -944,6 +953,7 @@
 				B29500EA2372A3A400F48F09 /* MLNSimpleViewPager.m in Sources */,
 				B27F65C52377AAAE00F2D341 /* MLNGalleryMessageBaseCellModel.m in Sources */,
 				FA4EE30A2379099700449250 /* MLNGalleryMineBottomPageHomeCell.m in Sources */,
+				B29F435A238E841D00130F07 /* MLNDiscoverTagViewCell.m in Sources */,
 				B27F65AC2377AA9700F2D341 /* MLNNativeWaterfallHeaderView.m in Sources */,
 				30A4EB60231CD75200995416 /* MLNMyRefreshHandler.m in Sources */,
 				30A4EB5D231CC86B00995416 /* MLNMyImageHandler.m in Sources */,
