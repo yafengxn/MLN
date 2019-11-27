@@ -33,7 +33,10 @@
 #define kMemoryTest NO
 
 // 主页面展示：yes:主页面展示lua no:主页面展示native
-#define kLuaPage YES
+#define kLuaPage 1
+
+// 统计平均数的次数
+#define kStatisticsAverageCount 10
 
 #endif /* MLNGalleryNative_h */
 

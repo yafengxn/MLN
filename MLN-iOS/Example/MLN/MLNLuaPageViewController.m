@@ -17,8 +17,12 @@
 #import <MLNLoadTimeStatistics.h>
 #import <MLNKitInstance.h>
 #import "MLNYYLabel.h"
+#import <MLNBenchmark.h>
+#import "MLNGalleryNative.h"
 
-@implementation MLNLuaPageViewController
+@implementation MLNLuaPageViewController {
+    BOOL _finishLayout;
+}
 
 #pragma mark - MLNActionProtocol
 + (void)mln_gotoWithActionItem:(MLNActionItem *)actionItem
@@ -87,11 +91,10 @@
 }
 
 - (void)viewDidLoad {
-    NSLog(@">>>>>>>>>>>>>加载Lua页面");
-    [[MLNLoadTimeStatistics sharedInstance] recordLoadStartTime];
+    _finishLayout = NO;
+    [MLNBenchmark beginLoadTimeBenchmark:MLNBenchmarkTypeLua];
     
     [super viewDidLoad];
-    
     if (_package.needReload || _package.needDownload) {
         [self checkPackage];
     }
@@ -136,8 +139,19 @@
 
 - (void)instance:(MLNKitInstance *)instance didFinishRun:(NSString *)entryFileName
 {
-    [[MLNLoadTimeStatistics sharedInstance] recordLoadEndTime];
-    NSLog(@"=========> load Time: %@", [[MLNLoadTimeStatistics sharedInstance] description]);
+    if (_finishLayout) return;
+    _finishLayout = YES; // should statistics MLNSDK setup and lua file layout time.
+    
+    CFTimeInterval time = [MLNBenchmark endLoadTimeBenchmark:MLNBenchmarkTypeLua];
+    NSUInteger count = [MLNBenchmark addLoadTime:time];
+    if (count == kStatisticsAverageCount) {
+        [MLNBenchmark averageLoadTime:MLNBenchmarkTypeLua];
+        [MLNBenchmark removeAllLoadTime];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 - (void)checkPackage

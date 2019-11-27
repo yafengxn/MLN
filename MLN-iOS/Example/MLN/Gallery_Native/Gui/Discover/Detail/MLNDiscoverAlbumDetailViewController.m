@@ -18,6 +18,7 @@
 #import "MLNDiscoverAlbumDetailCell.h"
 #import <MJRefresh.h>
 #import "MLNLoadTimeStatistics.h"
+#import <MLNBenchmark.h>
 
 @interface MLNDiscoverAlbumDetailViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, MLNNativeWaterfallLayoutDelegate>
 @property (nonatomic, strong) MLNGalleryNavigationBar *navigationBar;
@@ -35,19 +36,20 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
 @implementation MLNDiscoverAlbumDetailViewController
 
 - (void)viewDidLoad {
-    NSLog(@"<<<<<<<<<<<<<<<<<<原生创建Controller");
-    [[MLNLoadTimeStatistics sharedInstance] recordLoadStartTime];
+    [MLNBenchmark beginLoadTimeBenchmark:MLNBenchmarkTypeNative];
     
     [super viewDidLoad];
-    
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationBar setTitle:@"灵感集"];
-    
     [self setupHeaderView];
     [self waterfallView];
     
-    [[MLNLoadTimeStatistics sharedInstance] recordLoadEndTime];
-    NSLog(@"<<<<<<<<<<<<<<<<<<原生二级页面布局完成:%@", @([[MLNLoadTimeStatistics sharedInstance] loadTime]));
+    CFTimeInterval time = [MLNBenchmark endLoadTimeBenchmark:MLNBenchmarkTypeNative];
+    NSUInteger count = [MLNBenchmark addLoadTime:time];
+    if (count == kStatisticsAverageCount) {
+        [MLNBenchmark averageLoadTime:MLNBenchmarkTypeNative];
+        [MLNBenchmark removeAllLoadTime];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
