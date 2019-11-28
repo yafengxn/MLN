@@ -16,30 +16,43 @@ MLNBenchmarkType MLNBenchmarkTypeNative = "native";
 @implementation MLNBenchmark
 
 + (void)beginLoadTimeBenchmark:(MLNBenchmarkType)type {
+#if MLNBenchmarkEnable
     printf("\n=========== %s start loading  ================\n", type);
     _begin = CACurrentMediaTime();
+#endif
 }
 
 + (CFTimeInterval)endLoadTimeBenchmark:(MLNBenchmarkType)type {
+#if MLNBenchmarkEnable
     CFTimeInterval time = (CACurrentMediaTime() - _begin);
     printf("MLN %s load time: %10.2fms\n", type, time * 1000);
     printf("=========== %s finish loading ================\n", type);
     return time;
+#else
+    return 0.0;
+#endif
 }
 
 + (NSUInteger)addLoadTime:(CFTimeInterval)time {
+#if MLNBenchmarkEnable
     if (!_loadTimes) {
         _loadTimes = [NSMutableArray array];
     }
     [_loadTimes addObject:@(time * 1000)];
     return _loadTimes.count;
+#else
+    return 0;
+#endif
 }
 
 + (void)removeAllLoadTime {
+#if MLNBenchmarkEnable
     [_loadTimes removeAllObjects];
+#endif
 }
 
 + (CFTimeInterval)averageLoadTime:(MLNBenchmarkType)type {
+#if MLNBenchmarkEnable
     if (_loadTimes.count) {
         [_loadTimes sortUsingSelector:@selector(compare:)];
         NSLog(@"load times %@", _loadTimes);
@@ -53,6 +66,9 @@ MLNBenchmarkType MLNBenchmarkTypeNative = "native";
         return averageTime.doubleValue;
     }
     return 0.0;
+#else
+    return 0.0;
+#endif
 }
 
 @end

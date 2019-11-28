@@ -9,6 +9,20 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#ifndef MLNBenchmarkEnable
+    #define MLNBenchmarkEnable 1
+    #define MLNBenchmarkDetail 1
+    #if MLNBenchmarkEnable && MLNBenchmarkDetail
+        #define MLNBenchmarkBegin() CFTimeInterval begin = CACurrentMediaTime();
+        #define MLNBenchmarkEnd(desc)\
+        CFTimeInterval time = CACurrentMediaTime() - begin;\
+        printf("===== %s "desc"  time: %2.2fms\n", __func__, time * 1000);
+    #else
+        #define MLNBenchmarkBegin()
+        #define MLNBenchmarkEnd(desc)
+    #endif
+#endif
+
 typedef const char *MLNBenchmarkType;
 extern MLNBenchmarkType MLNBenchmarkTypeLua;
 extern MLNBenchmarkType MLNBenchmarkTypeNative;
