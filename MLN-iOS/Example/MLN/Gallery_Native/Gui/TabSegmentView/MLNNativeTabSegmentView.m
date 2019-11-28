@@ -127,6 +127,23 @@ const CGFloat kMLNNativeTabSegmentViewLabelOffsetWeight = 10.0f;
     return self;
 }
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    _settingIndex = -1;
+    self.backgroundColor = [UIColor clearColor];
+    self.scrollHandler = [[MLNNativeTabSegmentScrollHandler alloc] init];
+    self.scrollHandler.delegate = self;
+    self.configuration = [MLNNativeTabSegmentViewConfiguration defaultConfiguration];
+    [self setupContentScrollView];
+}
+
+- (void)setTapActionBlock:(MLNNativeTabSegmentViewTapActionBlock)tapBlock
+{
+    self.tapBlock = tapBlock;
+}
+
 - (void)refreshSegmentTitles:(NSArray<NSString*> *)segmentTitles {
     self.toIndex = -1;
     [self removeAnimation];

@@ -45,9 +45,8 @@ typedef enum : NSUInteger {
 - (void)setTapBadgeTitle:(NSString *)title atIndex:(NSInteger)index;
 - (void)setRedDotHidden:(BOOL)hidden adIndex:(NSInteger)index;
 - (void)setTabSegmentHidden:(BOOL)hidden adIndex:(NSInteger)index;
-
 - (void)setShowArrowActionWithBlock:(void(^)(NSInteger index))block atIndexs:(NSArray *)indexs;
-
+- (void)setTapActionBlock:(MLNNativeTabSegmentViewTapActionBlock)tapBlock;
 - (void)animtionFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex progress:(CGFloat)progress;
 
 

@@ -89,7 +89,7 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
 #pragma mark - MLNNativeWaterfallLayoutDelegate
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout heightForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 300;
+    return 265;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
@@ -118,7 +118,9 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
         _waterfallView.backgroundColor = [UIColor whiteColor];
         _waterfallView.dataSource = self;
         _waterfallView.delegate = self;
-        [_waterfallView registerClass:[MLNDiscoverAlbumDetailCell class] forCellWithReuseIdentifier:kMLNDiscoverDetailCellID];
+        
+        UINib *discoverDetailNib = [UINib nibWithNibName:@"MLNDiscoverAlbumDetailCell" bundle:[NSBundle mainBundle]];
+        [_waterfallView registerNib:discoverDetailNib forCellWithReuseIdentifier:kMLNDiscoverDetailCellID];
         _waterfallView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
         [self.view addSubview:_waterfallView];
     }

@@ -7,116 +7,60 @@
 //
 
 #import "MLNDiscoverTagView.h"
+#import "MLNDiscoverTagViewCell.h"
 
-#define kDefaultBackColor [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1.0]
-#define kDefaultTextColor [UIColor colorWithRed:130/255.0 green:130/255.0 blue:130/255.0 alpha:1.0]
-
-#define kSelectedBackColor [UIColor colorWithRed:233/255.0 green:0 blue:0 alpha:1.0]
-#define kSelectedTextColor [UIColor whiteColor]
-
-@interface MLNDiscoverTagView()
-@property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) NSMutableArray *tagButtons;
+@interface MLNDiscoverTagView()<UICollectionViewDataSource, UICollectionViewDelegate>
+@property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *dataList;
-@property (nonatomic, assign) NSInteger selectedIndex;
-
 @end
+
+static NSString *kDiscoverTagViewCellID = @"kDiscoverTagViewCellID";
 
 @implementation MLNDiscoverTagView
 
 - (void)reloadWithDataList:(NSArray *)dataList
 {
     _dataList = dataList;
-    
-    [self reCreateCategoryButtons];
-    
-    self.scrollView.frame = self.bounds;
-    
-    CGFloat startX = 0;
-    for (NSInteger i = 0; i < self.tagButtons.count; i++) {
-        UIButton *button = self.tagButtons[i];
-        CGFloat buttonW = [button.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}].width + 15;
-        CGFloat buttonH = 20;
-        CGFloat buttonX = startX;
-        CGFloat buttonY = (self.bounds.size.height - buttonH)/2.0;
-        button.frame = CGRectMake(buttonX, buttonY, buttonW, buttonH);
-        startX = startX + buttonW + 10;
+    self.collectionView.frame = self.bounds;
+    [self.collectionView reloadData];
+}
+
+#pragma mark - UICollectionViewDelegate
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(nonnull UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    MLNDiscoverTagViewCell *cell = [[MLNDiscoverTagViewCell alloc] init];
+    [cell setContent:self.dataList[indexPath.row]];
+    return CGSizeMake(cell.cellWidth, 20);
+}
+
+#pragma mark - UICollectionViewDataSource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.dataList.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    MLNDiscoverTagViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kDiscoverTagViewCellID forIndexPath:indexPath];
+    [cell setContent:self.dataList[indexPath.row]];
+    return cell;
+}
+
+- (UICollectionView *)collectionView
+{
+    if (!_collectionView) {
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        flowLayout.minimumInteritemSpacing = 3;
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+        _collectionView.backgroundColor = [UIColor clearColor];
+        [_collectionView registerClass:[MLNDiscoverTagViewCell class] forCellWithReuseIdentifier:kDiscoverTagViewCellID];
+        _collectionView.dataSource = self;
+        _collectionView.delegate = self;
+        _collectionView.showsHorizontalScrollIndicator = NO;
+        [self addSubview:_collectionView];
     }
-    
-    self.scrollView.contentSize = CGSizeMake(startX, self.bounds.size.height);
-}
-
-- (void)reCreateCategoryButtons
-{
-    [self.tagButtons makeObjectsPerformSelector:@selector(removeFromSuperview) withObject:nil];
-    [self.tagButtons removeAllObjects];
-    
-    for (NSInteger i = 0; i < self.dataList.count; i++) {
-        UIButton *button = [self createButtonWithTitle:self.dataList[i]];
-        [button setTitle:self.dataList[i] forState:UIControlStateNormal];
-        [self.scrollView addSubview:button];
-        [self.tagButtons addObject:button];
-    }
-    
-    [self updateSelectedButtonState];
-}
-
-
-#pragma mark - Actions
-- (void)categoryButtonClicked:(UIButton *)button
-{
-    self.selectedIndex =  [self.tagButtons indexOfObject:button];
-    [self updateSelectedButtonState];
-}
-
-
-#pragma mark - Private method
-
-- (void)updateSelectedButtonState
-{
-    for (NSInteger i = 0; i < self.tagButtons.count; i++) {
-        UIButton *button = self.tagButtons[i];
-        if (self.selectedIndex == i && self.selectEnable) {
-            [button setTitleColor:self.selectedTextColor forState:UIControlStateNormal];
-            button.backgroundColor = self.selectedBackgrundColor;
-        } else {
-            [button setTitleColor:self.normalTextColor forState:UIControlStateNormal];
-            button.backgroundColor = self.normalBackgroundColor;
-        }
-    }
-}
-
-- (UIButton *)createButtonWithTitle:(NSString *)title
-{
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.backgroundColor = self.normalBackgroundColor ?: kDefaultBackColor;
-    button.titleLabel.font = [UIFont systemFontOfSize:12];
-    UIColor *titleColor = self.normalTextColor ?: kDefaultTextColor;
-    [button setTitleColor:titleColor forState:UIControlStateNormal];
-    [button setTitle:title forState:UIControlStateNormal];
-    button.layer.cornerRadius = 10;
-    button.layer.masksToBounds = YES;
-    [button addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return button;
-}
-
-- (NSMutableArray *)tagButtons
-{
-    if (!_tagButtons) {
-        _tagButtons = [NSMutableArray array];
-    }
-    return _tagButtons;
-}
-
-- (UIScrollView *)scrollView
-{
-    if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc] init];
-        _scrollView.showsHorizontalScrollIndicator = NO;
-        [self addSubview:_scrollView];
-    }
-    return _scrollView;
+    return _collectionView;
 }
 
 @end
