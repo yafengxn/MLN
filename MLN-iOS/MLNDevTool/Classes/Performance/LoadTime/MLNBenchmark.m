@@ -55,12 +55,8 @@ MLNBenchmarkType MLNBenchmarkTypeNative = "native";
 #if MLNBenchmarkEnable
     if (_loadTimes.count) {
         [_loadTimes sortUsingSelector:@selector(compare:)];
-        NSLog(@"load times %@", _loadTimes);
-        
         [_loadTimes removeObjectAtIndex:0]; // remove a min value
         [_loadTimes removeLastObject];      // remove a max value
-        NSLog(@"load times %@", _loadTimes);
-        
         NSNumber *averageTime = [_loadTimes valueForKeyPath:@"@avg.doubleValue"];
         printf("=========== %s average load time: %0.2fms (%d count) ================\n", type, averageTime.doubleValue, (int)_loadTimes.count);
         return averageTime.doubleValue;
