@@ -109,19 +109,35 @@ static NSString *kMLNDiscoverDetailCellID = @"kMLNDiscoverDetailCellID";
 - (MLNNativeWaterfallView *)waterfallView
 {
     if (!_waterfallView) {
+//        MLNNativeWaterfallLayout *layout = [[MLNNativeWaterfallLayout alloc] init];
+//        layout.layoutInset = UIEdgeInsetsMake(10, 10, 10, 10);
+//        layout.itemSpacing = 10;
+//        layout.lineSpacing = 10;
+//        layout.delegate = self;
+//        _waterfallView = [[MLNNativeWaterfallView alloc] initWithFrame:CGRectMake(0, kNaviBarHeight + 220, kScreenWidth, kScreenHeight - kNaviBarHeight - 220) collectionViewLayout:layout];
+//        _waterfallView.backgroundColor = [UIColor whiteColor];
+//        _waterfallView.dataSource = self;
+//        _waterfallView.delegate = self;
+//
+//        UINib *discoverDetailNib = [UINib nibWithNibName:@"MLNDiscoverAlbumDetailCell" bundle:[NSBundle mainBundle]];
+//        [_waterfallView registerNib:discoverDetailNib forCellWithReuseIdentifier:kMLNDiscoverDetailCellID];
+//        _waterfallView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+//        [self.view addSubview:_waterfallView];
+        
+        _waterfallView = [[[NSBundle mainBundle] loadNibNamed:@"MLNDiscoverAlbumDetailWaterfallView" owner:self options:nil] firstObject];
+        _waterfallView.frame = CGRectMake(0, kNaviBarHeight + 220, kScreenWidth, kScreenHeight - kNaviBarHeight - 220);
+
         MLNNativeWaterfallLayout *layout = [[MLNNativeWaterfallLayout alloc] init];
         layout.layoutInset = UIEdgeInsetsMake(10, 10, 10, 10);
         layout.itemSpacing = 10;
         layout.lineSpacing = 10;
         layout.delegate = self;
-        _waterfallView = [[MLNNativeWaterfallView alloc] initWithFrame:CGRectMake(0, kNaviBarHeight + 220, kScreenWidth, kScreenHeight - kNaviBarHeight - 220) collectionViewLayout:layout];
-        _waterfallView.backgroundColor = [UIColor whiteColor];
-        _waterfallView.dataSource = self;
-        _waterfallView.delegate = self;
-        
+        _waterfallView.collectionViewLayout = layout;
+
         UINib *discoverDetailNib = [UINib nibWithNibName:@"MLNDiscoverAlbumDetailCell" bundle:[NSBundle mainBundle]];
         [_waterfallView registerNib:discoverDetailNib forCellWithReuseIdentifier:kMLNDiscoverDetailCellID];
         _waterfallView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+
         [self.view addSubview:_waterfallView];
     }
     return _waterfallView;

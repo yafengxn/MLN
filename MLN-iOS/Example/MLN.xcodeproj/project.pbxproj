@@ -86,6 +86,7 @@
 		B2DD3E60237990E9002AB6AD /* MLNActionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DD3E55237990E9002AB6AD /* MLNActionItem.m */; };
 		B2DD3E61237990E9002AB6AD /* MLNControlContext.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DD3E56237990E9002AB6AD /* MLNControlContext.m */; };
 		B2DD3E62237990E9002AB6AD /* MLNActionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DD3E58237990E9002AB6AD /* MLNActionManager.m */; };
+		FA2FE97D2390D85D00A9AA73 /* MLNDiscoverAlbumDetailWaterfallView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA2FE97C2390D85D00A9AA73 /* MLNDiscoverAlbumDetailWaterfallView.xib */; };
 		FA4EE2FA2379067000449250 /* MLNGalleryMinePageCellBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4EE2F92379067000449250 /* MLNGalleryMinePageCellBaseModel.m */; };
 		FA4EE2FD237907B000449250 /* MLNGalleryMinePageCellHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4EE2FC237907B000449250 /* MLNGalleryMinePageCellHomeModel.m */; };
 		FA4EE3002379080100449250 /* MLNGalleryMinePageCellDynamicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4EE2FF2379080100449250 /* MLNGalleryMinePageCellDynamicModel.m */; };
@@ -260,6 +261,7 @@
 		C0FB2CAC8F9592C3092ACF62 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F236AA5C6B666135B994F09B /* Pods-MLN_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLN_Example.debug.xcconfig"; path = "Target Support Files/Pods-MLN_Example/Pods-MLN_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		F449C1D4FDA5182F0D579269 /* libPods-MLN_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MLN_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA2FE97C2390D85D00A9AA73 /* MLNDiscoverAlbumDetailWaterfallView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MLNDiscoverAlbumDetailWaterfallView.xib; sourceTree = "<group>"; };
 		FA4EE2F82379067000449250 /* MLNGalleryMinePageCellBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNGalleryMinePageCellBaseModel.h; sourceTree = "<group>"; };
 		FA4EE2F92379067000449250 /* MLNGalleryMinePageCellBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNGalleryMinePageCellBaseModel.m; sourceTree = "<group>"; };
 		FA4EE2FB237907B000449250 /* MLNGalleryMinePageCellHomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNGalleryMinePageCellHomeModel.h; sourceTree = "<group>"; };
@@ -547,6 +549,7 @@
 			children = (
 				B27F65992377AA9500F2D341 /* MLNDiscoverAlbumDetailViewController.h */,
 				B27F65982377AA9500F2D341 /* MLNDiscoverAlbumDetailViewController.m */,
+				FA2FE97C2390D85D00A9AA73 /* MLNDiscoverAlbumDetailWaterfallView.xib */,
 				B27F65A72377AA9700F2D341 /* MLNDiscoverAblbumDeatilHeaderView.h */,
 				B27F65A32377AA9600F2D341 /* MLNDiscoverAblbumDeatilHeaderView.m */,
 				B27F65A52377AA9600F2D341 /* MLNDiscoverAlbumDetailCell.h */,
@@ -832,6 +835,7 @@
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				B29F4353238E6D8A00130F07 /* MLNDiscoverAlbumDetailCell.xib in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				FA2FE97D2390D85D00A9AA73 /* MLNDiscoverAlbumDetailWaterfallView.xib in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				B2D0AB85236C1F0A00B1D349 /* gallery_binary in Resources */,
 			);
