@@ -29,12 +29,12 @@ extern MLNBenchmarkType MLNBenchmarkTypeNative;
 
 @interface MLNBenchmark : NSObject
 
-+ (void)beginLoadTimeBenchmark:(const char *)type;
-+ (CFTimeInterval)endLoadTimeBenchmark:(const char *)type;
++ (void)beginLoadTimeBenchmark:(MLNBenchmarkType)type;
++ (CFTimeInterval)endLoadTimeBenchmark:(MLNBenchmarkType)type;
 
 + (NSUInteger)addLoadTime:(CFTimeInterval)time;
 + (void)removeAllLoadTime;
-+ (CFTimeInterval)averageLoadTime:(const char *)type;
++ (CFTimeInterval)averageLoadTime:(MLNBenchmarkType)type;
 
 @end
 
