@@ -197,7 +197,13 @@
         }
     } else if ([message isKindOfClass:[pbcoveragevisualcommand class]]) {
         [self.delegate startToGenerateCodeCoverageReportFile];
+    } else if ([message isKindOfClass:[pbbasepoint class]]) {
+        NSLog(@"=========> pbBasePoint");
+    } else {
+        NSLog(@"=========> others");
     }
+    
+    
     if ([self.listener respondsToSelector:@selector(server:onMessage:)]) {
         [self.listener server:server onMessage:message];
     }

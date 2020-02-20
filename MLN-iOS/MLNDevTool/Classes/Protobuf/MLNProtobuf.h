@@ -25,3 +25,7 @@
 #import "PbcoverageSummaryCommand.pbobjc.h"
 #import "PbgenerateReportCommand.pbobjc.h"
 #import "PbdetailReportCommand.pbobjc.h"
+
+#import "PbbasePoint.pbobjc.h"
+
+

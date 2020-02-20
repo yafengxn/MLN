@@ -13,9 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MLNPerspectiveAttributesGroup : NSObject
 
-@property (nonatomic, copy) MLNPerspectiveAttrGroupIdentifier identifier;
+//@property (nonatomic, copy) MLNPerspectiveAttrGroupIdentifier identifier;
 
-@property (nonatomic, copy) NSArray<MLNPerspectiveAttributesSection *> *attributes;
+//@property (nonatomic, copy) NSArray<MLNPerspectiveAttributesSection *> *attributes;
 
 @end
 

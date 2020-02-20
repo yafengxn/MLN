@@ -113,8 +113,8 @@
 
 + (pbcoveragesummarycommand *)buildCoverageSummaryCmd:(NSData *)fileData filePath:(NSString *)filePath {
     pbcoveragesummarycommand *covCmd = [[pbcoveragesummarycommand alloc] init];
-    covCmd.basecommand = [self buildBaseCmdNotUUID:pbbasecommand_InstructionType_Coveragesummary];
-    covCmd.fileData = fileData;
+//    covCmd.basecommand = [self buildBaseCmdNotUUID:pbbasecommand_InstructionType_Coveragesummary];
+//    covCmd.fileData = fileData;
     covCmd.filePath = filePath;
     return covCmd;
 }
