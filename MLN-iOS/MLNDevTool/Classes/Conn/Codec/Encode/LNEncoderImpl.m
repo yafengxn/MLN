@@ -32,11 +32,11 @@
     } else if ([msg isKindOfClass:[pbcoveragesummarycommand class]]) {
 //        type = pbbasecommand_InstructionType_Coveragesummary;
     } else if ([msg isKindOfClass:[pbcoveragedetailcommand class]]) {
-        type = pbbasecommand_InstructionType_CoverageDetail;
+//        type = pbbasecommand_InstructionType_CoverageDetail;
     } else if ([msg isKindOfClass:[pbcoveragevisualcommand class]]) {
-        type = pbbasecommand_InstructionType_CoverageVisual;
-    } else if ([msg isKindOfClass:[pbbasepoint class]]) {
-        type = pbbasecommand_InstructionType_Basepoint;
+//        type = pbbasecommand_InstructionType_CoverageVisual;
+    } else if ([msg isKindOfClass:[pbuicapturecommand class]]) {
+        type = pbbasecommand_InstructionType_UiCapture;
     } else if ([msg isKindOfClass:[pbpingcommand class]]) {
         [data appendChar:0x02];
         [data appendInt32:[(pbpingcommand *)msg ip]];

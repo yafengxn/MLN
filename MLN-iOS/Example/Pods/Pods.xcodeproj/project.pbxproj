@@ -47,7 +47,6 @@
 		07B3A30957DD092ECC4CFCD83876FA1D /* MLNReuseContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D81D94A5A8EBE6B6ECBDACA7F521EFF4 /* MLNReuseContentView.m */; };
 		07B7CF4C90CABBD0344010BD5313A3AA /* MLNWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F91340DA5C5474318EDCCB34D89F61E /* MLNWindow.m */; };
 		07E5854E45B4F185DAE8FDC36C94EECE /* EXPMatchers+beLessThanOrEqualTo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B90062135D1512C7FE57AC587BEA58F /* EXPMatchers+beLessThanOrEqualTo.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		07E895DC0B692CD8B21394C0B68BE070 /* PbbaseCommand.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = 103E32F6A092D5DE51F482409DFAE73F /* PbbaseCommand.pbobjc.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		080153D6C9B133E06055ECCDC44ED109 /* MLNCornerMaskViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 46372608A526FD37BD8CDD5DF7B1FAE8 /* MLNCornerMaskViewHandler.m */; };
 		08972BEC745F3895C5FE98732BB0E646 /* EXPMatcherHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA26C39BE8D324454751FB89B58CEF2 /* EXPMatcherHelpers.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		08D9B199132A1A8B77FB2DA9263814D3 /* MLNTextViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = BBFAED54EEB6560F89988320A13D9107 /* MLNTextViewProtocol.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -894,6 +893,11 @@
 		B2B5AF5C23FF5F1800A18CA7 /* LKS_PerspectiveHierarchyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B5AEC723FF5F1800A18CA7 /* LKS_PerspectiveHierarchyCell.m */; };
 		B2B5AF5D23FF5F1800A18CA7 /* LKS_PerspectiveItemLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B5AEC823FF5F1800A18CA7 /* LKS_PerspectiveItemLayer.m */; };
 		B2B5AF5E23FF5F1800A18CA7 /* LKS_PerspectiveManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B5AEC923FF5F1800A18CA7 /* LKS_PerspectiveManager.h */; };
+		B2B5AFE823FFD74500A18CA7 /* Pbrect.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B5AFE323FFD74400A18CA7 /* Pbrect.pbobjc.h */; };
+		B2B5AFE923FFD74500A18CA7 /* Pbpoint.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B5AFE423FFD74400A18CA7 /* Pbpoint.pbobjc.h */; };
+		B2B5AFEA23FFD74500A18CA7 /* Pbsize.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B5AFE523FFD74400A18CA7 /* Pbsize.pbobjc.h */; };
+		B2B5AFEB23FFD74500A18CA7 /* PbbaseCommand.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B5AFE623FFD74400A18CA7 /* PbbaseCommand.pbobjc.h */; };
+		B2B5AFEC23FFD74500A18CA7 /* PbuicaptureCommand.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B5AFE723FFD74500A18CA7 /* PbuicaptureCommand.pbobjc.h */; };
 		B2B85C46B6D6C7FEF9E9E5B42056CEE4 /* MLNApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 20848F16245F596D43AF37EC6FA869F9 /* MLNApplication.m */; };
 		B34CD1DCBF380B0C17FDAFBF592D4F7F /* lbaselib.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E28534231F3C4506C4CB1F299F80A41 /* lbaselib.c */; };
 		B353DEE0F707A17093B0D8A5F53894D9 /* Expecta-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2F1AF7887C3909EAFDB92B3058776F /* Expecta-dummy.m */; };
@@ -1008,7 +1012,6 @@
 		CE6E86165574FD44C5A98BD6E08666C7 /* SDDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 22799EF1D13022CB91E69B7D9CF906D5 /* SDDiskCache.m */; };
 		CF127467BB74026CD888C7242DC7C579 /* MLNTransformTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 17FD3612169FFB9B295B5D25203B6ED5 /* MLNTransformTask.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		CF2D80A67090BCE3BA65AD3A1843DA9D /* MLNAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 568CF431EF7C379983736F259E77D051 /* MLNAnimation.m */; };
-		CF612670959D0ACEA40C8CB5170E6278 /* PbbasePoint.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = E09FAB003EDDDE6A8FDDC58B3845773E /* PbbasePoint.pbobjc.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		CF88EC856CB9EAE0048B2F65395CCC03 /* SDWebImageCacheSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C7058C4227B090DFB57C7920830A143 /* SDWebImageCacheSerializer.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		CF9A18258C107829B28A074EC6119769 /* SDWebImageCacheKeyFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 37711A0F1538F09FA350F12F0AD14B47 /* SDWebImageCacheKeyFilter.m */; };
 		CF9FB75F3D5848B2E5819B8E3DE966C1 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 684FF6D36907C3F68844F1F2785EF63D /* SDImageCache.m */; };
@@ -1421,7 +1424,6 @@
 		0F8FDA27D013E58EC029EB67CC3347FF /* Api.pbobjc.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Api.pbobjc.h; sourceTree = "<group>"; };
 		101295FD6BD978D9FBE93EDE800DAFB4 /* MJRefresh-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MJRefresh-dummy.m"; sourceTree = "<group>"; };
 		102C7AF807DE56EA68BA006B0B4B9941 /* MLNStyleElement.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MLNStyleElement.m; sourceTree = "<group>"; };
-		103E32F6A092D5DE51F482409DFAE73F /* PbbaseCommand.pbobjc.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PbbaseCommand.pbobjc.h; path = "MLN-iOS/MLNDevTool/Classes/Protobuf/PbbaseCommand.pbobjc.h"; sourceTree = "<group>"; };
 		103F60AC5136E4F72D1191B5D2DC98A1 /* MLNUtilBundle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MLNUtilBundle.h; sourceTree = "<group>"; };
 		1041BAAEE297DD345E1D72773F157F93 /* PbgenerateReportCommand.pbobjc.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PbgenerateReportCommand.pbobjc.h; path = "MLN-iOS/MLNDevTool/Classes/Protobuf/PbgenerateReportCommand.pbobjc.h"; sourceTree = "<group>"; };
 		108686EA4EDE0F1CE6AC2B88EF75856A /* MLNFPSLabel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MLNFPSLabel.m; sourceTree = "<group>"; };
@@ -2281,6 +2283,11 @@
 		B2B5AEC823FF5F1800A18CA7 /* LKS_PerspectiveItemLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKS_PerspectiveItemLayer.m; sourceTree = "<group>"; };
 		B2B5AEC923FF5F1800A18CA7 /* LKS_PerspectiveManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKS_PerspectiveManager.h; sourceTree = "<group>"; };
 		B2B5AECA23FF5F1800A18CA7 /* LookinServerImages.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LookinServerImages.bundle; sourceTree = "<group>"; };
+		B2B5AFE323FFD74400A18CA7 /* Pbrect.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pbrect.pbobjc.h; path = "MLN-iOS/MLNDevTool/Classes/Protobuf/Pbrect.pbobjc.h"; sourceTree = "<group>"; };
+		B2B5AFE423FFD74400A18CA7 /* Pbpoint.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pbpoint.pbobjc.h; path = "MLN-iOS/MLNDevTool/Classes/Protobuf/Pbpoint.pbobjc.h"; sourceTree = "<group>"; };
+		B2B5AFE523FFD74400A18CA7 /* Pbsize.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pbsize.pbobjc.h; path = "MLN-iOS/MLNDevTool/Classes/Protobuf/Pbsize.pbobjc.h"; sourceTree = "<group>"; };
+		B2B5AFE623FFD74400A18CA7 /* PbbaseCommand.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PbbaseCommand.pbobjc.h; path = "MLN-iOS/MLNDevTool/Classes/Protobuf/PbbaseCommand.pbobjc.h"; sourceTree = "<group>"; };
+		B2B5AFE723FFD74500A18CA7 /* PbuicaptureCommand.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PbuicaptureCommand.pbobjc.h; path = "MLN-iOS/MLNDevTool/Classes/Protobuf/PbuicaptureCommand.pbobjc.h"; sourceTree = "<group>"; };
 		B2D3ED9429C438CB7A1BEE0F8410E4E0 /* MLNCornerLayerHandler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MLNCornerLayerHandler.m; sourceTree = "<group>"; };
 		B2DEFAA0E51B287C413DF83E85F25E8D /* NSString+MLNKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSString+MLNKit.m"; sourceTree = "<group>"; };
 		B3321B65E8568FD52BF9DBC6980BE366 /* SDImageTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDImageTransformer.m; path = SDWebImage/Core/SDImageTransformer.m; sourceTree = "<group>"; };
@@ -2471,7 +2478,6 @@
 		DFC8A8CAA99305E3A5D43A3E31B45B10 /* SDAnimatedImage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDAnimatedImage.m; path = SDWebImage/Core/SDAnimatedImage.m; sourceTree = "<group>"; };
 		E02089D5508F1648F7A062176B4BB6C9 /* mln_udp.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = mln_udp.c; sourceTree = "<group>"; };
 		E03EEA512279003DCE5FE260F3270B38 /* SDWebImageDownloaderConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDownloaderConfig.h; path = SDWebImage/Core/SDWebImageDownloaderConfig.h; sourceTree = "<group>"; };
-		E09FAB003EDDDE6A8FDDC58B3845773E /* PbbasePoint.pbobjc.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PbbasePoint.pbobjc.h; path = "MLN-iOS/MLNDevTool/Classes/Protobuf/PbbasePoint.pbobjc.h"; sourceTree = "<group>"; };
 		E0CD75FC91FBA60EDA4CFCD6C040FEC7 /* MLNTypeUtil.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MLNTypeUtil.h; sourceTree = "<group>"; };
 		E0FAEF74AACDE8E533D856A95A48593C /* UIImage+Compare.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Compare.m"; path = "FBSnapshotTestCase/Categories/UIImage+Compare.m"; sourceTree = "<group>"; };
 		E119A479979E885D290500EB4E397770 /* MLNKeyboardViewHandler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MLNKeyboardViewHandler.m; sourceTree = "<group>"; };
@@ -4958,9 +4964,12 @@
 			isa = PBXGroup;
 			children = (
 				043146345F3EFC7C2CB5419852BEBB9E /* libMLNProtobuf.a */,
+				B2B5AFE623FFD74400A18CA7 /* PbbaseCommand.pbobjc.h */,
+				B2B5AFE423FFD74400A18CA7 /* Pbpoint.pbobjc.h */,
+				B2B5AFE323FFD74400A18CA7 /* Pbrect.pbobjc.h */,
+				B2B5AFE523FFD74400A18CA7 /* Pbsize.pbobjc.h */,
+				B2B5AFE723FFD74500A18CA7 /* PbuicaptureCommand.pbobjc.h */,
 				8568CBF638F2071B64D378D9DA7D5BFE /* MLNProtobuf.h */,
-				103E32F6A092D5DE51F482409DFAE73F /* PbbaseCommand.pbobjc.h */,
-				E09FAB003EDDDE6A8FDDC58B3845773E /* PbbasePoint.pbobjc.h */,
 				978FB367371535E82C1A0197827A04B7 /* PbcloseCommand.pbobjc.h */,
 				586651F3791996BDA32F9391278837BD /* PbcoverageSummaryCommand.pbobjc.h */,
 				7C161CECE925C189D7823875DFD11BE8 /* PbcreateCommand.pbobjc.h */,
@@ -5453,6 +5462,7 @@
 				B2B5AF2123FF5F1800A18CA7 /* UIColor+LookinServer.h in Headers */,
 				5A0239FCF16D47E3DFCB875491229C93 /* GPBMessage.h in Headers */,
 				D4A97D5A57BB6F1D9075AF16193C0A0A /* GPBMessage_PackagePrivate.h in Headers */,
+				B2B5AFEC23FFD74500A18CA7 /* PbuicaptureCommand.pbobjc.h in Headers */,
 				9638B655AA0AA4DBF78DED9EB98820CC /* GPBProtocolBuffers.h in Headers */,
 				5B363397003A8712A444C5167EFD9AEE /* GPBProtocolBuffers_RuntimeSupport.h in Headers */,
 				E6E0D302CBB4A60A1005D8F60572CE5D /* GPBRootObject.h in Headers */,
@@ -5490,6 +5500,7 @@
 				428581E8349BE718861082252F022971 /* LNFileManager.h in Headers */,
 				2919C1CA429F13327B9A787D5828224E /* LNNetTransporter.h in Headers */,
 				B2B5AF2223FF5F1800A18CA7 /* CALayer+LookinServer.h in Headers */,
+				B2B5AFEB23FFD74500A18CA7 /* PbbaseCommand.pbobjc.h in Headers */,
 				B2B5AF4E23FF5F1800A18CA7 /* LookinServer.h in Headers */,
 				B2B5AEE623FF5F1800A18CA7 /* LookinMsgAttribute.h in Headers */,
 				CE6A2BE06DF9B98E27AE3D6276E91291 /* LNReaderFactory.h in Headers */,
@@ -5498,6 +5509,7 @@
 				5B518296D12AB458F8982D8CDA2BE284 /* LNReaderImpl.h in Headers */,
 				DE77E90799B6009E25962045E74BA312 /* LNReaderProtocol.h in Headers */,
 				B2B5AECC23FF5F1800A18CA7 /* LookinDisplayItemDetail.h in Headers */,
+				B2B5AFEA23FFD74500A18CA7 /* Pbsize.pbobjc.h in Headers */,
 				F459A2D90FE2ECFFBE1AABD211B17A4F /* LNSimulatorTransporter.h in Headers */,
 				B2B5AEF023FF5F1800A18CA7 /* LookinAttributesGroup.h in Headers */,
 				4C9B7FF3BDEA2DE8752AFF4DB4D8A919 /* LNTransporterFactory.h in Headers */,
@@ -5550,6 +5562,7 @@
 				4309515D5E9EEF5338E19CA6576BB7B4 /* MLNFileHandlerProtocol.h in Headers */,
 				B2B5AF0A23FF5F1800A18CA7 /* LookinAutoLayoutConstraint.h in Headers */,
 				0E8E7A93EC0314B416269DFDE1465DFE /* MLNFloatingMenu.h in Headers */,
+				B2B5AFE923FFD74500A18CA7 /* Pbpoint.pbobjc.h in Headers */,
 				B2B5AEFD23FF5F1800A18CA7 /* LookinIvarTrace.h in Headers */,
 				B2B5AF1223FF5F1800A18CA7 /* LKS_LocalInspectManager.h in Headers */,
 				3F5B223E58C9C0514F194F2644EFCEEE /* MLNFPSLabel.h in Headers */,
@@ -5594,6 +5607,7 @@
 				B2B5AEE023FF5F1800A18CA7 /* LookinAttributeModification.h in Headers */,
 				DF24953029B97071A727465DA9D0673E /* MLNTopTip.h in Headers */,
 				342E1609720DE82273A6968826AF3C30 /* MLNUIBundle.h in Headers */,
+				B2B5AFE823FFD74500A18CA7 /* Pbrect.pbobjc.h in Headers */,
 				B2B5AF0223FF5F1800A18CA7 /* LookinMethodTraceRecord.h in Headers */,
 				177F3CE72965F1B78AB9C5CB5C761302 /* MLNUtilBundle.h in Headers */,
 				B2B5AF1323FF5F1800A18CA7 /* LKS_LocalInspectViewController.h in Headers */,
@@ -5604,8 +5618,6 @@
 				5C955767AC457CCF55D8904523857215 /* NSBundle+MLNDebugTool.h in Headers */,
 				31FE6EC70D539CAA8AE9EBA5580D6DF9 /* NSData+LuaNative.h in Headers */,
 				0C17A3D9A8C86119BD4B8D66841A4DE1 /* NSMutableData+LuaNative.h in Headers */,
-				07E895DC0B692CD8B21394C0B68BE070 /* PbbaseCommand.pbobjc.h in Headers */,
-				CF612670959D0ACEA40C8CB5170E6278 /* PbbasePoint.pbobjc.h in Headers */,
 				C9E0AD682B0D92A44920F6D697074994 /* PbcloseCommand.pbobjc.h in Headers */,
 				6D04615550D738F11F73F4CB859721A5 /* PBCommandBuilder.h in Headers */,
 				FFA5116B63993C1878F8C74B494DB7FC /* PbcoverageSummaryCommand.pbobjc.h in Headers */,

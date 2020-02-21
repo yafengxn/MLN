@@ -121,7 +121,7 @@
 
 + (pbcoveragedetailcommand *)buildCoverageDetailCmd:(NSData *)fileData filePath:(NSString *)filePath {
     pbcoveragedetailcommand *covCmd = [[pbcoveragedetailcommand alloc] init];
-    covCmd.basecommand = [self buildBaseCmdNotUUID:pbbasecommand_InstructionType_CoverageDetail];
+//    covCmd.basecommand = [self buildBaseCmdNotUUID:pbbasecommand_InstructionType_CoverageDetail];
     covCmd.fileData = fileData;
     covCmd.filePath = filePath;
     return covCmd;
@@ -129,7 +129,7 @@
 
 + (pbcoveragevisualcommand *)buildCoverageVisualCmd {
     pbcoveragevisualcommand *covCmd = [[pbcoveragevisualcommand alloc] init];
-    covCmd.basecommand = [self buildBaseCmdNotUUID:pbbasecommand_InstructionType_CoverageVisual];
+//    covCmd.basecommand = [self buildBaseCmdNotUUID:pbbasecommand_InstructionType_CoverageVisual];
     return covCmd;
 }
 

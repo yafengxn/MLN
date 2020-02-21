@@ -197,8 +197,8 @@
         }
     } else if ([message isKindOfClass:[pbcoveragevisualcommand class]]) {
         [self.delegate startToGenerateCodeCoverageReportFile];
-    } else if ([message isKindOfClass:[pbbasepoint class]]) {
-        NSLog(@"=========> pbBasePoint");
+    } else if ([message isKindOfClass:[pbuicapturecommand class]]) {
+        NSLog(@"=========> PBUICAPTURE");
     } else {
         NSLog(@"=========> others");
     }

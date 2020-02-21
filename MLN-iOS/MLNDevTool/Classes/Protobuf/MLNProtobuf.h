@@ -26,6 +26,6 @@
 #import "PbgenerateReportCommand.pbobjc.h"
 #import "PbdetailReportCommand.pbobjc.h"
 
-#import "PbbasePoint.pbobjc.h"
+#import "PbuicaptureCommand.pbobjc.h"
 
 

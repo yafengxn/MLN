@@ -70,16 +70,16 @@
 //            clazz = pbcoveragesummarycommand.class;
 //            break;
 //        }
-        case pbbasecommand_InstructionType_CoverageDetail: {
-            clazz = pbcoveragedetailcommand.class;
-            break;
-        }
-        case pbbasecommand_InstructionType_CoverageVisual: {
-            clazz = pbcoveragevisualcommand.class;
-            break;
-        }
-        case pbbasecommand_InstructionType_Basepoint: {
-            clazz = pbbasepoint.class;
+//        case pbbasecommand_InstructionType_CoverageDetail: {
+//            clazz = pbcoveragedetailcommand.class;
+//            break;
+//        }
+//        case pbbasecommand_InstructionType_CoverageVisual: {
+//            clazz = pbcoveragevisualcommand.class;
+//            break;
+//        }
+        case pbbasecommand_InstructionType_UiCapture: {
+            clazz = pbuicapturecommand.class;
             break;
         }
         default:
