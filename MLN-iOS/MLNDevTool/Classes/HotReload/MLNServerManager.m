@@ -198,7 +198,7 @@
     } else if ([message isKindOfClass:[pbcoveragevisualcommand class]]) {
         [self.delegate startToGenerateCodeCoverageReportFile];
     } else if ([message isKindOfClass:[pbuicapturecommand class]]) {
-        NSLog(@"=========> PBUICAPTURE");
+        [self.server generateUIDisplayteItems];
     } else {
         NSLog(@"=========> others");
     }

@@ -133,5 +133,12 @@
     return covCmd;
 }
 
++ (pbuidatacommand *)buildUIDataCmd:(NSMutableArray *)displayItems
+{
+    pbuidatacommand *dataCmd = [[pbuidatacommand alloc] init];
+    dataCmd.basecommand = [self buildBaseCmdNotUUID:pbbasecommand_InstructionType_UiData];
+    dataCmd.displayItemArray = displayItems;
+    return dataCmd;
+}
 
 @end

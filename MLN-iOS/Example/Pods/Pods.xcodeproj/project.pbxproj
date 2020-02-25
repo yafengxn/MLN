@@ -898,6 +898,10 @@
 		B2B5AFEA23FFD74500A18CA7 /* Pbsize.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B5AFE523FFD74400A18CA7 /* Pbsize.pbobjc.h */; };
 		B2B5AFEB23FFD74500A18CA7 /* PbbaseCommand.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B5AFE623FFD74400A18CA7 /* PbbaseCommand.pbobjc.h */; };
 		B2B5AFEC23FFD74500A18CA7 /* PbuicaptureCommand.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B5AFE723FFD74500A18CA7 /* PbuicaptureCommand.pbobjc.h */; };
+		B2B5AFFC24049CF900A18CA7 /* MLNHierarchyDisplayItemTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B5AFFA24049CF900A18CA7 /* MLNHierarchyDisplayItemTransformer.h */; };
+		B2B5AFFD24049CF900A18CA7 /* MLNHierarchyDisplayItemTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B5AFFB24049CF900A18CA7 /* MLNHierarchyDisplayItemTransformer.m */; };
+		B2B5B0152404B15200A18CA7 /* MLNUIDebuggerTypeConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B5B0132404B15200A18CA7 /* MLNUIDebuggerTypeConverter.h */; };
+		B2B5B0162404B15200A18CA7 /* MLNUIDebuggerTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B5B0142404B15200A18CA7 /* MLNUIDebuggerTypeConverter.m */; };
 		B2B85C46B6D6C7FEF9E9E5B42056CEE4 /* MLNApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 20848F16245F596D43AF37EC6FA869F9 /* MLNApplication.m */; };
 		B34CD1DCBF380B0C17FDAFBF592D4F7F /* lbaselib.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E28534231F3C4506C4CB1F299F80A41 /* lbaselib.c */; };
 		B353DEE0F707A17093B0D8A5F53894D9 /* Expecta-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2F1AF7887C3909EAFDB92B3058776F /* Expecta-dummy.m */; };
@@ -2288,6 +2292,10 @@
 		B2B5AFE523FFD74400A18CA7 /* Pbsize.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pbsize.pbobjc.h; path = "MLN-iOS/MLNDevTool/Classes/Protobuf/Pbsize.pbobjc.h"; sourceTree = "<group>"; };
 		B2B5AFE623FFD74400A18CA7 /* PbbaseCommand.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PbbaseCommand.pbobjc.h; path = "MLN-iOS/MLNDevTool/Classes/Protobuf/PbbaseCommand.pbobjc.h"; sourceTree = "<group>"; };
 		B2B5AFE723FFD74500A18CA7 /* PbuicaptureCommand.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PbuicaptureCommand.pbobjc.h; path = "MLN-iOS/MLNDevTool/Classes/Protobuf/PbuicaptureCommand.pbobjc.h"; sourceTree = "<group>"; };
+		B2B5AFFA24049CF900A18CA7 /* MLNHierarchyDisplayItemTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNHierarchyDisplayItemTransformer.h; sourceTree = "<group>"; };
+		B2B5AFFB24049CF900A18CA7 /* MLNHierarchyDisplayItemTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNHierarchyDisplayItemTransformer.m; sourceTree = "<group>"; };
+		B2B5B0132404B15200A18CA7 /* MLNUIDebuggerTypeConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLNUIDebuggerTypeConverter.h; sourceTree = "<group>"; };
+		B2B5B0142404B15200A18CA7 /* MLNUIDebuggerTypeConverter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLNUIDebuggerTypeConverter.m; sourceTree = "<group>"; };
 		B2D3ED9429C438CB7A1BEE0F8410E4E0 /* MLNCornerLayerHandler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MLNCornerLayerHandler.m; sourceTree = "<group>"; };
 		B2DEFAA0E51B287C413DF83E85F25E8D /* NSString+MLNKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSString+MLNKit.m"; sourceTree = "<group>"; };
 		B3321B65E8568FD52BF9DBC6980BE366 /* SDImageTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDImageTransformer.m; path = SDWebImage/Core/SDImageTransformer.m; sourceTree = "<group>"; };
@@ -4717,6 +4725,10 @@
 		B2B5AF5F23FF606F00A18CA7 /* UIDebugger */ = {
 			isa = PBXGroup;
 			children = (
+				B2B5AFFA24049CF900A18CA7 /* MLNHierarchyDisplayItemTransformer.h */,
+				B2B5AFFB24049CF900A18CA7 /* MLNHierarchyDisplayItemTransformer.m */,
+				B2B5B0132404B15200A18CA7 /* MLNUIDebuggerTypeConverter.h */,
+				B2B5B0142404B15200A18CA7 /* MLNUIDebuggerTypeConverter.m */,
 			);
 			name = UIDebugger;
 			path = "MLN-iOS/MLNDevTool/Classes/UIDebugger";
@@ -5587,6 +5599,7 @@
 				EA88FC4F492A7886A722E7B967476550 /* MLNQRCodeDefaultInfo.h in Headers */,
 				3CFF5950A6E171A9EB0DFAB7841F4E42 /* MLNQRCodeHistoryCell.h in Headers */,
 				2EE57C7F39A6C1425CF872D6F8AB081B /* MLNQRCodeHistoryInfoProtocol.h in Headers */,
+				B2B5B0152404B15200A18CA7 /* MLNUIDebuggerTypeConverter.h in Headers */,
 				5A8571C4130ED2709795B30516C58AC8 /* MLNQRCodeHistoryViewController.h in Headers */,
 				B2B5AEF523FF5F1800A18CA7 /* Peertalk.h in Headers */,
 				40970A665143AA0150D6BCC344C844A0 /* MLNQRCodeHistoryViewControllerAdapter.h in Headers */,
@@ -5611,6 +5624,7 @@
 				B2B5AF0223FF5F1800A18CA7 /* LookinMethodTraceRecord.h in Headers */,
 				177F3CE72965F1B78AB9C5CB5C761302 /* MLNUtilBundle.h in Headers */,
 				B2B5AF1323FF5F1800A18CA7 /* LKS_LocalInspectViewController.h in Headers */,
+				B2B5AFFC24049CF900A18CA7 /* MLNHierarchyDisplayItemTransformer.h in Headers */,
 				352E1BB9B6701EE7C511FBFBC76F638F /* MLNWeakTarget.h in Headers */,
 				B2B5AF0823FF5F1800A18CA7 /* LookinAppInfo.h in Headers */,
 				DC98ACCA19AAB4839FB52914EF695201 /* MLNZipArchive.h in Headers */,
@@ -6958,6 +6972,7 @@
 				B2B5AEF623FF5F1800A18CA7 /* PTChannel.m in Sources */,
 				BF6512AF26D83839DA275259E1A8AE3E /* LNNetTransporter.m in Sources */,
 				6BB2ACD7F3771E66092FE464A61DF328 /* LNReaderFactory.m in Sources */,
+				B2B5B0162404B15200A18CA7 /* MLNUIDebuggerTypeConverter.m in Sources */,
 				160D110DC6B426EF347B5D1B4F830935 /* LNReaderImpl.m in Sources */,
 				9846563CBA811A77B995C7E65E079E7A /* LNSimulatorTransporter.m in Sources */,
 				951273B26F6534C7BF27AB32551A58CC /* LNTransporterFactory.m in Sources */,
@@ -7049,6 +7064,7 @@
 				B2B5AF5A23FF5F1800A18CA7 /* LKS_PerspectiveDataSource.m in Sources */,
 				B2B5AED323FF5F1800A18CA7 /* NSString+Lookin.m in Sources */,
 				B2B5AF2F23FF5F1800A18CA7 /* UIBlurEffect+LookinServer.m in Sources */,
+				B2B5AFFD24049CF900A18CA7 /* MLNHierarchyDisplayItemTransformer.m in Sources */,
 				7F4993601069A922BB0155C5B2ED7EED /* MLNQRCodeScanView.m in Sources */,
 				B2B5AF4523FF5F1800A18CA7 /* LKS_ExportManager.m in Sources */,
 				B2B5AEEB23FF5F1800A18CA7 /* LookinConnectionResponseAttachment.m in Sources */,

@@ -37,7 +37,9 @@
 //        type = pbbasecommand_InstructionType_CoverageVisual;
     } else if ([msg isKindOfClass:[pbuicapturecommand class]]) {
         type = pbbasecommand_InstructionType_UiCapture;
-    } else if ([msg isKindOfClass:[pbpingcommand class]]) {
+    } else if ([msg isKindOfClass:[pbuidatacommand class]]) {
+        type = pbbasecommand_InstructionType_UiData;
+    }else if ([msg isKindOfClass:[pbpingcommand class]]) {
         [data appendChar:0x02];
         [data appendInt32:[(pbpingcommand *)msg ip]];
         [data appendInt16:[(pbpingcommand *)msg port]];

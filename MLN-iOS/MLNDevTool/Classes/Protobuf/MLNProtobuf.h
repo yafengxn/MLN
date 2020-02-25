@@ -2,7 +2,7 @@
 //  MLNProtobuf.h
 //  MLNProtobuf
 //
-//  Created by MoMo on 2019/12/24.
+//  Created by tamer on 2019/12/24.
 //  Copyright © 2019 momo. All rights reserved.
 //
 
@@ -25,7 +25,9 @@
 #import "PbcoverageSummaryCommand.pbobjc.h"
 #import "PbgenerateReportCommand.pbobjc.h"
 #import "PbdetailReportCommand.pbobjc.h"
-
-#import "PbuicaptureCommand.pbobjc.h"
-
-
+#import "pbuicaptureCommand.pbobjc.h"
+#import "pbuidataCommand.pbobjc.h"
+#import "Pbpoint.pbobjc.h"
+#import "Pbsize.pbobjc.h"
+#import "Pbrect.pbobjc.h"
+#import "PbdisplayItem.pbobjc.h"

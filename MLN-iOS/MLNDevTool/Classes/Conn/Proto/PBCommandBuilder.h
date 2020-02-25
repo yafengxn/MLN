@@ -30,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (pbcoveragedetailcommand *)buildCoverageDetailCmd:(NSData *)fileData filePath:(NSString *)filePath;
 + (pbcoveragevisualcommand *)buildCoverageVisualCmd;
 
++ (pbuidatacommand *)buildUIDataCmd:(NSMutableArray *)displayItems;
+
 @end
 
 NS_ASSUME_NONNULL_END

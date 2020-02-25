@@ -11,6 +11,7 @@
 #import "LNEncoderFactory.h"
 #import "LNClientFactory.h"
 #import "LNTransporterFactory.h"
+#import "MLNHierarchyDisplayItemTransformer.h"
 
 @interface MLNServer () <LNClientListener>
 
@@ -134,6 +135,16 @@ static MLNServer *sharedInstance;
             [self.currentClient writeData:cmd];
         }
     }
+}
+
+- (void)generateUIDisplayteItems
+{
+    NSMutableArray *displayItems = [MLNHierarchyDisplayItemTransformer currentScreenDisplayItems];
+    if (displayItems.count <= 0) {
+        return;
+    }
+    pbuidatacommand *cmd = [PBCommandBuilder buildUIDataCmd:displayItems];
+    [self.currentClient writeData:cmd];
 }
 
 #pragma mark - Private

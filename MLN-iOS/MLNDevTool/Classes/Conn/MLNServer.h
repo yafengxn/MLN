@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)reportCodeCoverageSummary:(NSString *)filePath;
 - (void)reportCodeCoverageDetail:(NSString *)filePath;
 
+- (void)generateUIDisplayteItems;
+
 @end
 
 NS_ASSUME_NONNULL_END
