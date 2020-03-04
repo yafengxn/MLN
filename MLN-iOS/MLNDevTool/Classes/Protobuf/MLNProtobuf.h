@@ -32,6 +32,7 @@
 #import "Pbobject.pbobjc.h"
 #import "Pbimage.pbobjc.h"
 #import "Pbrect.pbobjc.h"
+#import "Pbcolor.pbobjc.h"
 #import "PblookinAttrIdentifiers.pbobjc.h"
 #import "PblookinAttrType.pbobjc.h"
 #import "PblookinValueType.pbobjc.h"

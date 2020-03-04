@@ -49,14 +49,11 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - pbimage
 
 typedef GPB_ENUM(pbimage_FieldNumber) {
-  pbimage_FieldNumber_Name = 1,
-  pbimage_FieldNumber_Size = 2,
-  pbimage_FieldNumber_ImageData = 3,
+  pbimage_FieldNumber_Size = 1,
+  pbimage_FieldNumber_ImageData = 2,
 };
 
 @interface pbimage : GPBMessage
-
-@property(nonatomic, readwrite, copy, null_resettable) NSString *name;
 
 @property(nonatomic, readwrite, strong, null_resettable) pbsize *size;
 /** Test to see if @c size has been set. */

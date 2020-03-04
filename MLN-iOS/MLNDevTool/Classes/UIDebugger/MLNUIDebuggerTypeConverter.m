@@ -40,6 +40,21 @@
     return rect;
 }
 
++ (pbcolor *)colorWithUIColor:(NSArray *)colors
+{
+    if (colors == nil) {
+        return nil;
+    }
+    pbcolor *color = [pbcolor new];
+    color.colorsArray = [GPBInt64Array new];
+    [color.colorsArray addValue:[colors[0] integerValue]];
+    [color.colorsArray addValue:[colors[1] integerValue]];
+    [color.colorsArray addValue:[colors[2] integerValue]];
+    [color.colorsArray addValue:[colors[3] integerValue]];
+
+    return color;
+}
+
 + (pbimage *)imageWithUIImage:(UIImage *)aImage
 {
     pbimage *image = [pbimage new];
@@ -63,20 +78,37 @@
 {
     pblookinattributegroup *attributeGroup = [pblookinattributegroup new];
     attributeGroup.identifier = [self attrGroupIdentifier:aGroup.identifier];
-    NSMutableArray *attrGroup = [NSMutableArray array];
-//    for ()
+    NSMutableArray *attrSectionArray = [NSMutableArray array];
+    for (LookinAttributesSection *eachSection in aGroup.attrSections) {
+        pblookinattributesection *section = [self attributeSectionWithLookinAttributesSection:eachSection];
+        [attrSectionArray addObject:section];
+    }
+    attributeGroup.attributesArray = attrSectionArray;
     
     return attributeGroup;
 }
 
-+ (pblookinattributesection *)attributeGroupWithLookinAttributesSection:(LookinAttributeSection*)aGroup
++ (pblookinattributesection *)attributeSectionWithLookinAttributesSection:(LookinAttributesSection *)aSection
 {
-    return nil;
+    pblookinattributesection *section = [pblookinattributesection new];
+    section.identifier = [self attrSectionIdentifier:aSection.identifier];
+    NSMutableArray *attributesArray = [NSMutableArray array];
+    for (LookinAttribute *eachAttribute in aSection.attributes) {
+        pblookinattribute *attribute = [self attributeWithLookinAttribute:eachAttribute];
+        [attributesArray addObject:attribute];
+    }
+    section.attributesArray = attributesArray;
+    
+    return section;
 }
 
 + (pblookinattribute *)attributeWithLookinAttribute:(LookinAttribute *)aAttribute
 {
-    return nil;
+    pblookinattribute *attribute = [pblookinattribute new];
+    attribute.identifier = [self attrIdentifier:aAttribute.identifier];
+    attribute.type = [self attrTypeWithLookinAttribute:aAttribute];
+    attribute.value = [self attrValueWithLookinAttribute:aAttribute];
+    return attribute;
 }
 
 
@@ -667,6 +699,82 @@
     }
     
     return attrIdentifier;
+}
+
++ (PBLookinAttrType)attrTypeWithLookinAttribute:(LookinAttribute *)attribute
+{
+    PBLookinAttrType attrType = PBLookinAttrType_PblookinAttrTypeNone;
+    switch (attribute.attrType) {
+        case LookinAttrTypeInt:
+        case LookinAttrTypeEnumInt:
+        case LookinAttrTypeLong:
+        case LookinAttrTypeEnumLong:
+        case LookinAttrTypeUnsignedInt:
+        case LookinAttrTypeUnsignedLong:
+        case LookinAttrTypeFloat:
+        case LookinAttrTypeDouble:
+        case LookinAttrTypeBOOL:
+        case PBLookinAttrType_PblookinAttrTypeCgpoint:
+        case PBLookinAttrType_PblookinAttrTypeCgsize:
+        case PBLookinAttrType_PblookinAttrTypeCgrect:
+        case PBLookinAttrType_PblookinAttrTypeNsstring:
+        case PBLookinAttrType_PblookinAttrTypeUicolor:
+            attrType = (PBLookinAttrType)attribute.attrType;
+            break;
+        default:
+            NSLog(@"Not supported lookinAttrType!");
+            break;
+    }
+    return attrType;
+}
+
++ (pblookinvaluetype *)attrValueWithLookinAttribute:(LookinAttribute *)attribute
+{
+    pblookinvaluetype *attrValue = [pblookinvaluetype new];
+    switch (attribute.attrType) {
+        case LookinAttrTypeInt:
+        case LookinAttrTypeEnumInt:
+            attrValue.intValue = [attribute.value intValue];
+            break;
+        case LookinAttrTypeLong:
+        case LookinAttrTypeEnumLong:
+            attrValue.longValue = [attribute.value longValue];
+            break;
+        case LookinAttrTypeUnsignedInt:
+            attrValue.unsignedIntValue = [attribute.value unsignedIntValue];
+            break;
+        case LookinAttrTypeUnsignedLong:
+            attrValue.unsignedLongValue = [attribute.value unsignedLongValue];
+            break;
+        case LookinAttrTypeFloat:
+            attrValue.unsignedLongValue = [attribute.value unsignedLongValue];
+            break;
+        case LookinAttrTypeDouble:
+            attrValue.unsignedLongValue = [attribute.value unsignedLongValue];
+            break;
+        case LookinAttrTypeBOOL:
+            attrValue.unsignedLongValue = [attribute.value unsignedLongValue];
+            break;
+        case PBLookinAttrType_PblookinAttrTypeCgpoint:
+            attrValue.pointValue = [self pointWithCGPoint:[attribute.value CGPointValue]];
+            break;
+        case PBLookinAttrType_PblookinAttrTypeCgsize:
+            attrValue.sizeValue = [self sizeWithCGSize:[attribute.value CGSizeValue]];
+            break;
+        case PBLookinAttrType_PblookinAttrTypeCgrect:
+            attrValue.rectValue = [self rectWithCGRect:[attribute.value CGRectValue]];
+            break;
+        case PBLookinAttrType_PblookinAttrTypeNsstring:
+            attrValue.stringValue = attribute.value;
+            break;
+        case PBLookinAttrType_PblookinAttrTypeUicolor:
+            attrValue.colorValue = [self colorWithUIColor:attribute.value];
+            break;
+        default:
+            NSLog(@"Not supported lookinAttrType!");
+            break;
+    }
+    return attrValue;
 }
 
 @end

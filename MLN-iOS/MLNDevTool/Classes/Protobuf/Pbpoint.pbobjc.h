@@ -53,9 +53,9 @@ typedef GPB_ENUM(pbpoint_FieldNumber) {
 
 @interface pbpoint : GPBMessage
 
-@property(nonatomic, readwrite) float x;
+@property(nonatomic, readwrite) double x;
 
-@property(nonatomic, readwrite) float y;
+@property(nonatomic, readwrite) double y;
 
 @end
 

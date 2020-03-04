@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class LookinObject;
 @class LookinAttributesGroup;
-@class LookinAttributeSection;
+@class LookinAttributesSection;
 @class LookinAttribute;
 
 @interface MLNUIDebuggerTypeConverter : NSObject
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (pbimage *)imageWithUIImage:(UIImage *)aImage;
 + (pbobject *)objectWithLookinObject:(LookinObject *)aObject;
 + (pblookinattributegroup *)attributeGroupWithLookinAttributesGroup:(LookinAttributesGroup *)aGroup;
-+ (pblookinattributesection *)attributeGroupWithLookinAttributesSection:(LookinAttributeSection*)aGroup;
++ (pblookinattributesection *)attributeSectionWithLookinAttributesSection:(LookinAttributesSection *)aSection;
 + (pblookinattribute *)attributeWithLookinAttribute:(LookinAttribute *)aAttribute;
 
 + (PBLookinAttrGroupIdentifier)attrGroupIdentifier:(LookinAttrGroupIdentifier)aAttrGroupIdentifier;

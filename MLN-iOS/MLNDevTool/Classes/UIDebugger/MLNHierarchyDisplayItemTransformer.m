@@ -41,12 +41,13 @@
     displayItem.isHidden = lookinItem.isHidden;
     displayItem.frame = [MLNUIDebuggerTypeConverter rectWithCGRect:lookinItem.frame];
     displayItem.bounds = [MLNUIDebuggerTypeConverter rectWithCGRect:lookinItem.bounds];
-//    displayItem.soloScreenshot = [MLNUIDebuggerTypeConverter imageWithUIImage:lookinItem.soloScreenshot];
-//    displayItem.groupScreenshot = [MLNUIDebuggerTypeConverter imageWithUIImage:lookinItem.groupScreenshot];
+    displayItem.soloScreenshot = [MLNUIDebuggerTypeConverter imageWithUIImage:lookinItem.soloScreenshot];
+    displayItem.groupScreenshot = [MLNUIDebuggerTypeConverter imageWithUIImage:lookinItem.groupScreenshot];
     displayItem.viewObject = [MLNUIDebuggerTypeConverter objectWithLookinObject:lookinItem.viewObject];
     displayItem.layerObject = [MLNUIDebuggerTypeConverter objectWithLookinObject:lookinItem.layerObject];
     displayItem.hostViewControllerObject = [MLNUIDebuggerTypeConverter objectWithLookinObject:lookinItem.hostViewControllerObject];
-//    displayItem.attributeGroupListArray = [self attributeGroupListArray:lookinItem.attributesGroupList];
+#warning 属性部分传递数据待验证
+    displayItem.attributeGroupListArray = [self attributeGroupListArray:lookinItem.attributesGroupList];
     displayItem.title = lookinItem.title;
     displayItem.subtitle = lookinItem.subtitle;
     
@@ -69,7 +70,8 @@
     NSMutableArray *attributeGroupArray = [NSMutableArray arrayWithCapacity:aAttributeGroupListArray.count];
     
     for (LookinAttributesGroup *eachAttributeGroup in aAttributeGroupListArray) {
-        
+        pblookinattributegroup *group = [MLNUIDebuggerTypeConverter attributeGroupWithLookinAttributesGroup:eachAttributeGroup];
+        [attributeGroupArray addObject:group];
     }
     
     return attributeGroupArray;

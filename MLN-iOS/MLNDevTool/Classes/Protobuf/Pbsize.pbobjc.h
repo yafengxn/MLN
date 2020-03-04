@@ -53,9 +53,9 @@ typedef GPB_ENUM(pbsize_FieldNumber) {
 
 @interface pbsize : GPBMessage
 
-@property(nonatomic, readwrite) float width;
+@property(nonatomic, readwrite) double width;
 
-@property(nonatomic, readwrite) float height;
+@property(nonatomic, readwrite) double height;
 
 @end
 

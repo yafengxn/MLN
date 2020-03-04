@@ -52,7 +52,7 @@ typedef GPB_ENUM(pbcolor_FieldNumber) {
 
 @interface pbcolor : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) GPBInt32Array *colorsArray;
+@property(nonatomic, readwrite, strong, null_resettable) GPBInt64Array *colorsArray;
 /** The number of items in @c colorsArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger colorsArray_Count;
 
