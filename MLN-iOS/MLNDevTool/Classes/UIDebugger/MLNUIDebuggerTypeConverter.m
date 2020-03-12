@@ -78,9 +78,11 @@
 {
     pblookinattributegroup *attributeGroup = [pblookinattributegroup new];
     attributeGroup.identifier = [self attrGroupIdentifier:aGroup.identifier];
+    attributeGroup.title = aGroup.title;
     NSMutableArray *attrSectionArray = [NSMutableArray array];
     for (LookinAttributesSection *eachSection in aGroup.attrSections) {
         pblookinattributesection *section = [self attributeSectionWithLookinAttributesSection:eachSection];
+        section.title = eachSection.title;
         [attrSectionArray addObject:section];
     }
     attributeGroup.attributesArray = attrSectionArray;
@@ -95,6 +97,7 @@
     NSMutableArray *attributesArray = [NSMutableArray array];
     for (LookinAttribute *eachAttribute in aSection.attributes) {
         pblookinattribute *attribute = [self attributeWithLookinAttribute:eachAttribute];
+        attribute.title = eachAttribute.title;
         [attributesArray addObject:attribute];
     }
     section.attributesArray = attributesArray;

@@ -26,12 +26,14 @@
     }
     NSArray<LookinAttributesGroup *> *groups = [[LookinDashboardBlueprint groupIDs] lookin_map:^id(NSUInteger idx, LookinAttrGroupIdentifier groupID) {
         LookinAttributesGroup *group = [LookinAttributesGroup new];
+        group.title = [LookinDashboardBlueprint groupTitleWithGroupID:groupID];
         group.identifier = groupID;
 
         NSArray<LookinAttrSectionIdentifier> *secIDs = [LookinDashboardBlueprint sectionIDsForGroupID:groupID];
         group.attrSections = [secIDs lookin_map:^id(NSUInteger idx, LookinAttrSectionIdentifier secID) {
             LookinAttributesSection *sec = [LookinAttributesSection new];
             sec.identifier = secID;
+            sec.title = [LookinDashboardBlueprint sectionTitleWithSectionID:secID];
             
             NSArray<LookinAttrIdentifier> *attrIDs = [LookinDashboardBlueprint attrIDsForSectionID:secID];
             sec.attributes = [attrIDs lookin_map:^id(NSUInteger idx, LookinAttrIdentifier attrID) {
@@ -96,6 +98,7 @@
     
     LookinAttribute *attribute = [LookinAttribute new];
     attribute.identifier = identifier;
+    attribute.title = [LookinDashboardBlueprint fullTitleWithAttrID:identifier];
     
     SEL getter = [LookinDashboardBlueprint getterWithAttrID:identifier];
     if (!getter) {

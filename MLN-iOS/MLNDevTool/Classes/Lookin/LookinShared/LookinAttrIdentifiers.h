@@ -12,6 +12,8 @@
 
 #pragma mark - Group
 
+typedef NSString * LookinAttrGroupName;
+
 typedef NSString * LookinAttrGroupIdentifier;
 
 extern LookinAttrGroupIdentifier const LookinAttrGroup_None;
@@ -32,6 +34,8 @@ extern LookinAttrGroupIdentifier const LookinAttrGroup_UIVisualEffectView;
 
 
 #pragma mark - Section
+
+typedef NSString * LookinAttrSectionName;
 
 typedef NSString * LookinAttrSectionIdentifier;
 
@@ -124,6 +128,8 @@ extern LookinAttrSectionIdentifier const LookinAttrSec_UIVisualEffectView_QMUIFo
 #pragma mark - Attr
 
 typedef NSString * LookinAttrIdentifier;
+
+typedef NSString * LookinAttrName;
 
 extern LookinAttrIdentifier const LookinAttr_None;
 

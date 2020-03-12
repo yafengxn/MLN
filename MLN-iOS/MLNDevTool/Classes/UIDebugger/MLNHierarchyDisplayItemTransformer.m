@@ -46,7 +46,6 @@
     displayItem.viewObject = [MLNUIDebuggerTypeConverter objectWithLookinObject:lookinItem.viewObject];
     displayItem.layerObject = [MLNUIDebuggerTypeConverter objectWithLookinObject:lookinItem.layerObject];
     displayItem.hostViewControllerObject = [MLNUIDebuggerTypeConverter objectWithLookinObject:lookinItem.hostViewControllerObject];
-#warning 属性部分传递数据待验证
     displayItem.attributeGroupListArray = [self attributeGroupListArray:lookinItem.attributesGroupList];
     displayItem.title = lookinItem.title;
     displayItem.subtitle = lookinItem.subtitle;

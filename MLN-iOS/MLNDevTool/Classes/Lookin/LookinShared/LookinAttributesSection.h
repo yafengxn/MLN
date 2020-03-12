@@ -24,6 +24,8 @@ typedef NS_ENUM (NSInteger, LookinAttributesSectionStyle) {
 
 @property(nonatomic, copy) LookinAttrSectionIdentifier identifier;
 
+@property(nonatomic, copy) LookinAttrSectionName title;
+
 @property(nonatomic, copy) NSArray<LookinAttribute *> *attributes;
 
 @end

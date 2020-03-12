@@ -22,6 +22,8 @@
 
 @property(nonatomic, copy) LookinAttrGroupIdentifier identifier;
 
+@property(nonatomic, copy) LookinAttrGroupName title;
+
 @property(nonatomic, copy) NSArray<LookinAttributesSection *> *attrSections;
 
 @end

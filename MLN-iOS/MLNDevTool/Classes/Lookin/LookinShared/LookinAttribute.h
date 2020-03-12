@@ -18,6 +18,8 @@
 
 @property(nonatomic, copy) LookinAttrIdentifier identifier;
 
+@property(nonatomic, copy) LookinAttrName title;
+
 /// 具体的值，需配合 attrType 属性来解析它
 @property(nonatomic, strong) id value;
 

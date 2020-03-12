@@ -51,12 +51,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef GPB_ENUM(pblookinattributesection_FieldNumber) {
   pblookinattributesection_FieldNumber_Identifier = 1,
-  pblookinattributesection_FieldNumber_AttributesArray = 2,
+  pblookinattributesection_FieldNumber_Title = 2,
+  pblookinattributesection_FieldNumber_AttributesArray = 3,
 };
 
 @interface pblookinattributesection : GPBMessage
 
 @property(nonatomic, readwrite) enum PBLookinAttrSectionIdentifier identifier;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *title;
 
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<pblookinattribute*> *attributesArray;
 /** The number of items in @c attributesArray without causing the array to be created. */

@@ -52,13 +52,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef GPB_ENUM(pblookinattribute_FieldNumber) {
   pblookinattribute_FieldNumber_Identifier = 1,
-  pblookinattribute_FieldNumber_Type = 2,
-  pblookinattribute_FieldNumber_Value = 3,
+  pblookinattribute_FieldNumber_Title = 2,
+  pblookinattribute_FieldNumber_Type = 3,
+  pblookinattribute_FieldNumber_Value = 4,
 };
 
 @interface pblookinattribute : GPBMessage
 
 @property(nonatomic, readwrite) enum PBLookinAttrIdentifier identifier;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *title;
 
 @property(nonatomic, readwrite) enum PBLookinAttrType type;
 
